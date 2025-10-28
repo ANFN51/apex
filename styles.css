@@ -1,0 +1,63 @@
+body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+
+/* Preloader */
+#preloader {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999;
+    display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
+}
+#preloader.loaded { opacity: 0; pointer-events: none; }
+
+/* Loading Animation (from loading.io) */
+@keyframes ldio-rpinwye8j0b { 0% { transform: rotate(0deg) } 50% { transform: rotate(180deg) } 100% { transform: rotate(360deg) } }
+.ldio-rpinwye8j0b div { position: absolute; animation: ldio-rpinwye8j0b 1s linear infinite; width: 80px; height: 80px; top: 10px; left: 10px; border-radius: 50%; box-shadow: 0 2px 0 0 #007bff; transform-origin: 40px 41px; }
+.loadingio-eclipse { width: 100px; height: 100px; display: inline-block; overflow: hidden; }
+.ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
+.ldio-rpinwye8j0b div { box-sizing: content-box; }
+
+/* Parallax Sections with Local JPEG Images */
+.parallax { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; min-height: 60vh; }
+.hero { background-image: url('images/hero-bg.jpg'); } /* Your downloaded hero JPEG */
+.properties { background-image: url('images/properties-bg.jpg'); min-height: 80vh; } /* Your downloaded properties JPEG */
+.cta { background-image: url('images/cta-bg.jpg'); min-height: 40vh; } /* Your downloaded CTA JPEG */
+
+/* Mobile Fallback */
+@media only screen and (max-device-width: 1366px) { .parallax { background-attachment: scroll; } }
+
+/* General Styles */
+.navbar { transition: background 0.3s; }
+.navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
+section { transition: opacity 0.5s, transform 0.5s; }
+.card { transition: transform 0.3s; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.card:hover { transform: translateY(-5px); }
+.btn-primary { background-color: #007bff; border: none; }
+.map { border-top: 1px solid #ddd; }
+
+/* Fade-In Animation */
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse for Buttons */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Apply to Sections */
+section { opacity: 0; transition: opacity 0.6s ease-out; }
+section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
+
+/* Hover Effects */
+.card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+.btn-primary { transition: transform 0.3s; }
+.btn-primary:hover { animation: pulse 1s infinite; }
+
+/* Parallax Overlay for Depth (optional fade) */
+.parallax::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.3); transition: opacity 0.5s;
+}
+.parallax:hover::before { opacity: 0.5; } /* Subtle interaction */
