@@ -38,5 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 }); // Trigger when 10% visible
 
     sections.forEach(section => observer.observe(section));
+
+    // Initialize AOS with global settings for futuristic minimalism
+    AOS.init({
+        duration: 1200, // Smooth, longer transitions for a high-tech feel
+        easing: 'ease-in-out-cubic', // Curved easing for modern fluidity
+        once: true, // Animate only once per scroll for performance
+        offset: 100 // Trigger slightly earlier for anticipation
+    });
+});
+    sections.forEach(section => observer.observe(section));
 });
 
