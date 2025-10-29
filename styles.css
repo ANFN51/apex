@@ -62,3 +62,4 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
 }
 .parallax:hover::before { opacity: 0.5; } /* Subtle interaction */
 .parallax:hover::before { opacity: 0.5; } /* Subtle interaction */
+.parallax:hover::before { opacity: 0.5; } /* Subtle interaction */
