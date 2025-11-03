@@ -24,12 +24,27 @@ body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hid
 @media only screen and (max-device-width: 1366px) { .parallax { background-attachment: scroll; } }
 
 /* General Styles */
+.navbar-brand {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    letter-spacing: 3px; /* Extended spacing for a wide, luxurious header */
+    background: linear-gradient(to right, #007bff, #00bfff); /* Optional gradient for extra cool factor */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
 .navbar { transition: background 0.3s; }
 .navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
+.nav-link { transition: transform 0.3s ease, color 0.3s ease, background 0.8s; background-position: center; }
+.nav-link:hover { transform: scale(1.05); color: #007bff !important; background: #f0f0f0 radial-gradient(circle, transparent 1%, #f0f0f0 1%) center/15000%; }
+.nav-link:active { background-color: #e0e0e0; background-size: 100%; transition: background 0s; }
 section { transition: opacity 0.5s, transform 0.5s; }
 .card { transition: transform 0.3s; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
 .card:hover { transform: translateY(-5px); }
-.btn-primary { background-color: #007bff; border: none; }
+.btn-primary { background-color: #007bff; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.btn-primary:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+.btn-light { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.btn-light:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
 .map { border-top: 1px solid #ddd; }
 
 /* Fade-In Animation */
@@ -38,21 +53,12 @@ section { transition: opacity 0.5s, transform 0.5s; }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* Pulse for Buttons */
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
 /* Apply to Sections */
 section { opacity: 0; transition: opacity 0.6s ease-out; }
 section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
 
 /* Hover Effects */
 .card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-.btn-primary { transition: transform 0.3s; }
-.btn-primary:hover { animation: pulse 1s infinite; }
 
 /* Parallax Overlay for Depth (optional fade) */
 .parallax::before {
@@ -61,5 +67,61 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     background: rgba(0,0,0,0.3); transition: opacity 0.5s;
 }
 .parallax:hover::before { opacity: 0.5; } /* Subtle interaction */
-.parallax:hover::before { opacity: 0.5; } /* Subtle interaction */
-.parallax:hover::before { opacity: 0.5; } /* Subtle interaction */
+
+/* Ripple effect for buttons */
+.btn {
+  position: relative;
+  overflow: hidden;
+  transition-duration: 0.4s;
+}
+
+.btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s;
+}
+
+.btn-primary::after {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.btn-light::after {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.btn:active::after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s;
+}
+/* Contact Background (using CTA image) */
+.contact-bg { background-image: url('images/cta-bg.jpeg'); min-height: 80vh; }
+
+
+#contact {
+    color: black !important;
+  }
+  
+  #contact h1,
+  #contact h2,
+  #contact p,
+  #contact strong {
+    color: black !important;
+  }
+  
+  #contact .team-section {
+    color: white !important;
+  }
+  
+  #contact .team-section h3 {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+  
