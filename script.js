@@ -4,7 +4,7 @@ window.addEventListener('load', function() {
     preloader.classList.add('loaded');
     setTimeout(() => {
         preloader.style.display = 'none';
-    }, 500); 
+    }, 500);
     setTimeout(() => {
         const sections = document.querySelectorAll('section');
         sections.forEach(section => {
@@ -12,7 +12,7 @@ window.addEventListener('load', function() {
                 section.classList.add('visible');
             }
         });
-    }, 550); 
+    }, 550);
 });
 
 // Smooth Scroll with Immediate Visibility for Button Targets
@@ -49,14 +49,12 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Optional: Keep unobserve for one-time, or remove for re-triggers if needed
-                observer.unobserve(entry.target);
+                observer.unobserve(entry.target); // One-time for performance
             }
         });
     }, { threshold: 0.1 });
-
     sections.forEach(section => observer.observe(section));
-});
+
     // Initialize AOS with global settings for futuristic minimalism
     AOS.init({
         duration: 1200, // Smooth, longer transitions for a high-tech feel
