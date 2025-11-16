@@ -7,47 +7,20 @@ window.addEventListener('load', function() {
     }, 500);
 });
 
-// Helper function to check if an element is in the viewport
-function isInViewport(el) {
-    const rect = el.getBoundingClientRect();
-    const threshold = 0.1; // Matches your observer threshold
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
-    return rect.top < windowHeight * (1 - threshold) && rect.bottom > windowHeight * threshold;
-}
 
-// Debounce function for scroll end detection
-function debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-}
-
-// Smooth Scroll with Scroll-End Trigger
+// Smooth Scroll with Immediate Visibility for Button Targets
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
         const targetId = anchor.getAttribute('href');
         const target = document.querySelector(targetId);
         if (target) {
+            // Force visibility immediately for reliable button functionality
+            target.classList.add('visible');
+            // Then perform the smooth scroll
             target.scrollIntoView({ behavior: 'smooth' });
-
-            // Set up a one-time scroll listener to detect end of scroll
-            const handleScrollEnd = debounce(() => {
-                if (!target.classList.contains('visible') && isInViewport(target)) {
-                    target.classList.add('visible');
-                }
-                window.removeEventListener('scroll', handleScrollEnd); // Clean up
-            }, 150); // 150ms debounce; adjust if scrolls are very slow
-
-            window.addEventListener('scroll', handleScrollEnd);
-            
-            // Fallback timeout in case scroll event misses
-            setTimeout(handleScrollEnd, 800); // Call after ~800ms
         }
     });
-});
 });
 // Custom smooth scroll function with easing
 function smoothScrollTo(targetPosition, duration) {
