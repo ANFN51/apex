@@ -125,3 +125,13 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     font-size: 2rem;
   }
   
+.hero h1 {
+    color: #ffffff; /* Already white, but reinforce */
+    text-shadow: 
+        0 0 10px #ffffff,  /* Inner glow */
+        0 0 20px #ffffff,  /* Mid glow */
+        0 0 30px #00bfff,  /* Outer blue-ish glow for luxury pop (matches your navbar gradient) */
+        0 0 40px #00bfff;  /* Extra layer for "bright asf" intensity */
+    font-weight: 900; /* Bolder for emphasis */
+    letter-spacing: 2px; /* Slight spacing for premium feel */
+}
