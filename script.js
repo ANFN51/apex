@@ -2,7 +2,9 @@
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
     preloader.classList.add('loaded');
-    setTimeout(() => preloader.style.display = 'none', 500);
+    setTimeout(() => {
+        preloader.style.display = 'none';
+    }, 500); 
     setTimeout(() => {
         const sections = document.querySelectorAll('section');
         sections.forEach(section => {
@@ -10,7 +12,7 @@ window.addEventListener('load', function() {
                 section.classList.add('visible');
             }
         });
-    }, 550);
+    }, 550); 
 });
 
 // Smooth Scroll with Immediate Visibility for Button Targets
