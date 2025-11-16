@@ -2,80 +2,58 @@
 window.addEventListener('load', function() {
     const preloader = document.getElementById('preloader');
     preloader.classList.add('loaded');
-    setTimeout(function() {
+    setTimeout(() => {
         preloader.style.display = 'none';
     }, 500);
+    setTimeout(() => {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            if (!section.classList.contains('visible') && section.getBoundingClientRect().top < window.innerHeight) {
+                section.classList.add('visible');
+            }
+        });
+    }, 550);
 });
 
-// Smooth Scroll with offset for fixed navbar and custom easing
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-    anchor.addEventListener('click', function(e) {
+// Smooth Scroll with Immediate Visibility for Button Targets
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
+        const targetId = anchor.getAttribute('href');
         const target = document.querySelector(targetId);
         if (target) {
-            const navbarHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-            smoothScrollTo(targetPosition, 800); // Duration set to 800ms for smoother feel
+            // Force visibility immediately for reliable button functionality
+            target.classList.add('visible');
+            // Then perform the smooth scroll
+            target.scrollIntoView({ behavior: 'smooth' });
         }
     });
 });
 
-// Custom smooth scroll function with easing
-function smoothScrollTo(targetPosition, duration) {
-    const startPosition = window.pageYOffset;
-    const distance = targetPosition - startPosition;
-    let startTime = null;
-
-    function animation(currentTime) {
-        if (startTime === null) startTime = currentTime;
-        const timeElapsed = currentTime - startTime;
-        const run = easeInOutQuad(timeElapsed, startPosition, distance, duration);
-        window.scrollTo(0, run);
-        if (timeElapsed < duration) requestAnimationFrame(animation);
-    }
-
-    // Easing function: easeInOutQuad for smooth start and end
-    function easeInOutQuad(t, b, c, d) {
-        t /= d / 2;
-        if (t < 1) return (c / 2) * t * t + b;
-        t--;
-        return (-c / 2) * (t * (t - 2) - 1) + b;
-    }
-
-    requestAnimationFrame(animation);
-}
-
 // Navbar Scroll Effect
-window.addEventListener('scroll', function() {
+window.addEventListener('scroll', () => {
     document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
 });
 
 // Contact Form (Demo Alert)
-const contactForm = document.getElementById('contact-form');
-if (contactForm) {
-    contactForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        alert('Message sent successfully! (This is a demo)');
-        e.target.reset();
-    });
-}
+document.getElementById('contact-form')?.addEventListener('submit', e => {
+    e.preventDefault();
+    alert('Message sent successfully! (This is a demo)');
+    e.target.reset();
+});
 
 // Scroll-Triggered Animations
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
-    const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // One-time trigger
+                observer.unobserve(entry.target); // One-time for performance
             }
         });
-    }, { threshold: 0.1 }); // Trigger when 10% visible
-
-    sections.forEach(function(section) {
-        observer.observe(section);
-    });
+    }, { threshold: 0.1 });
+    sections.forEach(section => observer.observe(section));
 
     // Initialize AOS with global settings for futuristic minimalism
     AOS.init({
