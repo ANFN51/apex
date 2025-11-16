@@ -7,20 +7,21 @@ window.addEventListener('load', function() {
     }, 500);
 });
 
-// Smooth Scroll with offset for fixed navbar and custom easing
-document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
-    anchor.addEventListener('click', function(e) {
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
         e.preventDefault();
-        const targetId = this.getAttribute('href');
+        const targetId = anchor.getAttribute('href');
         const target = document.querySelector(targetId);
-        if (target) {
-            const navbarHeight = document.querySelector('.navbar').offsetHeight;
-            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
-            smoothScrollTo(targetPosition, 800); // Duration set to 800ms for smoother feel
-        }
+        target.scrollIntoView({ behavior: 'smooth' });
+        
+        setTimeout(() => {
+            if (target) {
+                target.classList.add('visible');
+            }
+        }, 600);  
     });
 });
-
 // Custom smooth scroll function with easing
 function smoothScrollTo(targetPosition, duration) {
     const startPosition = window.pageYOffset;
