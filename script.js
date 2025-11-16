@@ -7,19 +7,36 @@ window.addEventListener('load', function() {
     }, 500);
 });
 
-// Smooth Scroll
+// Helper function to check if an element is in the viewport
+function isInViewport(el) {
+    const rect = el.getBoundingClientRect();
+    const threshold = 0.1; // Matches your observer threshold
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    return rect.top < windowHeight * (1 - threshold) && rect.bottom > windowHeight * threshold;
+}
+
+// Smooth Scroll with Manual Visibility Trigger
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
         const targetId = anchor.getAttribute('href');
         const target = document.querySelector(targetId);
-        target.scrollIntoView({ behavior: 'smooth' });
-        
-        setTimeout(() => {
-            if (target) {
-                target.classList.add('visible');
-            }
-        }, 600);  
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+            
+            // Wait for scroll to settle, then check and add .visible if needed
+            setTimeout(() => {
+                function checkVisibility() {
+                    if (!target.classList.contains('visible') && isInViewport(target)) {
+                        target.classList.add('visible');
+                    } else if (!target.classList.contains('visible')) {
+                        // Retry once more if not yet in view (for longer scrolls)
+                        requestAnimationFrame(checkVisibility);
+                    }
+                }
+                checkVisibility();
+            }, 600); // Base delay; adjust to 800-1000ms if scrolls feel slower on your device
+        }
     });
 });
 // Custom smooth scroll function with easing
