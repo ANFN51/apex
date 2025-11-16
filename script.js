@@ -15,7 +15,16 @@ function isInViewport(el) {
     return rect.top < windowHeight * (1 - threshold) && rect.bottom > windowHeight * threshold;
 }
 
-// Smooth Scroll with Manual Visibility Trigger
+// Debounce function for scroll end detection
+function debounce(func, wait) {
+    let timeout;
+    return function(...args) {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => func.apply(this, args), wait);
+    };
+}
+
+// Smooth Scroll with Scroll-End Trigger
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
@@ -23,21 +32,22 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(targetId);
         if (target) {
             target.scrollIntoView({ behavior: 'smooth' });
-            
-            // Wait for scroll to settle, then check and add .visible if needed
-            setTimeout(() => {
-                function checkVisibility() {
-                    if (!target.classList.contains('visible') && isInViewport(target)) {
-                        target.classList.add('visible');
-                    } else if (!target.classList.contains('visible')) {
-                        // Retry once more if not yet in view (for longer scrolls)
-                        requestAnimationFrame(checkVisibility);
-                    }
+
+            // Set up a one-time scroll listener to detect end of scroll
+            const handleScrollEnd = debounce(() => {
+                if (!target.classList.contains('visible') && isInViewport(target)) {
+                    target.classList.add('visible');
                 }
-                checkVisibility();
-            }, 600); // Base delay; adjust to 800-1000ms if scrolls feel slower on your device
+                window.removeEventListener('scroll', handleScrollEnd); // Clean up
+            }, 150); // 150ms debounce; adjust if scrolls are very slow
+
+            window.addEventListener('scroll', handleScrollEnd);
+            
+            // Fallback timeout in case scroll event misses
+            setTimeout(handleScrollEnd, 800); // Call after ~800ms
         }
     });
+});
 });
 // Custom smooth scroll function with easing
 function smoothScrollTo(targetPosition, duration) {
