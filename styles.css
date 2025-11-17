@@ -1,180 +1,69 @@
-body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
-
+body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
 /* Preloader */
 #preloader {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #fff;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease;
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999;
+    display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
 }
-
-#preloader.loaded {
-    opacity: 0;
-    pointer-events: none;
-}
-
-/* Loading Animation */
-@keyframes ldio-rpinwye8j0b {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(180deg); }
-    100% { transform: rotate(360deg); }
-}
-
-.ldio-rpinwye8j0b div {
-    position: absolute;
-    animation: ldio-rpinwye8j0b 1s linear infinite;
-    width: 80px;
-    height: 80px;
-    top: 10px;
-    left: 10px;
-    border-radius: 50%;
-    box-shadow: 0 2px 0 0 #007bff;
-    transform-origin: 40px 41px;
-}
-
-.loadingio-eclipse {
-    width: 100px;
-    height: 100px;
-    display: inline-block;
-    overflow: hidden;
-}
-
-.ldio-rpinwye8j0b {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    transform: translateZ(0) scale(1);
-    backface-visibility: hidden;
-    transform-origin: 0 0;
-}
-
-.ldio-rpinwye8j0b div {
-    box-sizing: content-box;
-}
-
-/* Parallax Sections */
-.parallax {
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 60vh;
-}
-
-.hero {
-    background-image: url('images/hero-bg.jpeg');
-}
-
-.properties {
-    background-image: url('images/properties-bg.jpeg');
-    min-height: 80vh;
-}
-
-.cta {
-    background-image: url('images/cta-bg.jpeg');
-    min-height: 40vh;
-}
-
-/* Disable parallax on mobile for better performance */
+#preloader.loaded { opacity: 0; pointer-events: none; }
+/* Loading Animation (from loading.io) */
+@keyframes ldio-rpinwye8j0b { 0% { transform: rotate(0deg) } 50% { transform: rotate(180deg) } 100% { transform: rotate(360deg) } }
+.ldio-rpinwye8j0b div { position: absolute; animation: ldio-rpinwye8j0b 1s linear infinite; width: 80px; height: 80px; top: 10px; left: 10px; border-radius: 50%; box-shadow: 0 2px 0 0 #007bff; transform-origin: 40px 41px; }
+.loadingio-eclipse { width: 100px; height: 100px; display: inline-block; overflow: hidden; }
+.ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
+.ldio-rpinwye8j0b div { box-sizing: content-box; }
+/* Parallax Sections with Local JPEG Images */
+.parallax { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; min-height: 60vh; }
+.hero { background-image: url('images/hero-bg.jpeg'); } /* Your downloaded hero JPEG */
+.properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; } /* Your downloaded properties JPEG */
+.cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; } /* Your downloaded CTA JPEG */
+/* Mobile Fallback (Existing, but Ensure It Applies) */
 @media (max-width: 768px) {
-    .parallax {
-        background-attachment: scroll;
+    .about-img {
+        margin-bottom: 20px; /* Spacing for stacked layout */
     }
 }
-
 /* General Styles */
 .navbar-brand {
+    font-family: 'Raleway', sans-serif;
     font-weight: 700;
-    letter-spacing: 3px;
-    background: linear-gradient(to right, #007bff, #00bfff);
+    letter-spacing: 3px; /* Extended spacing for a wide, luxurious header */
+    background: linear-gradient(to right, #007bff, #00bfff); /* Optional gradient for extra cool factor */
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
-
-.navbar {
-    transition: background 0.3s;
-}
-
-.navbar.scrolled {
-    background: rgba(255, 255, 255, 0.95) !important;
-}
-
-.nav-link {
-    transition: transform 0.3s ease, color 0.3s ease;
-}
-
-.nav-link:hover {
-    transform: scale(1.05);
-    color: #007bff !important;
-}
-
-section {
-    transition: opacity 0.5s, transform 0.5s;
-}
-
-.card {
-    transition: transform 0.3s;
-    border: none;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover {
-    transform: translateY(-5px);
-}
-
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.btn-primary:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
+.navbar { transition: background 0.3s; }
+.navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
+.nav-link { transition: transform 0.3s ease, color 0.3s ease, background 0.8s; background-position: center; }
+.nav-link:hover { transform: scale(1.05); color: #007bff !important; background: #f0f0f0 radial-gradient(circle, transparent 1%, #f0f0f0 1%) center/15000%; }
+.nav-link:active { background-color: #e0e0e0; background-size: 100%; transition: background 0s; }
+section { transition: opacity 0.5s, transform 0.5s; }
+.card { transition: transform 0.3s; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+.card:hover { transform: translateY(-5px); }
+.btn-primary { background-color: #007bff; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.btn-primary:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+.btn-light { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+.btn-light:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+.map { border-top: 1px solid #ddd; }
 /* Fade-In Animation */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
-section {
-    opacity: 0;
-    transition: opacity 0.6s ease-out;
+section { opacity: 0; transition: opacity 0.6s ease-out; }
+section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
+.card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+.parallax::before {
+    content: '';
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0);
+    transition: opacity 0.5s;
 }
-
-section.visible {
-    opacity: 1;
-    animation: fadeInUp 0.8s ease-out forwards;
-}
-
-/* Button Effects */
 .btn {
     position: relative;
     overflow: hidden;
     transition-duration: 0.4s;
 }
-
 .btn::after {
     content: "";
     display: block;
@@ -186,37 +75,99 @@ section.visible {
     opacity: 0;
     transition: all 0.8s;
 }
-
 .btn-primary::after {
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.6); /* White ripple for brightness */
 }
-
 .btn:active::after {
     padding: 0;
     margin: 0;
     opacity: 1;
     transition: 0s;
 }
-
-.btn-primary:hover {
-    transform: scale(1.1);
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
-    background-color: #0056b3;
+/* Primary button hover effect */
+.btn-primary {
+    background-color: #007bff;
+    border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
-
-/* Hero Text */
+.btn-primary:hover {
+    transform: scale(1.1); /* Slightly larger scale for more noticeable effect */
+    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Blue glow shadow for luxury feel */
+    background-color: #0056b3; /* Darken slightly on hover for depth */
+}
+/* Contact Background (using CTA image) */
+.contact-bg { background-image: url('images/cta-bg.jpeg'); min-height: 80vh; }
+#contact {
+    color: black !important;
+  }
+  
+  #contact h1,
+  #contact h2,
+  #contact p,
+  #contact strong {
+    color: black !important;
+  }
+  
+  #contact .team-section {
+    color: white !important;
+  }
+  
+  #contact .team-section h3 {
+    font-weight: bold;
+    font-size: 2rem;
+  }
+  
 .hero h1 {
     color: #ffffff;
-    text-shadow: 0 0 10px #ffffff, 0 0 20px #ffffff, 0 0 30px #00bfff, 0 0 40px #00bfff;
+    text-shadow:
+        0 0 10px #ffffff,
+        0 0 20px #ffffff,
+        0 0 30px #00bfff,
+        0 0 40px #00bfff;
     font-weight: 900;
     letter-spacing: 2px;
 }
-
-/* About Section */
+/* About Overlay Image with Futuristic Animation */
+.about-overlay-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9) rotate(0deg); /* Initial state for animation */
+    width: 40%; /* Adjust for minimalistic sizing; e.g., 40% of section width */
+    height: auto;
+    opacity: 0; /* Start hidden */
+    pointer-events: none; /* Non-interactive for clean UX */
+    z-index: 2; /* Above background and text if needed; ensures layering */
+    animation: overlayAnimate 2s ease-out 0.5s forwards; /* Delay for section reveal, forwards to persist end state */
+}
+/* Keyframes for Minimalistic, High-Tech Animation (Fade-In, Scale, Subtle Rotate) */
+@keyframes overlayAnimate {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); /* Start small and tilted for dynamic entry */
+    }
+    100% {
+        opacity: 0.7; /* Semi-transparent for overlay blend */
+        transform: translate(-50%, -50%) scale(1) rotate(0deg); /* Full size and straight */
+    }
+}
+/* Optional Hover for Interactivity (Futuristic Pulse) */
+.about-bg:hover .about-overlay-img {
+    animation: overlayPulse 1s infinite alternate ease-in-out;
+}
+@keyframes overlayPulse {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); } /* Gentle expansion and tilt */
+}
+/* Confirm Mountain Background (No Changes Needed, But Ensure It's Set) */
 .about-bg {
     background-image: url('images/mountain.jpg');
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 60vh;
 }
-
 .about-bg::before {
     content: '';
     position: absolute;
@@ -225,29 +176,70 @@ section.visible {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 1;
+    z-index: 1; /* Below overlay image */
+    transition: opacity 0.5s;
+}
+@keyframes subtleFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-.about-bg .container {
+/* Added Animations */
+
+/* 1. Fade-In on Scroll for Sections */
+section {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+section.visible {
+    opacity: 1;
+    animation: fadeIn 1s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 3. Button Ripple Effect on Hover */
+.btn {
     position: relative;
-    z-index: 2;
+    overflow: hidden;
+}
+.btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    opacity: 0;
+    border-radius: 50%;
+    transform: scale(1);
+    transition: transform 0.5s, opacity 1s;
+}
+.btn:hover::after {
+    opacity: 1;
+    transform: scale(50);
+    transition: transform 0.5s, opacity 0.1s;
 }
 
-@media (max-width: 768px) {
-    .about-img {
-        margin-bottom: 20px;
-    }
+/* 4. Text Reveal on Load */
+h1, h2 {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+h1.visible, h2.visible {
+    opacity: 1;
+    transform: translateY(0);
 }
 
-/* Contact Section */
-#contact h1,
-#contact h2,
-#contact p,
-#contact strong {
-    color: inherit;
+/* 5. Parallax Enhancement with Fade */
+.parallax {
+    opacity: 0.8;
+    transition: opacity 0.5s ease;
 }
-
-/* Map */
-.map {
-    border-top: 1px solid #ddd;
+.parallax:hover, .parallax:focus {
+    opacity: 1;
 }
