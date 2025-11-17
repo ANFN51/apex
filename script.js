@@ -15,14 +15,16 @@ window.addEventListener('load', function() {
     }, 550);
 });
 
-// Smooth Scroll
+// Smooth Scroll with Immediate Visibility for Button Targets
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
         const targetId = anchor.getAttribute('href');
         const target = document.querySelector(targetId);
         if (target) {
+            // Force visibility immediately for reliable button functionality
             target.classList.add('visible');
+            // Then perform the smooth scroll
             target.scrollIntoView({ behavior: 'smooth' });
         }
     });
@@ -47,16 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                // Add .visible to h1 and h2 within the section for text reveal
+                const headings = entry.target.querySelectorAll('h1, h2');
+                headings.forEach(heading => heading.classList.add('visible'));
+                observer.unobserve(entry.target); // One-time for performance
             }
         });
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
 
+    // Initialize AOS with global settings for futuristic minimalism
     AOS.init({
-        duration: 1200,
-        easing: 'ease-in-out-cubic',
-        once: true,
-        offset: 100
+        duration: 1200, // Smooth, longer transitions for a high-tech feel
+        easing: 'ease-in-out-cubic', // Curved easing for modern fluidity
+        once: true, // Animate only once per scroll for performance
+        offset: 100 // Trigger slightly earlier for anticipation
     });
 });
