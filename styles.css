@@ -20,8 +20,11 @@ body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hid
 .properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; } /* Your downloaded properties JPEG */
 .cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; } /* Your downloaded CTA JPEG */
 
-@media only screen and (max-width: 1366px) { 
-    .parallax { background-attachment: scroll; } 
+/* Mobile Fallback (Existing, but Ensure It Applies) */
+@media only screen and (max-device-width: 1366px) {
+    .parallax, .about-bg {
+        background-attachment: scroll;
+    }
 }
 /* General Styles */
 .navbar-brand {
@@ -169,9 +172,4 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     opacity: 0.6; /* Gentle interaction for high-tech engagement */
 }
 
-/* Mobile Fallback (Existing, but Ensure It Applies) */
-@media only screen and (max-device-width: 1366px) {
-    .parallax, .about-bg {
-        background-attachment: scroll;
-    }
-}
+
