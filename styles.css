@@ -172,4 +172,7 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     opacity: 0.6; /* Gentle interaction for high-tech engagement */
 }
 
-
+@keyframes subtleFade {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
