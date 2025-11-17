@@ -143,3 +143,35 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     font-weight: 900; 
     letter-spacing: 2px; 
 }
+
+/* About Section with Custom Mountain Background (Futuristic Parallax) */
+.about-bg {
+    background-image: url('images/mountain.jpg'); /* Your custom mountain image */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 60vh; /* Immersive height matching hero for premium flow */
+}
+
+/* Enhance Overlay for Minimalistic Depth and Text Readability */
+.about-bg::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4); /* Subtle darkening for futuristic contrast */
+    transition: opacity 0.5s;
+}
+.about-bg:hover::before {
+    opacity: 0.6; /* Gentle interaction for high-tech engagement */
+}
+
+/* Mobile Fallback (Existing, but Ensure It Applies) */
+@media only screen and (max-device-width: 1366px) {
+    .parallax, .about-bg {
+        background-attachment: scroll;
+    }
+}
