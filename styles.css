@@ -147,17 +147,52 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     letter-spacing: 2px; 
 }
 
-/* About Section with Custom Mountain Background (Futuristic Parallax) */
+/* About Overlay Image with Futuristic Animation */
+.about-overlay-img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.9) rotate(0deg); /* Initial state for animation */
+    width: 40%; /* Adjust for minimalistic sizing; e.g., 40% of section width */
+    height: auto;
+    opacity: 0; /* Start hidden */
+    pointer-events: none; /* Non-interactive for clean UX */
+    z-index: 2; /* Above background and text if needed; ensures layering */
+    animation: overlayAnimate 2s ease-out 0.5s forwards; /* Delay for section reveal, forwards to persist end state */
+}
+
+/* Keyframes for Minimalistic, High-Tech Animation (Fade-In, Scale, Subtle Rotate) */
+@keyframes overlayAnimate {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); /* Start small and tilted for dynamic entry */
+    }
+    100% {
+        opacity: 0.7; /* Semi-transparent for overlay blend */
+        transform: translate(-50%, -50%) scale(1) rotate(0deg); /* Full size and straight */
+    }
+}
+
+/* Optional Hover for Interactivity (Futuristic Pulse) */
+.about-bg:hover .about-overlay-img {
+    animation: overlayPulse 1s infinite alternate ease-in-out;
+}
+
+@keyframes overlayPulse {
+    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); } /* Gentle expansion and tilt */
+}
+
+/* Confirm Mountain Background (No Changes Needed, But Ensure It's Set) */
 .about-bg {
-    background-image: url('images/mountain.jpg'); /* Your custom mountain image */
+    background-image: url('images/mountain.jpg');
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    min-height: 60vh; /* Immersive height matching hero for premium flow */
+    min-height: 60vh;
 }
 
-/* Enhance Overlay for Minimalistic Depth and Text Readability */
 .about-bg::before {
     content: '';
     position: absolute;
@@ -165,11 +200,9 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4); /* Subtle darkening for futuristic contrast */
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1; /* Below overlay image */
     transition: opacity 0.5s;
-}
-.about-bg:hover::before {
-    opacity: 0.6; /* Gentle interaction for high-tech engagement */
 }
 
 @keyframes subtleFade {
