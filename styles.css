@@ -1,40 +1,42 @@
-body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
-
-/* Preloader */
+body {
+font-family: 'Roboto', sans-serif;
+margin: 0;
+padding: 0;
+overflow-x: hidden;
+background-color: #f8f9fa; / Subtle light background for minimalism */
+}
+/* Preloader for Sleek Loading Experience */
 #preloader {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999;
-    display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
+position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999;
+display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
 }
 #preloader.loaded { opacity: 0; pointer-events: none; }
-
-/* Loading Animation (from loading.io) */
+/* Loading Animation (Minimalistic Spinner) */
 @keyframes ldio-rpinwye8j0b { 0% { transform: rotate(0deg) } 50% { transform: rotate(180deg) } 100% { transform: rotate(360deg) } }
 .ldio-rpinwye8j0b div { position: absolute; animation: ldio-rpinwye8j0b 1s linear infinite; width: 80px; height: 80px; top: 10px; left: 10px; border-radius: 50%; box-shadow: 0 2px 0 0 #007bff; transform-origin: 40px 41px; }
 .loadingio-eclipse { width: 100px; height: 100px; display: inline-block; overflow: hidden; }
 .ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
 .ldio-rpinwye8j0b div { box-sizing: content-box; }
-
-/* Parallax Sections with Local JPEG Images */
+/* Parallax Sections for Immersive, Futuristic Depth /
 .parallax { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; min-height: 60vh; }
-.hero { background-image: url('images/hero-bg.jpeg'); } /* Your downloaded hero JPEG */
-.properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; } /* Your downloaded properties JPEG */
-.cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; } /* Your downloaded CTA JPEG */
-
-/* Mobile Fallback (Existing, but Ensure It Applies) */
+.hero { background-image: url('images/hero-bg.jpeg'); } / Hero for Premium Entry /
+.properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; } / Properties Showcase /
+.cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; } / Call to Action */
+/* Mobile Fallback for Smooth Scrolling */
 @media only screen and (max-device-width: 1366px) {
-    .parallax, .about-bg {
-        background-attachment: scroll;
-    }
+.parallax, .about-bg {
+background-attachment: scroll;
 }
-/* General Styles */
+}
+/* General Styles for Elite, Minimalistic UI /
 .navbar-brand {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    letter-spacing: 3px; /* Extended spacing for a wide, luxurious header */
-    background: linear-gradient(to right, #007bff, #00bfff); /* Optional gradient for extra cool factor */
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
+font-family: 'Raleway', sans-serif;
+font-weight: 700;
+letter-spacing: 3px; / Extended spacing for luxurious feel */
+background: linear-gradient(to right, #007bff, #00bfff);
+-webkit-background-clip: text;
+background-clip: text;
+color: transparent;
 }
 .navbar { transition: background 0.3s; }
 .navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
@@ -49,163 +51,123 @@ section { transition: opacity 0.5s, transform 0.5s; }
 .btn-light { transition: transform 0.3s ease, box-shadow 0.3s ease; }
 .btn-light:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
 .map { border-top: 1px solid #ddd; }
+/* Fade-In for Sections (Futuristic Reveal) /
 
-/* Fade-In Animation */
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
+from { opacity: 0; transform: translateY(50px); }
+to { opacity: 1; transform: translateY(0); }
 }
-
-
 section { opacity: 0; transition: opacity 0.6s ease-out; }
 section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
-
-
 .card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-
-
 .parallax::before {
-    content: '';
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0); 
-    transition: opacity 0.5s;
+content: '';
+position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+background: rgba(0,0,0,0);
+transition: opacity 0.5s;
 }
-
 .btn {
-    position: relative;
-    overflow: hidden;
-    transition-duration: 0.4s;
+position: relative;
+overflow: hidden;
+transition-duration: 0.4s;
 }
-
 .btn::after {
-    content: "";
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s;
+content: "";
+display: block;
+position: absolute;
+padding-top: 300%;
+padding-left: 350%;
+margin-left: -20px;
+margin-top: -120%;
+opacity: 0;
+transition: all 0.8s;
 }
-
 .btn-primary::after {
-    background: rgba(255, 255, 255, 0.6); /* White ripple for brightness */
+background: rgba(255, 255, 255, 0.6); 
 }
-
 .btn:active::after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s;
+padding: 0;
+margin: 0;
+opacity: 1;
+transition: 0s;
 }
-
-/* Primary button hover effect */
+/* Primary Button Hover for Luxury Interaction */
 .btn-primary {
-    background-color: #007bff;
-    border: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+background-color: #007bff;
+border: none;
+transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
 }
-
 .btn-primary:hover {
-    transform: scale(1.1); /* Slightly larger scale for more noticeable effect */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Blue glow shadow for luxury feel */
-    background-color: #0056b3; /* Darken slightly on hover for depth */
+transform: scale(1.1);
+box-shadow: 0 0 15px rgba(0, 123, 255, 0.5);
+background-color: #0056b3;
 }
-/* Contact Background (using CTA image) */
+/* Contact Section with Parallax Background */
 .contact-bg { background-image: url('images/cta-bg.jpeg'); min-height: 80vh; }
-
-
 #contact {
-    color: black !important;
-  }
-  
-  #contact h1,
-  #contact h2,
-  #contact p,
-  #contact strong {
-    color: black !important;
-  }
-  
-  #contact .team-section {
-    color: white !important;
-  }
-  
-  #contact .team-section h3 {
-    font-weight: bold;
-    font-size: 2rem;
-  }
-  
+color: black !important;
+}
+#contact h1,
+#contact h2,
+#contact p,
+#contact strong {
+color: black !important;
+}
+#contact .team-section {
+color: white !important;
+}
+#contact .team-section h3 {
+font-weight: bold;
+font-size: 2rem;
+}
+/* Hero Heading for Futuristic Glow */
 .hero h1 {
-    color: #ffffff; 
-    text-shadow: 
-        0 0 10px #ffffff,  
-        0 0 20px #ffffff,  
-        0 0 30px #00bfff, 
-        0 0 40px #00bfff; 
-    font-weight: 900; 
-    letter-spacing: 2px; 
+color: #ffffff;
+text-shadow:
+0 0 10px #ffffff,
+0 0 20px #ffffff,
+0 0 30px #00bfff,
+0 0 40px #00bfff;
+font-weight: 900;
+letter-spacing: 2px;
 }
-
-/* About Overlay Image with Futuristic Animation */
-.about-overlay-img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9) rotate(0deg); /* Initial state for animation */
-    width: 40%; /* Adjust for minimalistic sizing; e.g., 40% of section width */
-    height: auto;
-    opacity: 0; /* Start hidden */
-    pointer-events: none; /* Non-interactive for clean UX */
-    z-index: 2; /* Above background and text if needed; ensures layering */
-    animation: overlayAnimate 2s ease-out 0.5s forwards; /* Delay for section reveal, forwards to persist end state */
-}
-
-/* Keyframes for Minimalistic, High-Tech Animation (Fade-In, Scale, Subtle Rotate) */
-@keyframes overlayAnimate {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); /* Start small and tilted for dynamic entry */
-    }
-    100% {
-        opacity: 0.7; /* Semi-transparent for overlay blend */
-        transform: translate(-50%, -50%) scale(1) rotate(0deg); /* Full size and straight */
-    }
-}
-
-/* Optional Hover for Interactivity (Futuristic Pulse) */
-.about-bg:hover .about-overlay-img {
-    animation: overlayPulse 1s infinite alternate ease-in-out;
-}
-
-@keyframes overlayPulse {
-    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); } /* Gentle expansion and tilt */
-}
-
-/* Confirm Mountain Background (No Changes Needed, But Ensure It's Set) */
+/* About Section with Mountain Background (Minimalistic Layering) /
 .about-bg {
-    background-image: url('images/mountain.jpg');
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 60vh;
+background-image: url('images/mountain.jpg');
+background-attachment: fixed;
+background-position: center;
+background-repeat: no-repeat;
+background-size: cover;
+min-height: 60vh;
 }
-
 .about-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1; /* Below overlay image */
-    transition: opacity 0.5s;
+content: '';
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background: rgba(0, 0, 0, 0.3); / Lighter tint for visibility /
+z-index: 1; / Below content */
 }
-
+/* About Image (Static Left Positioning, No Animation) /
+.about-img {
+width: 100%; / Full column for premium display /
+height: auto;
+opacity: 0.9; / Subtle blend with mountain /
+box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2); / Elegant shadow /
+border-radius: 8px; / Soft edges for minimalism /
+z-index: 2; / Above background /
+position: relative; / Static within grid */
+}
+/* Mobile Adjustments for Responsive Elegance /
+@media (max-width: 768px) {
+.about-img {
+margin-bottom: 20px; / Spacing for stacked layout */
+}
+}
+/* Subtle Fade for Section Reveals (Optional, Kept Minimal) */
 @keyframes subtleFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+from { opacity: 0; }
+to { opacity: 1; }
 }
