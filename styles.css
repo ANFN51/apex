@@ -184,112 +184,42 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     to { opacity: 1; }
 }
 
-/* 1. Fade-In on Scroll for Sections – now safe */
-section {
-    opacity: 0;
-    transform: translateY(30px);           /* gentle slide-up */
-    transition: opacity 1s ease, transform 1s ease;
-}
-section.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 3. Button Ripple Effect (unchanged) */
-.btn {
-    position: relative;
-    overflow: hidden;
-}
-.btn::after {
-    content: '';
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 5px; height: 5px;
-    background: rgba(255,255,255,0.5);
-    opacity: 0;
-    border-radius: 50%;
-    transform: scale(1);
-    transition: transform 0.5s, opacity 1s;
-}
-.btn:hover::after {
-    opacity: 1;
-    transform: scale(50);
-    transition: transform 0.5s, opacity 0.1s;
-}
-
-/* 4. Text Reveal on Load */
-h1, h2, h3 {
-    opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s ease, transform 0.8s ease;
-}
-h1.visible, h2.visible, h3.visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-/* 5. Parallax Enhancement – now uses overlay instead of whole section opacity */
+/* Enhanced Parallax Scrolling */
 .parallax {
-    position: relative;
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-.parallax::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.15);
-    transition: opacity 0.5s ease;
-}
-.parallax:hover::before {
-    opacity: 0;
+    position: relative; /* Ensure positioning context */
+    overflow: hidden; /* Prevent overflow issues */
+    background-attachment: fixed; /* Keeps background in place */
+    background-size: cover; /* Ensures full coverage */
+    min-height: 70vh; /* Increase height for more visible effect */
+    z-index: 1; /* Layering to avoid overlaps */
 }
 
-/* Mobile-first: Default styles for small screens */
-.about-section .row {
-    flex-direction: column; /* Stack columns on mobile */
+.parallax .container {
+    position: relative; /* Content scrolls over fixed BG */
+    z-index: 2; /* Above background */
 }
 
-/* Scale up for larger screens */
-@media (min-width: 768px) {
-    .about-section .row {
-        flex-direction: row; /* Side-by-side on desktop */
+/* Subtle scroll-driven movement for modern browsers */
+@supports (animation-timeline: scroll()) {
+    .parallax {
+        animation: parallax-effect linear both;
+        animation-timeline: scroll(root block);
+        animation-range: entry 0% cover 50%; /* Adjust range for smoothness */
     }
 }
 
+@keyframes parallax-effect {
+    from {
+        background-position-y: 0; /* Start position */
+    }
+    to {
+        background-position-y: -10%; /* Slight shift for depth */
+    }
+}
+
+/* Mobile Fallback: Disable fixed on mobile for performance */
 @media (max-width: 767px) {
     .parallax {
-        background-attachment: scroll; /* Prevent jitter on mobile */
-        min-height: 50vh; /* Reduce height for faster scrolling */
+        background-attachment: scroll; /* Normal scroll on mobile */
     }
 }
-
-body {
-    font-size: clamp(14px, 2vw, 18px); /* Scales between 14px and 18px */
-}
-
-img {
-    max-width: 100%; /* Ensures images don't overflow */
-    height: auto;
-}
-
-/* For hero or property images */
-.hero img, .properties img {
-    object-fit: cover; /* Maintain aspect ratio */
-}
-
-@media (max-width: 576px) {
-    .navbar-nav .nav-link {
-        padding: 1rem; /* Larger tap targets */
-    }
-    #services .card {
-        margin-bottom: 1.5rem; /* More spacing on mobile */
-    }
-    /* Hide detailed text on mobile if needed */
-    #about p:last-child {
-        display: none; /* Example: Shorten about section */
-    }
-}
-
