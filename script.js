@@ -67,27 +67,3 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-// Advanced Parallax Scrolling
-function updateParallax() {
-    const parallaxElements = document.querySelectorAll('.parallax');
-    parallaxElements.forEach(el => {
-        const speed = parseFloat(el.getAttribute('data-speed')) || 0.5; // Default speed
-        const offset = window.pageYOffset * speed;
-        el.style.backgroundPositionY = `${offset}px`;
-    });
-}
-
-// Use requestAnimationFrame for smoother performance
-let ticking = false;
-window.addEventListener('scroll', () => {
-    if (!ticking) {
-        window.requestAnimationFrame(() => {
-            updateParallax();
-            ticking = false;
-        });
-        ticking = true;
-    }
-});
-
-// Initial call on load
-window.addEventListener('load', updateParallax);
