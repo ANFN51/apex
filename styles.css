@@ -223,3 +223,12 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
         background-attachment: scroll; /* Normal scroll on mobile */
     }
 }
+
+.parallax {
+    position: relative;
+    overflow: hidden;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    min-height: 70vh; /* Adjust for visibility */
+}
