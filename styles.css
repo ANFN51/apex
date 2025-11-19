@@ -247,3 +247,49 @@ h1.visible, h2.visible, h3.visible {
     opacity: 0;
 }
 
+/* Mobile-first: Default styles for small screens */
+.about-section .row {
+    flex-direction: column; /* Stack columns on mobile */
+}
+
+/* Scale up for larger screens */
+@media (min-width: 768px) {
+    .about-section .row {
+        flex-direction: row; /* Side-by-side on desktop */
+    }
+}
+
+@media (max-width: 767px) {
+    .parallax {
+        background-attachment: scroll; /* Prevent jitter on mobile */
+        min-height: 50vh; /* Reduce height for faster scrolling */
+    }
+}
+
+body {
+    font-size: clamp(14px, 2vw, 18px); /* Scales between 14px and 18px */
+}
+
+img {
+    max-width: 100%; /* Ensures images don't overflow */
+    height: auto;
+}
+
+/* For hero or property images */
+.hero img, .properties img {
+    object-fit: cover; /* Maintain aspect ratio */
+}
+
+@media (max-width: 576px) {
+    .navbar-nav .nav-link {
+        padding: 1rem; /* Larger tap targets */
+    }
+    #services .card {
+        margin-bottom: 1.5rem; /* More spacing on mobile */
+    }
+    /* Hide detailed text on mobile if needed */
+    #about p:last-child {
+        display: none; /* Example: Shorten about section */
+    }
+}
+
