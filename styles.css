@@ -105,37 +105,43 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     background-color: #0056b3; /* Darken slightly on hover for depth */
 }
 
-/* Contact Background (using CTA image) */
-.contact-bg { background-image: url('images/cta-bg.jpeg'); min-height: 80vh; }
+/* Existing #contact styles (for reference; keep these) */
 #contact {
-    color: black !important;
-  }
-  
-  #contact h1,
-  #contact h2,
-  #contact p,
-  #contact strong {
-    color: black !important;
-  }
-  
-  #contact .team-section {
-    color: white !important;
-  }
-  
-  #contact .team-section h3 {
-    font-weight: bold;
-    font-size: 2rem;
-  }
-  
-.hero h1 {
-    color: #ffffff;
-    text-shadow:
-        0 0 10px #ffffff,
-        0 0 20px #ffffff,
-        0 0 30px #00bfff,
-        0 0 40px #00bfff;
-    font-weight: 900;
-    letter-spacing: 2px;
+    color: black !important; /* Override if needed, but we'll enhance with gradient */
+}
+
+#contact h1,
+#contact h2,
+#contact h3,
+#contact p,
+#contact strong {
+    color: transparent !important; /* Set to transparent to allow gradient visibility */
+    background: linear-gradient(to right, #007bff, #00bfff); /* Matching Apex logo gradient */
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-weight: 700; /* Bold for emphasis, matching logo */
+    letter-spacing: 2px; /* Slight spacing for a premium feel */
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth on lighter backgrounds */
+}
+
+/* Team section specific tweaks for better contrast */
+#contact .team-section {
+    color: white !important; /* Base color fallback */
+}
+
+#contact .team-section h3,
+#contact .team-section p,
+#contact .team-section strong {
+    background: linear-gradient(to right, #007bff, #00bfff); /* Apply gradient here too */
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+}
+
+/* Ensure form labels and placeholders remain readable (no gradient for inputs) */
+#contact .form-control {
+    color: #333; /* Dark text for form fields */
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white for contrast */
 }
 
 /* About Overlay Image with Futuristic Animation + Transparent Logo (No White Background) */
