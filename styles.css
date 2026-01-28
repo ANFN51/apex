@@ -439,3 +439,89 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     0%, 100% { filter: drop-shadow(var(--glow-soft)); }
     50%      { filter: drop-shadow(var(--glow-strong)); }
 }
+
+/* ──────────────────────────────────────────────────────────────
+   MOBILE OPTIMIZATIONS – Futuristic Minimalist Real Estate
+   Fixes for phones: Responsive scaling, parallax fallback, performance tweaks
+   ────────────────────────────────────────────────────────────── */
+
+/* Stronger Mobile Parallax Fallback (No Jitter) */
+@media (max-width: 767px) {
+    .parallax {
+        background-attachment: scroll !important; /* Override fixed for smooth scroll */
+        background-size: cover; /* Prevent stretching */
+        min-height: 50vh; /* Reduce height for faster mobile viewing */
+    }
+    .parallax::before {
+        opacity: 0.7; /* Slightly lighter overlay for better text legibility on small screens */
+    }
+}
+
+/* Responsive Logo & Images (Scale Fluidly, No Overflows) */
+@media (max-width: 767px) {
+    .about-overlay-img, img {
+        max-width: 80% !important; /* Down from 420px for phones */
+        height: auto;
+        position: relative !important; /* Switch from absolute to avoid overlaps */
+        transform: none !important; /* Disable translates for stacking */
+        margin: 0 auto 1.5rem; /* Center with spacing */
+    }
+    .row.align-items-center {
+        flex-direction: column; /* Stack logo above text on mobile */
+    }
+}
+
+/* IDX Iframe & Search Input (Full-Width, Auto-Height) */
+@media (max-width: 767px) {
+    #idx-container, #idx-container iframe {
+        height: 500px !important; /* Shorter for mobile to avoid endless scroll */
+        border-radius: 12px;
+    }
+    #property-search {
+        font-size: 1rem; /* Smaller text for touch */
+    }
+}
+
+/* Performance Tweaks: Reduce Animations on Mobile */
+@media (max-width: 767px) {
+    .card:hover, .btn-primary:hover, .about-overlay-img:hover {
+        transform: none !important; /* Disable lifts/scales for faster response */
+        animation: none !important; /* Pause pulses/glows */
+    }
+    section.visible {
+        animation-duration: 0.4s; /* Faster fade-ins */
+    }
+    #preloader {
+        transition: opacity 0.3s; /* Quicker load-out */
+    }
+}
+
+/* General Mobile Polish: Text Sizing, Spacing, No Horizontal Overflow */
+@media (max-width: 767px) {
+    body {
+        overflow-x: hidden !important; /* Reinforce no side-scroll */
+    }
+    h1.display-2 {
+        font-size: 3.5rem !important; /* Smaller bold headings */
+    }
+    h2.display-4 {
+        font-size: 2.8rem !important;
+    }
+    p.fs-3, p.fs-4, .lead {
+        font-size: 1.1rem !important; /* Legible but compact */
+    }
+    .container {
+        padding-left: 15px;
+        padding-right: 15px; /* Bootstrap default, but ensure */
+    }
+    .navbar-nav {
+        text-align: center; /* Center menu items on collapse */
+    }
+}
+
+/* Dark Mode Mobile Adjustments (If Using Toggle) */
+@media (max-width: 767px) {
+    .body-dark .card, .body-dark #idx-container {
+        background: rgba(20,20,40,0.75); /* Slightly more opaque for contrast */
+    }
+}
