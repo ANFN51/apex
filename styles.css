@@ -1,4 +1,11 @@
-body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+body { 
+    font-family: 'Roboto', sans-serif; 
+    margin: 0; 
+    padding: 0; 
+    overflow-x: hidden;
+    opacity: 0; /* Start hidden for fade-in after preloader */
+    transition: opacity 0.8s ease;
+}
 
 /* Preloader */
 #preloader {
@@ -15,12 +22,28 @@ body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hid
 .ldio-rpinwye8j0b div { box-sizing: content-box; }
 
 /* Parallax Sections with Local JPEG Images */
-.parallax { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; min-height: 60vh; }
+.parallax { 
+    background-attachment: fixed; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    min-height: 60vh; 
+    position: relative;
+    overflow: hidden;
+}
 .hero { background-image: url('images/hero-bg.jpeg'); } /* Your downloaded hero JPEG */
 .properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; } /* Your downloaded properties JPEG */
 .cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; } /* Your downloaded CTA JPEG */
 
-/* Mobile Fallback (Existing, but Ensure It Applies) */
+/* Brightness & contrast boost for brighter initial load */
+.about-bg,
+.parallax.hero,
+.parallax.properties,
+.parallax.cta {
+    filter: brightness(1.15) contrast(1.05);
+}
+
+/* Mobile Fallback */
 @media (max-width: 768px) {
     .about-img {
         margin-bottom: 20px; /* Spacing for stacked layout */
@@ -37,8 +60,14 @@ body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hid
     background-clip: text;
     color: transparent;
 }
-.navbar { transition: background 0.3s; }
-.navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
+.navbar { 
+    transition: background 0.3s; 
+    background: rgba(255, 255, 255, 0.92) !important; /* Softer base transparency */
+}
+.navbar.scrolled { 
+    background: rgba(255,255,255,0.98) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Softer shadow */
+}
 .nav-link { transition: transform 0.3s ease, color 0.3s ease, background 0.8s; background-position: center; }
 .nav-link:hover { transform: scale(1.05); color: #007bff !important; background: #f0f0f0 radial-gradient(circle, transparent 1%, #f0f0f0 1%) center/15000%; }
 .nav-link:active { background-color: #e0e0e0; background-size: 100%; transition: background 0s; }
@@ -60,26 +89,37 @@ section { opacity: 0; transition: opacity 0.6s ease-out; }
 section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
 .card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
 
-/* Parallax Overlay for Depth (optional fade) */
+/* Parallax Overlay for Depth */
 .parallax::before {
     content: '';
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
     background: rgba(0,0,0,0);
     transition: opacity 0.5s;
 }
-.btn {
-    position: relative;
-    overflow: hidden;
-    transition-duration: 0.4s;
+
+/* Hero-Specific Futuristic Overlay (Darker for Premium Feel) */
+.parallax.hero::before {
+    background: linear-gradient(to bottom, rgba(0,0,20,0.65), rgba(10,10,40,0.45));
+    transition: opacity 0.6s ease;
+}
+.parallax.hero:hover::before {
+    opacity: 0.8; /* Slightly lighter on interaction for modern feel */
 }
 
+/* Gradient Text (Brighter & More Dynamic) */
 .gradient-text {
-    background: linear-gradient(to right, #007bff, #00bfff);
+    background: linear-gradient(to right, #00bfff, #ffffff, #007bff);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
 }
 
+/* Button Ripple Effect */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition-duration: 0.4s;
+}
 .btn::after {
     content: "";
     display: block;
@@ -92,128 +132,10 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     transition: all 0.8s;
 }
 .btn-primary::after {
-    background: rgba(255, 255, 255, 0.6); /* White ripple for brightness */
-}
-.btn:active::after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s;
+    background: rgba(255,255,255,0.3);
 }
 
-/* Primary button hover effect */
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-.btn-primary:hover {
-    transform: scale(1.1); /* Slightly larger scale for more noticeable effect */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Blue glow shadow for luxury feel */
-    background-color: #0056b3; /* Darken slightly on hover for depth */
-}
-
-/* Existing #contact styles (for reference; keep these) */
-#contact {
-    color: black !important; /* Override if needed, but we'll enhance with gradient */
-}
-
-#contact h1,
-#contact h2,
-#contact h3,
-#contact p,
-#contact strong {
-    color: transparent !important; /* Set to transparent to allow gradient visibility */
-    background: linear-gradient(to right, #007bff, #00bfff); /* Matching Apex logo gradient */
-    -webkit-background-clip: text;
-    background-clip: text;
-    font-weight: 700; /* Bold for emphasis, matching logo */
-    letter-spacing: 2px; /* Slight spacing for a premium feel */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth on lighter backgrounds */
-}
-
-/* Team section specific tweaks for better contrast */
-#contact .team-section {
-    color: white !important; /* Base color fallback */
-}
-
-#contact .team-section h3,
-#contact .team-section p,
-#contact .team-section strong {
-    background: linear-gradient(to right, #007bff, #00bfff); /* Apply gradient here too */
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent !important;
-}
-
-/* Ensure form labels and placeholders remain readable (no gradient for inputs) */
-#contact .form-control {
-    color: #333; /* Dark text for form fields */
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white for contrast */
-}
-
-/* About Overlay Image with Futuristic Animation + Transparent Logo (No White Background) */
-.about-overlay-img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9) rotate(0deg); /* Initial state for animation */
-    width: 40%; /* Adjust for minimalistic sizing; e.g., 40% of section width */
-    height: auto;
-    opacity: 0; /* Start hidden */
-    pointer-events: none; /* Non-interactive for clean UX */
-    z-index: 2; /* Above background and text if needed; ensures layering */
-    animation: overlayAnimate 2s ease-out 0.5s forwards; /* Delay for section reveal, forwards to persist end state */
-    /* Futuristic Transparent Logo Enhancements (No White - Assumes PNG with Alpha) */
-    max-width: 380px; /* Tune to your logo */
-    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)) brightness(1.1);
-    transition: all 0.5s ease;
-}
-.about-overlay-img:hover {
-    transform: translate(-50%, -50%) scale(1.03) rotate(0deg); /* Slight lift + scale on hover */
-    filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.9)) brightness(1.3);
-}
-
-#about .col-md-6 p {
-    font-size: 1.25rem; /* Larger size for impact; adjust to 1.5rem for even bigger */
-    font-weight: 700; /* Bold weight */
-    line-height: 1.6; /* Improved spacing for readability */
-    margin-bottom: 1.5rem; /* Extra spacing between paragraphs */
-    color: #ffffff; /* Ensure white text for contrast on mountain background */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth on parallax bg */
-}
-
-/* Keyframes for Minimalistic, High-Tech Animation (Fade-In, Scale, Subtle Rotate) */
-@keyframes overlayAnimate {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); /* Start small and tilted for dynamic entry */
-    }
-    100% {
-        opacity: 0.7; /* Semi-transparent for overlay blend */
-        transform: translate(-50%, -50%) scale(1) rotate(0deg); /* Full size and straight */
-    }
-}
-
-/* Optional Hover for Interactivity (Futuristic Pulse) */
-.about-bg:hover .about-overlay-img {
-    animation: overlayPulse 1s infinite alternate ease-in-out;
-}
-@keyframes overlayPulse {
-    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); } /* Gentle expansion and tilt */
-}
-
-/* Subtle breathing glow for logo */
-@keyframes glow-pulse {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)); }
-    50%      { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.85)); }
-}
-.about-overlay-img {
-    animation: glow-pulse 6s infinite ease-in-out;
-}
-
-/* Confirm Mountain Background (No Changes Needed, But Ensure It's Set) */
+/* About Section Enhancements (Mountain Background) */
 .about-bg {
     background-image: url('images/mountain.jpg');
     background-attachment: fixed;
@@ -229,69 +151,54 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.25);
-    z-index: 1; /* Below overlay image */
+    background: rgba(0, 0, 0, 0.25); /* Lightened from 0.4 for brighter feel */
+    z-index: 1;
     transition: opacity 0.5s;
 }
-@keyframes subtleFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
+#about .col-md-6 p,
+#about h2,
+.parallax.text-white h2,
+.parallax.text-white p {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    color: #ffffff !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6); /* Stronger shadow for better contrast */
+}
+
+/* Futuristic Transparent Logo Enhancements (No White - Assumes PNG with Alpha) */
+.about-overlay-img {
+    max-width: 380px;
+    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)) brightness(1.1);
+    transition: all 0.5s ease;
+    animation: glow-pulse 6s infinite ease-in-out;
+}
+.about-overlay-img:hover {
+    transform: translate(-50%, -50%) scale(1.03) rotate(0deg);
+    filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.9)) brightness(1.3);
+}
+@keyframes glow-pulse {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)); }
+    50%      { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.85)); }
 }
 
 /* Enhanced Parallax Scrolling */
-.parallax {
-    position: relative; /* Ensure positioning context */
-    overflow: hidden; /* Prevent overflow issues */
-    background-attachment: fixed; /* Keeps background in place */
-    background-size: cover; /* Ensures full coverage */
-    min-height: 70vh; /* Increase height for more visible effect */
-    z-index: 1; /* Layering to avoid overlaps */
-}
-
-.parallax .container {
-    position: relative; /* Content scrolls over fixed BG */
-    z-index: 2; /* Above background */
-}
-
-/* Subtle scroll-driven movement for modern browsers */
 @supports (animation-timeline: scroll()) {
     .parallax {
         animation: parallax-effect linear both;
         animation-timeline: scroll(root block);
-        animation-range: entry 0% cover 50%; /* Adjust range for smoothness */
+        animation-range: entry 0% cover 50%;
     }
 }
-
 @keyframes parallax-effect {
-    from {
-        background-position-y: 0; /* Start position */
-    }
-    to {
-        background-position-y: -10%; /* Slight shift for depth */
-    }
+    from { background-position-y: 0; }
+    to { background-position-y: -10%; }
 }
 
 /* Mobile Fallback: Disable fixed on mobile for performance */
 @media (max-width: 767px) {
     .parallax {
-        background-attachment: scroll; /* Normal scroll on mobile */
+        background-attachment: scroll;
     }
-}
-
-.parallax {
-    position: relative;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    min-height: 70vh; /* Adjust for visibility */
-}
-
-/* Hero-Specific Futuristic Overlay (Darker for Premium Feel) */
-.parallax.hero::before {
-    background: linear-gradient(to bottom, rgba(0,0,20,0.65), rgba(10,10,40,0.45));
-    transition: opacity 0.6s ease;
-}
-.parallax.hero:hover::before {
-    opacity: 0.8; /* Slightly lighter on interaction for modern feel */
 }
