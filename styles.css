@@ -440,88 +440,71 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     50%      { filter: drop-shadow(var(--glow-strong)); }
 }
 
-/* ──────────────────────────────────────────────────────────────
-   MOBILE OPTIMIZATIONS – Futuristic Minimalist Real Estate
-   Fixes for phones: Responsive scaling, parallax fallback, performance tweaks
-   ────────────────────────────────────────────────────────────── */
+/* URGENT MOBILE RESCUE – Override for Phones (max-width 991px for tablets too) */
+@media (max-width: 991px) {
+    body, html {
+        height: 100%;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
+    }
 
-/* Stronger Mobile Parallax Fallback (No Jitter) */
-@media (max-width: 767px) {
     .parallax {
-        background-attachment: scroll !important; /* Override fixed for smooth scroll */
-        background-size: cover; /* Prevent stretching */
-        min-height: 50vh; /* Reduce height for faster mobile viewing */
+        background-attachment: scroll !important;
+        background-position: center 30% !important; /* Slight crop fix */
+        min-height: 40vh !important; /* Much shorter for quick view */
+        padding-top: 80px; /* Navbar clearance */
+        padding-bottom: 40px;
     }
+
     .parallax::before {
-        opacity: 0.7; /* Slightly lighter overlay for better text legibility on small screens */
+        opacity: 0.65 !important; /* Lighter overlay = better contrast */
     }
-}
 
-/* Responsive Logo & Images (Scale Fluidly, No Overflows) */
-@media (max-width: 767px) {
-    .about-overlay-img, img {
-        max-width: 80% !important; /* Down from 420px for phones */
-        height: auto;
-        position: relative !important; /* Switch from absolute to avoid overlaps */
-        transform: none !important; /* Disable translates for stacking */
-        margin: 0 auto 1.5rem; /* Center with spacing */
+    /* Force logo stacking & centering – no absolute nonsense */
+    .about-overlay-img {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        margin: 0 auto 2rem !important;
+        max-width: 70vw !important;
+        display: block !important;
     }
-    .row.align-items-center {
-        flex-direction: column; /* Stack logo above text on mobile */
-    }
-}
 
-/* IDX Iframe & Search Input (Full-Width, Auto-Height) */
-@media (max-width: 767px) {
+    /* Stack rows vertically, increase readability */
+    .row {
+        flex-direction: column !important;
+    }
+
+    .col-lg-5, .col-lg-7, .col-md-6 {
+        width: 100% !important;
+        margin-bottom: 2rem !important;
+    }
+
+    /* Text scaling for phones */
+    h1.display-2 { font-size: 2.8rem !important; }
+    h2.display-4 { font-size: 2.2rem !important; }
+    .fs-3, .fs-4, .lead { font-size: 1.15rem !important; line-height: 1.5 !important; }
+
+    /* IDX – Make usable on mobile */
     #idx-container, #idx-container iframe {
-        height: 500px !important; /* Shorter for mobile to avoid endless scroll */
-        border-radius: 12px;
+        height: 600px !important; /* Adjustable – test 400-800px */
+        min-height: 400px !important;
     }
-    #property-search {
-        font-size: 1rem; /* Smaller text for touch */
-    }
-}
 
-/* Performance Tweaks: Reduce Animations on Mobile */
-@media (max-width: 767px) {
+    /* Disable heavy effects entirely on mobile */
     .card:hover, .btn-primary:hover, .about-overlay-img:hover {
-        transform: none !important; /* Disable lifts/scales for faster response */
-        animation: none !important; /* Pause pulses/glows */
+        transform: none !important;
+        box-shadow: none !important;
+        filter: none !important;
     }
-    section.visible {
-        animation-duration: 0.4s; /* Faster fade-ins */
-    }
-    #preloader {
-        transition: opacity 0.3s; /* Quicker load-out */
-    }
+
+    /* Preloader quicker exit */
+    #preloader.loaded { opacity: 0; transition: opacity 0.4s; }
 }
 
-/* General Mobile Polish: Text Sizing, Spacing, No Horizontal Overflow */
-@media (max-width: 767px) {
-    body {
-        overflow-x: hidden !important; /* Reinforce no side-scroll */
-    }
-    h1.display-2 {
-        font-size: 3.5rem !important; /* Smaller bold headings */
-    }
-    h2.display-4 {
-        font-size: 2.8rem !important;
-    }
-    p.fs-3, p.fs-4, .lead {
-        font-size: 1.1rem !important; /* Legible but compact */
-    }
-    .container {
-        padding-left: 15px;
-        padding-right: 15px; /* Bootstrap default, but ensure */
-    }
-    .navbar-nav {
-        text-align: center; /* Center menu items on collapse */
-    }
-}
-
-/* Dark Mode Mobile Adjustments (If Using Toggle) */
-@media (max-width: 767px) {
-    .body-dark .card, .body-dark #idx-container {
-        background: rgba(20,20,40,0.75); /* Slightly more opaque for contrast */
-    }
+/* Touch-friendly buttons */
+.btn {
+    min-height: 48px; /* Easier tap target */
+    font-size: 1.1rem;
 }
