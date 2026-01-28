@@ -123,3 +123,17 @@ if (isMobile) {
         counter.textContent = counter.getAttribute('data-target'); // Skip animation, show final value
     });
 }
+// Aggressive Mobile Safety Net
+if (window.innerWidth <= 991 || /Mobi|Android/i.test(navigator.userAgent)) {
+    document.querySelectorAll('.parallax').forEach(el => {
+        el.style.backgroundAttachment = 'scroll';
+        el.style.minHeight = '40vh';
+    });
+    document.querySelectorAll('.about-overlay-img').forEach(el => {
+        el.style.position = 'relative';
+        el.style.transform = 'none';
+        el.style.margin = '0 auto 2rem';
+    });
+    // Optional: Skip heavy animations
+    document.body.classList.add('mobile-optimized');
+}
