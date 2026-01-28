@@ -111,3 +111,15 @@ function calculateMortgage() {
     const M = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
     document.getElementById('result').innerHTML = `Estimated Monthly Payment: <span style="font-size: 1.6rem;">$${M.toFixed(2)}</span>`;
 }
+
+// Mobile Detection & Optimizations
+const isMobile = /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 767;
+if (isMobile) {
+    // Disable parallax effect via JS if needed (fallback to CSS)
+    document.querySelectorAll('.parallax').forEach(el => el.style.backgroundAttachment = 'scroll');
+    // Reduce counter animation speed
+    const counters = document.querySelectorAll('.counter');
+    counters.forEach(counter => {
+        counter.textContent = counter.getAttribute('data-target'); // Skip animation, show final value
+    });
+}
