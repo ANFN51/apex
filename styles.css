@@ -291,11 +291,22 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
 }
 
 /* ──────────────────────────────────────────────────────────────
-   FUTURISTIC MINIMALIST ENHANCEMENTS – Apex Realty Centers
-   Appended for premium, high-tech luxury real estate look
+   Apex Realty Centers – Futuristic Minimalist Real Estate Styles
+   Cleaned & Optimized: Smoother transitions, reduced redundancy, 
+   enhanced performance (e.g., shorter animations, will-change),
+   grouped rules, removed unused selectors, refined neon/glows.
    ────────────────────────────────────────────────────────────── */
 
-/* Global Dark Theme Base (for dark mode toggle) */
+/* Global Reset & Base */
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    transition: background 0.5s ease, color 0.5s ease; /* Smoother theme switch */
+}
+
+/* Custom Variables for Futuristic Theme */
 :root {
     --primary: #007bff;
     --primary-glow: #00d4ff;
@@ -307,219 +318,166 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     --blur: blur(12px);
 }
 
+/* Dark Mode (Clean Toggle Support) */
 .body-dark {
     background: var(--bg-dark);
     color: var(--text-light);
 }
+.body-dark .navbar { background: rgba(10, 10, 21, 0.92) !important; backdrop-filter: var(--blur); }
+.body-dark .bg-light { background: rgba(26, 26, 46, 0.85) !important; backdrop-filter: var(--blur); }
 
-.body-dark .navbar {
-    background: rgba(10, 10, 21, 0.92) !important;
-    backdrop-filter: var(--blur);
+/* Preloader – Optimized for Faster Exit */
+#preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.4s ease; /* Shorter for smoothness */
 }
+#preloader.loaded { opacity: 0; pointer-events: none; }
 
-.body-dark .bg-light {
-    background: rgba(26, 26, 46, 0.85) !important;
-    backdrop-filter: var(--blur);
+/* Loading Animation – Kept Minimal */
+@keyframes ldio-rpinwye8j0b { 0% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } 100% { transform: rotate(360deg); } }
+.ldio-rpinwye8j0b div { position: absolute; animation: ldio-rpinwye8j0b 1s linear infinite; width: 80px; height: 80px; top: 10px; left: 10px; border-radius: 50%; box-shadow: 0 2px 0 0 var(--primary); transform-origin: 40px 41px; }
+.loadingio-eclipse { width: 100px; height: 100px; display: inline-block; overflow: hidden; }
+.ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
+.ldio-rpinwye8j0b div { box-sizing: content-box; }
+
+/* Parallax Sections – Cleaned, with Smoother Depth */
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 60vh;
+    position: relative;
+    overflow: hidden;
+    transition: opacity 0.5s ease; /* Smooth reveal */
 }
+.hero { background-image: url('images/hero-bg.jpeg'); }
+.properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; }
+.cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; }
 
-/* Glassmorphism Cards & Containers */
-.card, #idx-container, .form-control {
+/* Parallax Overlay – Refined Gradient for Premium Depth */
+.parallax::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(5, 10, 30, 0.75), rgba(20, 20, 60, 0.55));
+    transition: opacity 0.5s ease;
+    z-index: 1;
+}
+.parallax:hover::before { opacity: 0.85; }
+
+/* Navbar – Clean Transitions */
+.navbar {
+    transition: background 0.3s ease;
+}
+.navbar.scrolled { background: rgba(255, 255, 255, 0.95) !important; }
+.nav-link {
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+.nav-link:hover { transform: scale(1.05); color: var(--primary) !important; }
+
+/* Sections & Fade-In – Smoother, Shorter Animation */
+section {
+    opacity: 0;
+    transition: opacity 0.5s ease-out, transform 0.5s ease-out;
+    will-change: opacity, transform; /* Performance boost */
+}
+@keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(30px); } /* Reduced distance for speed */
+    to { opacity: 1; transform: translateY(0); }
+}
+section.visible { opacity: 1; animation: fadeInUp 0.6s ease-out forwards; } /* Shorter duration */
+
+/* Cards & Glassmorphism – Clean Hover with Glow */
+.card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: none;
     background: var(--bg-card);
     backdrop-filter: var(--blur);
     border: 1px solid rgba(0, 212, 255, 0.18);
     border-radius: 16px;
-    transition: all 0.4s ease;
+    box-shadow: var(--glow-soft);
+    will-change: transform, box-shadow;
 }
-
-.card:hover, #idx-container:hover {
-    transform: translateY(-8px);
+.card:hover {
+    transform: translateY(-5px);
     box-shadow: var(--glow-strong);
 }
 
-/* Enhanced Futuristic Logo (Transparent, No White) */
-.about-overlay-img {
-    max-width: 420px;
-    opacity: 0.92;
-    filter: drop-shadow(var(--glow-soft)) brightness(1.15);
-    animation: glow-pulse 7s infinite ease-in-out, overlayAnimate 2.2s ease-out forwards;
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.about-overlay-img:hover {
-    transform: translate(-50%, -50%) scale(1.06);
-    filter: drop-shadow(var(--glow-strong)) brightness(1.35);
-}
-
-/* Bolder & Larger Text (Headings & Paragraphs) */
-.display-2, .display-4, h1, h2 {
-    font-weight: 900;
-    letter-spacing: 1.2px;
-    text-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
-}
-
-.fs-3, .fs-4, .lead {
-    font-weight: 700;
-    line-height: 1.55;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
-}
-
-/* Parallax Depth & Overlay Refinement */
-.parallax::before {
-    background: linear-gradient(to bottom, rgba(5, 10, 30, 0.75), rgba(20, 20, 60, 0.55));
-    z-index: 1;
-    transition: opacity 0.7s ease;
-}
-
-.parallax:hover::before {
-    opacity: 0.85;
-}
-
-/* Hero & Section Text Glow */
-.hero h1, .parallax h2 {
-    background: linear-gradient(to right, var(--primary), var(--primary-glow));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* Search Input & IDX Container Polish */
-#property-search {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(0, 212, 255, 0.35);
-    color: var(--text-light);
-    font-weight: 500;
-}
-
-#property-search:focus {
-    box-shadow: var(--glow-soft);
-    border-color: var(--primary-glow);
-}
-
-#idx-container iframe {
-    border-radius: 16px !important;
-    box-shadow: 0 15px 45px rgba(0, 212, 255, 0.18) !important;
-}
-
-/* Button Pulse & Neon Glow */
+/* Buttons – Futuristic Pulse & Ripple, Smoother Scale */
 .btn-primary {
-    background: linear-gradient(135deg, #007bff, #00bfff);
+    background: linear-gradient(135deg, var(--primary), var(--primary-glow));
     border: none;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
     box-shadow: var(--glow-soft);
 }
-
 .btn-primary:hover {
-    transform: scale(1.08);
+    transform: scale(1.05);
     box-shadow: var(--glow-strong);
     background: linear-gradient(135deg, #0069d9, #0099ff);
 }
 
-/* Counter Animation Accent */
-.counter {
-    color: var(--primary-glow);
-    font-weight: 900;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+/* Logo – Transparent, Futuristic Glow (No White) */
+.logo-futuristic, .about-overlay-img {
+    max-width: 380px;
+    height: auto;
+    opacity: 0.95;
+    filter: drop-shadow(var(--glow-soft)) brightness(1.1);
+    transition: all 0.4s ease;
+    animation: glow-pulse 6s infinite ease-in-out;
+    will-change: filter, transform;
 }
-
-/* Mobile Optimization – Keep Parallax Smooth */
-@media (max-width: 767px) {
-    .about-overlay-img {
-        position: relative;
-        transform: none;
-        margin: 0 auto 2rem;
-        max-width: 320px;
-    }
-    .parallax {
-        background-attachment: scroll;
-        min-height: 50vh;
-    }
+.logo-futuristic:hover, .about-overlay-img:hover {
+    transform: translateY(-5px) scale(1.03);
+    filter: drop-shadow(var(--glow-strong)) brightness(1.3);
 }
-
-/* Final Touch: Breathing Glow Refinement */
 @keyframes glow-pulse {
     0%, 100% { filter: drop-shadow(var(--glow-soft)); }
-    50%      { filter: drop-shadow(var(--glow-strong)); }
+    50% { filter: drop-shadow(var(--glow-strong)); }
 }
 
-/* URGENT MOBILE RESCUE – Override for Phones (max-width 991px for tablets too) */
-@media (max-width: 991px) {
-    body, html {
-        height: 100%;
-        overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
-    }
-
-    .parallax {
-        background-attachment: scroll !important;
-        background-position: center 30% !important; /* Slight crop fix */
-        min-height: 40vh !important; /* Much shorter for quick view */
-        padding-top: 80px; /* Navbar clearance */
-        padding-bottom: 40px;
-    }
-
-    .parallax::before {
-        opacity: 0.65 !important; /* Lighter overlay = better contrast */
-    }
-
-    /* Force logo stacking & centering – no absolute nonsense */
-    .about-overlay-img {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-        margin: 0 auto 2rem !important;
-        max-width: 70vw !important;
-        display: block !important;
-    }
-
-    /* Stack rows vertically, increase readability */
-    .row {
-        flex-direction: column !important;
-    }
-
-    .col-lg-5, .col-lg-7, .col-md-6 {
-        width: 100% !important;
-        margin-bottom: 2rem !important;
-    }
-
-    /* Text scaling for phones */
-    h1.display-2 { font-size: 2.8rem !important; }
-    h2.display-4 { font-size: 2.2rem !important; }
-    .fs-3, .fs-4, .lead { font-size: 1.15rem !important; line-height: 1.5 !important; }
-
-    /* IDX – Make usable on mobile */
-    #idx-container, #idx-container iframe {
-        height: 600px !important; /* Adjustable – test 400-800px */
-        min-height: 400px !important;
-    }
-
-    /* Disable heavy effects entirely on mobile */
-    .card:hover, .btn-primary:hover, .about-overlay-img:hover {
-        transform: none !important;
-        box-shadow: none !important;
-        filter: none !important;
-    }
-
-    /* Preloader quicker exit */
-    #preloader.loaded { opacity: 0; transition: opacity 0.4s; }
+/* IDX & Search – Clean, Glowing Input */
+#property-search {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    color: var(--text-light);
+    transition: box-shadow 0.3s ease;
+}
+#property-search:focus { box-shadow: var(--glow-soft); border-color: var(--primary-glow); }
+#idx-container iframe {
+    border-radius: 16px;
+    box-shadow: var(--glow-soft);
 }
 
-/* Touch-friendly buttons */
-.btn {
-    min-height: 48px; /* Easier tap target */
-    font-size: 1.1rem;
+/* Text Enhancements – Bolder & Glow for Premium Feel */
+h1, h2, .display-3, .display-4 {
+    font-weight: 900;
+    letter-spacing: 1px;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+.lead, p.fs-4 { font-weight: 700; line-height: 1.6; text-shadow: 0 0 10px rgba(0, 212, 255, 0.2); }
+
+/* Mobile Fallbacks – Clean & Smooth */
+@media (max-width: 767px) {
+    .parallax { background-attachment: scroll; min-height: 50vh; }
+    .about-overlay-img { max-width: 80%; margin: 0 auto 1.5rem; position: relative; transform: none; }
+    .card:hover, .btn-primary:hover { transform: none; animation: none; } /* Reduce jank */
+    h1.display-3 { font-size: 3rem; }
+    section.visible { animation-duration: 0.4s; } /* Faster on mobile */
 }
 
-/* TEMP DEBUG: Force reveal everything – remove after testing */
-#preloader {
-    display: none !important; /* Kill preloader completely for test */
-}
-section {
-    opacity: 1 !important;
-    animation: none !important;
-}
-section.visible { /* still allow future animations if needed */
-    opacity: 1;
-}
-body {
-    opacity: 1 !important;
-}
+/* Map & Footer – Minimal Polish */
+.map { border-top: 1px solid #ddd; }
+footer { background: var(--bg-dark); color: #fff; padding: 2rem 0; text-align: center; }
