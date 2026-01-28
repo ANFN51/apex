@@ -293,3 +293,237 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
 .parallax.hero:hover::before {
     opacity: 0.8; /* Slightly lighter on interaction for modern feel */
 }
+
+/* ──────────────────────────────────────────────────────────────
+   FUTURISTIC MINIMALIST ENHANCEMENTS – Apex Realty Centers
+   Appended for premium, high-tech luxury real estate look
+   ────────────────────────────────────────────────────────────── */
+
+/* Global Dark Theme Base (for dark mode toggle) */
+:root {
+    --primary: #007bff;
+    --primary-glow: #00d4ff;
+    --bg-dark: #0a0a15;
+    --bg-card: rgba(20, 20, 40, 0.6);
+    --text-light: #f0f4ff;
+    --glow-soft: 0 0 20px rgba(0, 212, 255, 0.4);
+    --glow-strong: 0 0 35px rgba(0, 212, 255, 0.7);
+    --blur: blur(12px);
+}
+
+.body-dark {
+    background: var(--bg-dark);
+    color: var(--text-light);
+}
+
+.body-dark .navbar {
+    background: rgba(10, 10, 21, 0.92) !important;
+    backdrop-filter: var(--blur);
+}
+
+.body-dark .bg-light {
+    background: rgba(26, 26, 46, 0.85) !important;
+    backdrop-filter: var(--blur);
+}
+
+/* Glassmorphism Cards & Containers */
+.card, #idx-container, .form-control {
+    background: var(--bg-card);
+    backdrop-filter: var(--blur);
+    border: 1px solid rgba(0, 212, 255, 0.18);
+    border-radius: 16px;
+    transition: all 0.4s ease;
+}
+
+.card:hover, #idx-container:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--glow-strong);
+}
+
+/* Enhanced Futuristic Logo (Transparent, No White) */
+.about-overlay-img {
+    max-width: 420px;
+    opacity: 0.92;
+    filter: drop-shadow(var(--glow-soft)) brightness(1.15);
+    animation: glow-pulse 7s infinite ease-in-out, overlayAnimate 2.2s ease-out forwards;
+    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.about-overlay-img:hover {
+    transform: translate(-50%, -50%) scale(1.06);
+    filter: drop-shadow(var(--glow-strong)) brightness(1.35);
+}
+
+/* Bolder & Larger Text (Headings & Paragraphs) */
+.display-2, .display-4, h1, h2 {
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    text-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
+}
+
+.fs-3, .fs-4, .lead {
+    font-weight: 700;
+    line-height: 1.55;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
+}
+
+/* Parallax Depth & Overlay Refinement */
+.parallax::before {
+    background: linear-gradient(to bottom, rgba(5, 10, 30, 0.75), rgba(20, 20, 60, 0.55));
+    z-index: 1;
+    transition: opacity 0.7s ease;
+}
+
+.parallax:hover::before {
+    opacity: 0.85;
+}
+
+/* Hero & Section Text Glow */
+.hero h1, .parallax h2 {
+    background: linear-gradient(to right, var(--primary), var(--primary-glow));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* Search Input & IDX Container Polish */
+#property-search {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(0, 212, 255, 0.35);
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+#property-search:focus {
+    box-shadow: var(--glow-soft);
+    border-color: var(--primary-glow);
+}
+
+#idx-container iframe {
+    border-radius: 16px !important;
+    box-shadow: 0 15px 45px rgba(0, 212, 255, 0.18) !important;
+}
+
+/* Button Pulse & Neon Glow */
+.btn-primary {
+    background: linear-gradient(135deg, #007bff, #00bfff);
+    border: none;
+    box-shadow: var(--glow-soft);
+}
+
+.btn-primary:hover {
+    transform: scale(1.08);
+    box-shadow: var(--glow-strong);
+    background: linear-gradient(135deg, #0069d9, #0099ff);
+}
+
+/* Counter Animation Accent */
+.counter {
+    color: var(--primary-glow);
+    font-weight: 900;
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+}
+
+/* Mobile Optimization – Keep Parallax Smooth */
+@media (max-width: 767px) {
+    .about-overlay-img {
+        position: relative;
+        transform: none;
+        margin: 0 auto 2rem;
+        max-width: 320px;
+    }
+    .parallax {
+        background-attachment: scroll;
+        min-height: 50vh;
+    }
+}
+
+/* Final Touch: Breathing Glow Refinement */
+@keyframes glow-pulse {
+    0%, 100% { filter: drop-shadow(var(--glow-soft)); }
+    50%      { filter: drop-shadow(var(--glow-strong)); }
+}
+
+/* URGENT MOBILE RESCUE – Override for Phones (max-width 991px for tablets too) */
+@media (max-width: 991px) {
+    body, html {
+        height: 100%;
+        overflow-x: hidden !important;
+        -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
+    }
+
+    .parallax {
+        background-attachment: scroll !important;
+        background-position: center 30% !important; /* Slight crop fix */
+        min-height: 40vh !important; /* Much shorter for quick view */
+        padding-top: 80px; /* Navbar clearance */
+        padding-bottom: 40px;
+    }
+
+    .parallax::before {
+        opacity: 0.65 !important; /* Lighter overlay = better contrast */
+    }
+
+    /* Force logo stacking & centering – no absolute nonsense */
+    .about-overlay-img {
+        position: relative !important;
+        top: auto !important;
+        left: auto !important;
+        transform: none !important;
+        margin: 0 auto 2rem !important;
+        max-width: 70vw !important;
+        display: block !important;
+    }
+
+    /* Stack rows vertically, increase readability */
+    .row {
+        flex-direction: column !important;
+    }
+
+    .col-lg-5, .col-lg-7, .col-md-6 {
+        width: 100% !important;
+        margin-bottom: 2rem !important;
+    }
+
+    /* Text scaling for phones */
+    h1.display-2 { font-size: 2.8rem !important; }
+    h2.display-4 { font-size: 2.2rem !important; }
+    .fs-3, .fs-4, .lead { font-size: 1.15rem !important; line-height: 1.5 !important; }
+
+    /* IDX – Make usable on mobile */
+    #idx-container, #idx-container iframe {
+        height: 600px !important; /* Adjustable – test 400-800px */
+        min-height: 400px !important;
+    }
+
+    /* Disable heavy effects entirely on mobile */
+    .card:hover, .btn-primary:hover, .about-overlay-img:hover {
+        transform: none !important;
+        box-shadow: none !important;
+        filter: none !important;
+    }
+
+    /* Preloader quicker exit */
+    #preloader.loaded { opacity: 0; transition: opacity 0.4s; }
+}
+
+/* Touch-friendly buttons */
+.btn {
+    min-height: 48px; /* Easier tap target */
+    font-size: 1.1rem;
+}
+
+/* TEMP DEBUG: Force reveal everything – remove after testing */
+#preloader {
+    display: none !important; /* Kill preloader completely for test */
+}
+section {
+    opacity: 1 !important;
+    animation: none !important;
+}
+section.visible { /* still allow future animations if needed */
+    opacity: 1;
+}
+body {
+    opacity: 1 !important;
+}
