@@ -101,3 +101,28 @@ document.getElementById('mortgage-form')?.addEventListener('submit', (e) => {
     resultDiv.style.transition = 'opacity 0.5s ease-in-out';
     setTimeout(() => { resultDiv.style.opacity = 1; }, 10); // Fade-in
 });
+
+// Personalized Geolocation Greeting
+window.addEventListener('load', () => {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition((position) => {
+            const lat = position.coords.latitude;
+            const lon = position.coords.longitude;
+            // Rough check for Detroit area (42.3 lat, -83.0 lon, ~50km radius)
+            const isDetroit = Math.abs(lat - 42.3314) < 0.5 && Math.abs(lon + 83.0458) < 0.5;
+            const greetingDiv = document.getElementById('personal-greeting');
+            greetingDiv.querySelector('p').textContent = isDetroit 
+                ? 'Welcome, Detroit Dreamer! Apex has prime Garden City spots waiting for you.' 
+                : 'Welcome to Apex—Luxury real estate tailored just for you!';
+            greetingDiv.style.display = 'block';
+            greetingDiv.style.opacity = 0;
+            greetingDiv.style.transition = 'opacity 1s ease-in';
+            setTimeout(() => { greetingDiv.style.opacity = 1; }, 500); // Delayed fade-in
+        }, () => {
+            // Fallback if denied
+            const greetingDiv = document.getElementById('personal-greeting');
+            greetingDiv.querySelector('p').textContent = 'Welcome to Apex—Discover luxury wherever you are!';
+            greetingDiv.style.display = 'block';
+        });
+    }
+});
