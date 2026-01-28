@@ -100,3 +100,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
 });
+function calculateMortgage() {
+    const P = parseFloat(document.getElementById('loanAmount').value);
+    const r = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
+    const n = parseFloat(document.getElementById('loanTerm').value) * 12;
+    if (isNaN(P) || isNaN(r) || isNaN(n) || n <= 0) {
+        document.getElementById('result').innerHTML = 'Please enter valid numbers.';
+        return;
+    }
+    const M = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    document.getElementById('result').innerHTML = `Estimated Monthly Payment: <span style="font-size: 1.6rem;">$${M.toFixed(2)}</span>`;
+}
