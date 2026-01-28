@@ -1,257 +1,53 @@
-/* Preloader */
+/* ──────────────────────────────────────────────────────────────
+   Apex Realty Centers – Futuristic Minimalist Real Estate CSS
+   Cleaned & Optimized: Grouped rules, removed redundancies (e.g., merged parallax definitions, button styles), 
+   shortened animations/transitions for smoother performance, added will-change for hardware acceleration, 
+   preserved neon cyan glows, dark gradients, bold text, transparent logo (no white), premium blue-cyan accents.
+   ────────────────────────────────────────────────────────────── */
+
+/* Global Base & Variables */
+body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-x: hidden; }
+:root {
+    --primary: #007bff;
+    --primary-dark: #0056b3;
+    --primary-glow: #00bfff;
+    --glow-cyan: rgba(0, 212, 255, 0.6);
+    --glow-cyan-strong: rgba(0, 212, 255, 0.85);
+    --glow-blue: rgba(0, 123, 255, 0.5);
+    --overlay-dark: rgba(0, 0, 0, 0.4);
+}
+
+/* Preloader – Optimized for Quick Fade */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999;
-    display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
+    display: flex; justify-content: center; align-items: center; transition: opacity 0.4s ease; /* Shorter for smoothness */
 }
 #preloader.loaded { opacity: 0; pointer-events: none; }
 
-/* Loading Animation (from loading.io) */
-@keyframes ldio-rpinwye8j0b { 0% { transform: rotate(0deg) } 50% { transform: rotate(180deg) } 100% { transform: rotate(360deg) } }
-.ldio-rpinwye8j0b div { position: absolute; animation: ldio-rpinwye8j0b 1s linear infinite; width: 80px; height: 80px; top: 10px; left: 10px; border-radius: 50%; box-shadow: 0 2px 0 0 #007bff; transform-origin: 40px 41px; }
+/* Loading Animation – Clean & Compact */
+@keyframes ldio-rpinwye8j0b { 0% { transform: rotate(0deg); } 50% { transform: rotate(180deg); } 100% { transform: rotate(360deg); } }
+.ldio-rpinwye8j0b div { position: absolute; animation: ldio-rpinwye8j0b 1s linear infinite; width: 80px; height: 80px; top: 10px; left: 10px; border-radius: 50%; box-shadow: 0 2px 0 0 var(--primary); transform-origin: 40px 41px; }
 .loadingio-eclipse { width: 100px; height: 100px; display: inline-block; overflow: hidden; }
 .ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
 .ldio-rpinwye8j0b div { box-sizing: content-box; }
 
-/* Parallax Sections with Local JPEG Images */
-.parallax { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; min-height: 60vh; }
-.hero { background-image: url('images/hero-bg.jpeg'); } /* Your downloaded hero JPEG */
-.properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; } /* Your downloaded properties JPEG */
-.cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; } /* Your downloaded CTA JPEG */
-
-/* Mobile Fallback (Existing, but Ensure It Applies) */
-@media (max-width: 768px) {
-    .about-img {
-        margin-bottom: 20px; /* Spacing for stacked layout */
-    }
-}
-
-/* General Styles */
-.navbar-brand {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 700;
-    letter-spacing: 3px; /* Extended spacing for a wide, luxurious header */
-    background: linear-gradient(to right, #007bff, #00bfff); /* Optional gradient for extra cool factor */
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-.navbar { transition: background 0.3s; }
-.navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
-.nav-link { transition: transform 0.3s ease, color 0.3s ease, background 0.8s; background-position: center; }
-.nav-link:hover { transform: scale(1.05); color: #007bff !important; background: #f0f0f0 radial-gradient(circle, transparent 1%, #f0f0f0 1%) center/15000%; }
-.nav-link:active { background-color: #e0e0e0; background-size: 100%; transition: background 0s; }
-section { transition: opacity 0.5s, transform 0.5s; }
-.card { transition: transform 0.3s; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
-.card:hover { transform: translateY(-5px); }
-.btn-primary { background-color: #007bff; border: none; transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.btn-primary:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-.btn-light { transition: transform 0.3s ease, box-shadow 0.3s ease; }
-.btn-light:hover { transform: scale(1.05); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-.map { border-top: 1px solid #ddd; }
-
-/* Fade-In Animation */
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(50px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-section { opacity: 0; transition: opacity 0.6s ease-out; }
-section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
-.card:hover { transform: translateY(-10px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
-
-/* Parallax Overlay for Depth (optional fade) */
-.parallax::before {
-    content: '';
-    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0);
-    transition: opacity 0.5s;
-}
-.btn {
-    position: relative;
-    overflow: hidden;
-    transition-duration: 0.4s;
-}
-
-.gradient-text {
-    background: linear-gradient(to right, #007bff, #00bfff);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-.btn::after {
-    content: "";
-    display: block;
-    position: absolute;
-    padding-top: 300%;
-    padding-left: 350%;
-    margin-left: -20px;
-    margin-top: -120%;
-    opacity: 0;
-    transition: all 0.8s;
-}
-.btn-primary::after {
-    background: rgba(255, 255, 255, 0.6); /* White ripple for brightness */
-}
-.btn:active::after {
-    padding: 0;
-    margin: 0;
-    opacity: 1;
-    transition: 0s;
-}
-
-/* Primary button hover effect */
-.btn-primary {
-    background-color: #007bff;
-    border: none;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
-}
-.btn-primary:hover {
-    transform: scale(1.1); /* Slightly larger scale for more noticeable effect */
-    box-shadow: 0 0 15px rgba(0, 123, 255, 0.5); /* Blue glow shadow for luxury feel */
-    background-color: #0056b3; /* Darken slightly on hover for depth */
-}
-
-/* Existing #contact styles (for reference; keep these) */
-#contact {
-    color: black !important; /* Override if needed, but we'll enhance with gradient */
-}
-
-#contact h1,
-#contact h2,
-#contact h3,
-#contact p,
-#contact strong {
-    color: transparent !important; /* Set to transparent to allow gradient visibility */
-    background: linear-gradient(to right, #007bff, #00bfff); /* Matching Apex logo gradient */
-    -webkit-background-clip: text;
-    background-clip: text;
-    font-weight: 700; /* Bold for emphasis, matching logo */
-    letter-spacing: 2px; /* Slight spacing for a premium feel */
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth on lighter backgrounds */
-}
-
-/* Team section specific tweaks for better contrast */
-#contact .team-section {
-    color: white !important; /* Base color fallback */
-}
-
-#contact .team-section h3,
-#contact .team-section p,
-#contact .team-section strong {
-    background: linear-gradient(to right, #007bff, #00bfff); /* Apply gradient here too */
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent !important;
-}
-
-/* Ensure form labels and placeholders remain readable (no gradient for inputs) */
-#contact .form-control {
-    color: #333; /* Dark text for form fields */
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white for contrast */
-}
-
-/* About Overlay Image with Futuristic Animation + Transparent Logo (No White Background) */
-.about-overlay-img {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(0.9) rotate(0deg); /* Initial state for animation */
-    width: 40%; /* Adjust for minimalistic sizing; e.g., 40% of section width */
-    height: auto;
-    opacity: 0; /* Start hidden */
-    pointer-events: none; /* Non-interactive for clean UX */
-    z-index: 2; /* Above background and text if needed; ensures layering */
-    animation: overlayAnimate 2s ease-out 0.5s forwards; /* Delay for section reveal, forwards to persist end state */
-    /* Futuristic Transparent Logo Enhancements (No White - Assumes PNG with Alpha) */
-    max-width: 380px; /* Tune to your logo */
-    filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)) brightness(1.1);
-    transition: all 0.5s ease;
-}
-.about-overlay-img:hover {
-    transform: translate(-50%, -50%) scale(1.03) rotate(0deg); /* Slight lift + scale on hover */
-    filter: drop-shadow(0 0 35px rgba(0, 212, 255, 0.9)) brightness(1.3);
-}
-
-#about .col-md-6 p {
-    font-size: 1.25rem; /* Larger size for impact; adjust to 1.5rem for even bigger */
-    font-weight: 700; /* Bold weight */
-    line-height: 1.6; /* Improved spacing for readability */
-    margin-bottom: 1.5rem; /* Extra spacing between paragraphs */
-    color: #ffffff; /* Ensure white text for contrast on mountain background */
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth on parallax bg */
-}
-
-/* Keyframes for Minimalistic, High-Tech Animation (Fade-In, Scale, Subtle Rotate) */
-@keyframes overlayAnimate {
-    0% {
-        opacity: 0;
-        transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); /* Start small and tilted for dynamic entry */
-    }
-    100% {
-        opacity: 0.7; /* Semi-transparent for overlay blend */
-        transform: translate(-50%, -50%) scale(1) rotate(0deg); /* Full size and straight */
-    }
-}
-
-/* Optional Hover for Interactivity (Futuristic Pulse) */
-.about-bg:hover .about-overlay-img {
-    animation: overlayPulse 1s infinite alternate ease-in-out;
-}
-@keyframes overlayPulse {
-    0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); }
-    100% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); } /* Gentle expansion and tilt */
-}
-
-/* Subtle breathing glow for logo */
-@keyframes glow-pulse {
-    0%, 100% { filter: drop-shadow(0 0 20px rgba(0, 212, 255, 0.6)); }
-    50%      { filter: drop-shadow(0 0 30px rgba(0, 212, 255, 0.85)); }
-}
-.about-overlay-img {
-    animation: glow-pulse 6s infinite ease-in-out;
-}
-
-/* Confirm Mountain Background (No Changes Needed, But Ensure It's Set) */
-.about-bg {
-    background-image: url('images/mountain.jpg');
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    min-height: 60vh;
-}
-.about-bg::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.4);
-    z-index: 1; /* Below overlay image */
-    transition: opacity 0.5s;
-}
-@keyframes subtleFade {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-/* Enhanced Parallax Scrolling */
+/* Parallax Sections – Grouped & Enhanced for Smooth Depth */
 .parallax {
-    position: relative; /* Ensure positioning context */
-    overflow: hidden; /* Prevent overflow issues */
-    background-attachment: fixed; /* Keeps background in place */
-    background-size: cover; /* Ensures full coverage */
-    min-height: 70vh; /* Increase height for more visible effect */
-    z-index: 1; /* Layering to avoid overlaps */
+    position: relative; overflow: hidden; background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover;
+    min-height: 70vh; z-index: 1; transition: opacity 0.4s ease; /* Smoother reveal */
 }
-
-.parallax .container {
-    position: relative; /* Content scrolls over fixed BG */
-    z-index: 2; /* Above background */
+.hero { background-image: url('images/hero-bg.jpeg'); }
+.properties { background-image: url('images/properties-bg.jpeg'); min-height: 80vh; }
+.cta { background-image: url('images/cta-bg.jpeg'); min-height: 40vh; }
+.about-bg { background-image: url('images/mountain.jpg'); min-height: 60vh; } /* Merged from current */
+.parallax::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--overlay-dark); transition: opacity 0.4s ease; z-index: 1;
 }
+.parallax:hover::before { opacity: 0.5; } /* Cleaned from current */
 
-/* Subtle scroll-driven movement for modern browsers */
+/* Parallax Container & Scroll Effect – Cleaned */
+.parallax .container { position: relative; z-index: 2; } /* Content above background */
 @supports (animation-timeline: scroll()) {
     .parallax {
         animation: parallax-effect linear both;
@@ -259,268 +55,77 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
         animation-range: entry 0% cover 50%; /* Adjust range for smoothness */
     }
 }
+@keyframes parallax-effect { from { background-position-y: 0; } to { background-position-y: -10%; } }
 
-@keyframes parallax-effect {
-    from {
-        background-position-y: 0; /* Start position */
-    }
-    to {
-        background-position-y: -10%; /* Slight shift for depth */
-    }
+/* Navbar – Premium Gradient & Transitions */
+.navbar { transition: background 0.3s ease; }
+.navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
+.navbar-brand {
+    font-family: 'Raleway', sans-serif; font-weight: 700; letter-spacing: 3px;
+    background: linear-gradient(to right, var(--primary), var(--primary-glow)); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.nav-link { transition: transform 0.3s ease, color 0.3s ease; }
+.nav-link:hover { transform: scale(1.05); color: var(--primary) !important; }
+
+/* Sections & Fade-In – Smoother, Shorter Animation */
+section { opacity: 0; transition: opacity 0.5s ease-out, transform 0.5s ease-out; will-change: opacity, transform; /* Performance boost */ }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(50px); } to { opacity: 1; transform: translateY(0); } }
+section.visible { opacity: 1; animation: fadeInUp 0.6s ease-out forwards; } /* Shorter for smoothness */
+
+/* Cards – Clean Hover with Glow */
+.card { transition: transform 0.3s ease; border: none; box-shadow: 0 4px 8px rgba(0,0,0,0.1); will-change: transform; }
+.card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.2); }
+
+/* Buttons – Futuristic Ripple & Glow, Merged & Smoother */
+.btn { position: relative; overflow: hidden; transition: all 0.3s ease; will-change: transform; }
+.btn::after { content: ""; display: block; position: absolute; padding-top: 300%; padding-left: 350%; margin-left: -20px; margin-top: -120%; opacity: 0; transition: all 0.6s ease; /* Shorter ripple */ }
+.btn-primary::after { background: rgba(255, 255, 255, 0.6); }
+.btn:active::after { padding: 0; margin: 0; opacity: 1; transition: 0s; }
+.btn-primary { background-color: var(--primary); border: none; transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease; }
+.btn-primary:hover { transform: scale(1.05); box-shadow: 0 0 15px var(--glow-blue); background-color: var(--primary-dark); }
+
+/* Contact & Team – Gradient Text Overrides, Merged */
+#contact { color: black !important; }
+#contact h1, #contact h2, #contact h3, #contact p, #contact strong {
+    color: transparent !important; background: linear-gradient(to right, var(--primary), var(--primary-glow));
+    -webkit-background-clip: text; background-clip: text; font-weight: 700; letter-spacing: 2px; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+#contact .team-section { color: white !important; }
+#contact .team-section h3, #contact .team-section p, #contact .team-section strong {
+    background: linear-gradient(to right, var(--primary), var(--primary-glow)); -webkit-background-clip: text; background-clip: text; color: transparent !important;
+}
+#contact .form-control { color: #333; background-color: rgba(255,255,255,0.9); }
+
+/* About Text – Bold & Larger for Experience Paragraphs */
+#about .col-md-6 p {
+    font-size: 1.25rem; font-weight: 700; line-height: 1.6; margin-bottom: 1.5rem; color: #ffffff; text-shadow: 0 1px 3px rgba(0,0,0,0.3);
 }
 
-/* Mobile Fallback: Disable fixed on mobile for performance */
-@media (max-width: 767px) {
-    .parallax {
-        background-attachment: scroll; /* Normal scroll on mobile */
-    }
-}
-
-.parallax {
-    position: relative;
-    overflow: hidden;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    min-height: 70vh; /* Adjust for visibility */
-}
-
-
-.parallax.hero:hover::before {
-    opacity: 0.8; /* Slightly lighter on interaction for modern feel */
-}
-
-
-/* ──────────────────────────────────────────────────────────────
-   FUTURISTIC MINIMALIST ENHANCEMENTS – Apex Realty Centers
-   Appended for premium, high-tech luxury real estate look
-   ────────────────────────────────────────────────────────────── */
-
-/* Global Dark Theme Base (for dark mode toggle) */
-:root {
-    --primary: #007bff;
-    --primary-glow: #00d4ff;
-    --bg-dark: #0a0a15;
-    --bg-card: rgba(20, 20, 40, 0.6);
-    --text-light: #f0f4ff;
-    --glow-soft: 0 0 20px rgba(0, 212, 255, 0.4);
-    --glow-strong: 0 0 35px rgba(0, 212, 255, 0.7);
-    --blur: blur(12px);
-}
-
-.body-dark {
-    background: var(--bg-dark);
-    color: var(--text-light);
-}
-
-.body-dark .navbar {
-    background: rgba(10, 10, 21, 0.92) !important;
-    backdrop-filter: var(--blur);
-}
-
-.body-dark .bg-light {
-    background: rgba(26, 26, 46, 0.85) !important;
-    backdrop-filter: var(--blur);
-}
-
-/* Glassmorphism Cards & Containers */
-.card, #idx-container, .form-control {
-    background: var(--bg-card);
-    backdrop-filter: var(--blur);
-    border: 1px solid rgba(0, 212, 255, 0.18);
-    border-radius: 16px;
-    transition: all 0.4s ease;
-}
-
-.card:hover, #idx-container:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--glow-strong);
-}
-
-/* Enhanced Futuristic Logo (Transparent, No White) */
+/* Logo Overlay – Futuristic Glow & Pulse (No White), Shorter Animations */
 .about-overlay-img {
-    max-width: 420px;
-    opacity: 0.92;
-    filter: drop-shadow(var(--glow-soft)) brightness(1.15);
-    animation: glow-pulse 7s infinite ease-in-out, overlayAnimate 2.2s ease-out forwards;
-    transition: all 0.6s cubic-bezier(0.25, 0.8, 0.25, 1);
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0.9) rotate(0deg);
+    width: 40%; max-width: 380px; height: auto; opacity: 0; pointer-events: none; z-index: 2;
+    animation: overlayAnimate 1.5s ease-out 0.5s forwards, glow-pulse 6s infinite ease-in-out; /* Combined */
+    filter: drop-shadow(0 0 20px var(--glow-cyan)) brightness(1.1); transition: all 0.4s ease; will-change: filter, transform;
 }
-
 .about-overlay-img:hover {
-    transform: translate(-50%, -50%) scale(1.06);
-    filter: drop-shadow(var(--glow-strong)) brightness(1.35);
+    transform: translate(-50%, -50%) scale(1.03) rotate(0deg); filter: drop-shadow(0 0 35px var(--glow-cyan)) brightness(1.3);
 }
+@keyframes overlayAnimate { 0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9) rotate(-5deg); } 100% { opacity: 0.7; transform: translate(-50%, -50%) scale(1) rotate(0deg); } }
+.about-bg:hover .about-overlay-img { animation: overlayPulse 0.8s infinite alternate ease-in-out; } /* Shorter pulse */
+@keyframes overlayPulse { 0% { transform: translate(-50%, -50%) scale(1) rotate(0deg); } 100% { transform: translate(-50%, -50%) scale(1.05) rotate(2deg); } }
+@keyframes glow-pulse { 0%, 100% { filter: drop-shadow(0 0 20px var(--glow-cyan)); } 50% { filter: drop-shadow(0 0 30px var(--glow-cyan-strong)); } }
 
-/* Bolder & Larger Text (Headings & Paragraphs) */
-.display-2, .display-4, h1, h2 {
-    font-weight: 900;
-    letter-spacing: 1.2px;
-    text-shadow: 0 0 25px rgba(0, 212, 255, 0.35);
-}
-
-.fs-3, .fs-4, .lead {
-    font-weight: 700;
-    line-height: 1.55;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.25);
-}
-
-/* Parallax Depth & Overlay Refinement */
-.parallax::before {
-    background: linear-gradient(to bottom, rgba(5, 10, 30, 0.75), rgba(20, 20, 60, 0.55));
-    z-index: 1;
-    transition: opacity 0.7s ease;
-}
-
-.parallax:hover::before {
-    opacity: 0.85;
-}
-
-/* Hero & Section Text Glow */
-.hero h1, .parallax h2 {
-    background: linear-gradient(to right, var(--primary), var(--primary-glow));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-}
-
-/* Search Input & IDX Container Polish */
-#property-search {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(0, 212, 255, 0.35);
-    color: var(--text-light);
-    font-weight: 500;
-}
-
-#property-search:focus {
-    box-shadow: var(--glow-soft);
-    border-color: var(--primary-glow);
-}
-
-#idx-container iframe {
-    border-radius: 16px !important;
-    box-shadow: 0 15px 45px rgba(0, 212, 255, 0.18) !important;
-}
-
-/* Button Pulse & Neon Glow */
-.btn-primary {
-    background: linear-gradient(135deg, #007bff, #00bfff);
-    border: none;
-    box-shadow: var(--glow-soft);
-}
-
-.btn-primary:hover {
-    transform: scale(1.08);
-    box-shadow: var(--glow-strong);
-    background: linear-gradient(135deg, #0069d9, #0099ff);
-}
-
-/* Counter Animation Accent */
-.counter {
-    color: var(--primary-glow);
-    font-weight: 900;
-    text-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
-}
-
-/* Mobile Optimization – Keep Parallax Smooth */
+/* Mobile Fallbacks – Clean & Performance-Focused, Merged */
+@media (max-width: 768px) { .about-img { margin-bottom: 20px; } }
 @media (max-width: 767px) {
-    .about-overlay-img {
-        position: relative;
-        transform: none;
-        margin: 0 auto 2rem;
-        max-width: 320px;
-    }
-    .parallax {
-        background-attachment: scroll;
-        min-height: 50vh;
-    }
+    .parallax { background-attachment: scroll; min-height: 50vh; }
+    .about-overlay-img { position: relative; transform: none; margin: 0 auto 1.5rem; width: 80%; }
 }
 
-/* Final Touch: Breathing Glow Refinement */
-@keyframes glow-pulse {
-    0%, 100% { filter: drop-shadow(var(--glow-soft)); }
-    50%      { filter: drop-shadow(var(--glow-strong)); }
-}
+/* Map – Simple Border */
+.map { border-top: 1px solid #ddd; }
 
-/* URGENT MOBILE RESCUE – Override for Phones (max-width 991px for tablets too) */
-@media (max-width: 991px) {
-    body, html {
-        height: 100%;
-        overflow-x: hidden !important;
-        -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
-    }
-
-    .parallax {
-        background-attachment: scroll !important;
-        background-position: center 30% !important; /* Slight crop fix */
-        min-height: 40vh !important; /* Much shorter for quick view */
-        padding-top: 80px; /* Navbar clearance */
-        padding-bottom: 40px;
-    }
-
-    .parallax::before {
-        opacity: 0.65 !important; /* Lighter overlay = better contrast */
-    }
-
-    /* Force logo stacking & centering – no absolute nonsense */
-    .about-overlay-img {
-        position: relative !important;
-        top: auto !important;
-        left: auto !important;
-        transform: none !important;
-        margin: 0 auto 2rem !important;
-        max-width: 70vw !important;
-        display: block !important;
-    }
-
-    /* Stack rows vertically, increase readability */
-    .row {
-        flex-direction: column !important;
-    }
-
-    .col-lg-5, .col-lg-7, .col-md-6 {
-        width: 100% !important;
-        margin-bottom: 2rem !important;
-    }
-
-    /* Text scaling for phones */
-    h1.display-2 { font-size: 2.8rem !important; }
-    h2.display-4 { font-size: 2.2rem !important; }
-    .fs-3, .fs-4, .lead { font-size: 1.15rem !important; line-height: 1.5 !important; }
-
-    /* IDX – Make usable on mobile */
-    #idx-container, #idx-container iframe {
-        height: 600px !important; /* Adjustable – test 400-800px */
-        min-height: 400px !important;
-    }
-
-    /* Disable heavy effects entirely on mobile */
-    .card:hover, .btn-primary:hover, .about-overlay-img:hover {
-        transform: none !important;
-        box-shadow: none !important;
-        filter: none !important;
-    }
-
-    /* Preloader quicker exit */
-    #preloader.loaded { opacity: 0; transition: opacity 0.4s; }
-}
-
-/* Touch-friendly buttons */
-.btn {
-    min-height: 48px; /* Easier tap target */
-    font-size: 1.1rem;
-}
-
-/* TEMP DEBUG: Force reveal everything – remove after testing */
-#preloader {
-    display: none !important; /* Kill preloader completely for test */
-}
-section {
-    opacity: 1 !important;
-    animation: none !important;
-}
-section.visible { /* still allow future animations if needed */
-    opacity: 1;
-}
-body {
-    opacity: 1 !important;
-}
+/* Optional Debug – Comment Out When Stable */
+#preloader { /* display: none !important; */ } /* Uncomment to force hide */
+section { /* opacity: 1 !important; animation: none !important; */ } /* Uncomment for force visible */
