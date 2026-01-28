@@ -103,6 +103,35 @@
     </div>
 </section>
 
+<!-- Mortgage Calculator – Futuristic & Minimal -->
+<section id="calculator" class="py-5 bg-dark text-white">
+    <div class="container">
+        <h2 class="text-center display-5 fw-bold mb-5" style="text-shadow: 0 0 20px rgba(0, 212, 255, 0.4);">Mortgage Calculator</h2>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="card p-4" style="background: rgba(20,20,40,0.7); backdrop-filter: blur(12px); border: 1px solid rgba(0,212,255,0.25);">
+                    <form id="mortgage-form">
+                        <div class="mb-3">
+                            <label for="loanAmount" class="form-label fw-bold">Loan Amount ($)</label>
+                            <input type="number" class="form-control" id="loanAmount" value="500000" min="10000" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="interestRate" class="form-label fw-bold">Annual Interest Rate (%)</label>
+                            <input type="number" class="form-control" id="interestRate" value="6.5" step="0.1" min="0" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loanTerm" class="form-label fw-bold">Loan Term (Years)</label>
+                            <input type="number" class="form-control" id="loanTerm" value="30" min="1" required>
+                        </div>
+                        <button type="button" class="btn btn-primary w-100 py-3 fs-5 fw-bold" onclick="calculateMortgage()">Calculate Payment</button>
+                    </form>
+                    <div id="result" class="mt-4 text-center fs-4 fw-bold" style="color: #00d4ff;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Properties Section (Parallax 2) – Dynamic IDX with Search Input -->
 <section id="properties" class="parallax properties py-5 text-white">
     <div class="container">
