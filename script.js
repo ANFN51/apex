@@ -67,3 +67,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+// Property Oracle Teaser
+document.getElementById('property-oracle')?.addEventListener('click', () => {
+    const properties = [
+        'A futuristic eco-mansion in the hills with solar-powered infinity pools and drone delivery pads—yours for $2.5M!',
+        'An urban loft with holographic art walls and voice-activated everything, overlooking Detroit\'s skyline at $950K.',
+        'A serene lakeside estate with private yacht dock and AI-managed gardens—prime luxury at $1.8M.',
+        'A high-tech penthouse with VR tour capabilities and smart climate control, valued at $1.2M in the heart of the city.',
+        'A custom villa with underground cinema and electric vehicle charging hub—dream big for $3M!'
+    ];
+    const randomProp = properties[Math.floor(Math.random() * properties.length)];
+    const resultDiv = document.getElementById('oracle-result');
+    resultDiv.innerHTML = `<p class="fw-bold">The Oracle predicts: ${randomProp}</p><p>Intrigued? <a href="index.html#contact">Contact us</a> for the real deal!</p>`;
+    resultDiv.style.display = 'block';
+    resultDiv.style.opacity = 0;
+    resultDiv.style.transition = 'opacity 0.5s ease-in-out';
+    setTimeout(() => { resultDiv.style.opacity = 1; }, 10); // Fade-in animation
+});
