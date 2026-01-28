@@ -1,12 +1,28 @@
-// Preloader (Existing)
+// Preloader – Robust version with fallback timeout
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
-    preloader.classList.add('loaded');
-    setTimeout(() => {
-        preloader.style.display = 'none';
-        document.body.style.opacity = 1; // Fade in body
-    }, 500);
+    if (preloader) {
+        preloader.classList.add('loaded');
+        console.log('Preloader faded – should hide now');
+        setTimeout(() => {
+            preloader.style.display = 'none';
+            console.log('Preloader fully removed');
+            document.body.style.opacity = '1'; // Safety net
+        }, 600); // Slightly longer to ensure transition
+    } else {
+        console.warn('Preloader element not found');
+    }
 });
+
+// Fallback: Force remove preloader after 8 seconds if load hangs
+setTimeout(() => {
+    const pre = document.getElementById('preloader');
+    if (pre && pre.style.display !== 'none') {
+        pre.classList.add('loaded');
+        pre.style.display = 'none';
+        console.warn('Forced preloader removal after timeout');
+    }
+}, 8000);
 
 // Smooth Scroll (Existing)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -87,18 +103,35 @@ document.getElementById('contact-form')?.addEventListener('submit', e => {
     e.target.reset();
 });
 
-// Scroll-Triggered Animations (Existing)
+// Scroll-Triggered Animations – More forgiving
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
+    if (sections.length === 0) {
+        console.warn('No sections found for observer');
+        return;
+    }
+
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
+                // observer.unobserve(entry.target); // Comment out to allow re-trigger if needed
+                console.log('Section visible:', entry.target.id);
             }
         });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.05 }); // Lower threshold = triggers sooner
+
     sections.forEach(section => observer.observe(section));
+
+    // Safety fallback: Make all sections visible after 4 seconds if observer fails
+    setTimeout(() => {
+        sections.forEach(s => {
+            if (!s.classList.contains('visible')) {
+                s.classList.add('visible');
+                console.warn('Fallback visibility applied to:', s.id);
+            }
+        });
+    }, 4000);
 });
 function calculateMortgage() {
     const P = parseFloat(document.getElementById('loanAmount').value);
