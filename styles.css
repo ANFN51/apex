@@ -508,3 +508,18 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     min-height: 48px; /* Easier tap target */
     font-size: 1.1rem;
 }
+
+/* TEMP DEBUG: Force reveal everything – remove after testing */
+#preloader {
+    display: none !important; /* Kill preloader completely for test */
+}
+section {
+    opacity: 1 !important;
+    animation: none !important;
+}
+section.visible { /* still allow future animations if needed */
+    opacity: 1;
+}
+body {
+    opacity: 1 !important;
+}
