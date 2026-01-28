@@ -84,3 +84,20 @@ document.getElementById('property-oracle')?.addEventListener('click', () => {
     resultDiv.style.transition = 'opacity 0.5s ease-in-out';
     setTimeout(() => { resultDiv.style.opacity = 1; }, 10); // Fade-in animation
 });
+
+// Mortgage Calculator
+document.getElementById('mortgage-form')?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const price = parseFloat(document.getElementById('home-price').value);
+    const down = parseFloat(document.getElementById('down-payment').value);
+    const rate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
+    const term = parseFloat(document.getElementById('loan-term').value) * 12;
+    const loan = price - down;
+    const payment = (loan * rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
+    const resultDiv = document.getElementById('mortgage-result');
+    resultDiv.innerHTML = `<p class="fw-bold">Estimated Monthly Payment: $${payment.toFixed(2)}</p><p>Ready for your Detroit luxury home? <a href="index.html#contact">Contact us</a> for financing tips!</p>`;
+    resultDiv.style.display = 'block';
+    resultDiv.style.opacity = 0;
+    resultDiv.style.transition = 'opacity 0.5s ease-in-out';
+    setTimeout(() => { resultDiv.style.opacity = 1; }, 10); // Fade-in
+});
