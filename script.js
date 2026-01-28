@@ -170,3 +170,10 @@ if (window.innerWidth <= 991 || /Mobi|Android/i.test(navigator.userAgent)) {
     // Optional: Skip heavy animations
     document.body.classList.add('mobile-optimized');
 }
+
+// Ensure body is visible even if JS partially fails
+document.body.style.transition = 'opacity 0.8s ease';
+document.body.style.opacity = '0';
+window.addEventListener('load', () => {
+    document.body.style.opacity = '1';
+});
