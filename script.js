@@ -1,128 +1,102 @@
-// Preloader
-window.addEventListener('load', function() {
+// Preloader (Existing)
+window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
     preloader.classList.add('loaded');
     setTimeout(() => {
         preloader.style.display = 'none';
+        document.body.style.opacity = 1; // Fade in body
     }, 500);
-    setTimeout(() => {
-        const sections = document.querySelectorAll('section');
-        sections.forEach(section => {
-            if (!section.classList.contains('visible') && section.getBoundingClientRect().top < window.innerHeight) {
-                section.classList.add('visible');
-            }
-        });
-    }, 550);
 });
 
-// Smooth Scroll with Immediate Visibility for Button Targets
+// Smooth Scroll (Existing)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
-        const targetId = anchor.getAttribute('href');
-        const target = document.querySelector(targetId);
-        if (target) {
-            // Force visibility immediately for reliable button functionality
-            target.classList.add('visible');
-            // Then perform the smooth scroll
-            target.scrollIntoView({ behavior: 'smooth' });
-        }
+        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
     });
 });
 
-// Navbar Scroll Effect
+// Navbar Scroll Effect (Existing)
 window.addEventListener('scroll', () => {
     document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
 });
 
-// Contact Form (Demo Alert)
+// Dynamic Greeting (Professional Time-Based Personalization)
+const greeting = document.getElementById('dynamic-greeting');
+const hour = new Date().getHours();
+greeting.textContent = `${hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening'}. Exclusive properties tailored for discerning clients. Over 15 years of unparalleled expertise.`;
+
+// Animated Counters (Futuristic Scroll-Trigger)
+const counters = document.querySelectorAll('.counter');
+const countUp = (el) => {
+    const target = parseInt(el.textContent);
+    let count = 0;
+    const interval = setInterval(() => {
+        count += Math.ceil(target / 50);
+        el.textContent = count;
+        if (count >= target) clearInterval(interval);
+    }, 40);
+};
+const counterObserver = new IntersectionObserver(entries => entries.forEach(entry => entry.isIntersecting && countUp(entry.target)));
+counters.forEach(counter => counterObserver.observe(counter));
+
+// Dynamic Testimonials (Fetch from JSON)
+fetch('testimonials.json')
+    .then(res => res.json())
+    .then(data => {
+        const row = document.getElementById('testimonials-row');
+        data.forEach(test => {
+            const col = document.createElement('div');
+            col.className = 'col-md-4 mb-4';
+            col.innerHTML = `<div class="card p-3"><p>"${test.quote}"</p><footer class="blockquote-footer">${test.author}</footer></div>`;
+            row.appendChild(col);
+        });
+    });
+
+// Dynamic IDX (Professional Search Integration – Assume IDX Broker JS; Update with Your Key)
+function loadIDX(query = '') {
+    const container = document.getElementById('idx-container');
+    container.innerHTML = ''; // Clear for refresh
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://your-idx-provider.com/search-widget?mls=your-mls-id&client=your-key&query=${encodeURIComponent(query)}`;
+    iframe.width = '100%';
+    iframe.height = '750';
+    iframe.frameBorder = '0';
+    iframe.style = 'border-radius: 16px; box-shadow: 0 15px 40px rgba(0, 212, 255, 0.2); backdrop-filter: blur(8px);';
+    container.appendChild(iframe);
+}
+loadIDX(); // Initial load
+document.getElementById('property-search').addEventListener('input', e => loadIDX(e.target.value)); // Dynamic update
+
+// Theme Toggle (Futuristic Dark Mode – Uses localStorage for Persistence)
+const toggle = document.getElementById('theme-toggle');
+const body = document.body;
+toggle.addEventListener('click', () => {
+    body.classList.toggle('body-dark');
+    toggle.textContent = body.classList.contains('body-dark') ? 'Light Mode' : 'Dark Mode';
+    localStorage.setItem('theme', body.classList.contains('body-dark') ? 'dark' : 'light');
+});
+if (localStorage.getItem('theme') === 'dark') body.classList.add('body-dark');
+
+// Contact Form (Dynamic Submission with EmailJS – Professional Backend-Less)
+emailjs.init('your_emailjs_user_id'); // Add your EmailJS User ID
 document.getElementById('contact-form')?.addEventListener('submit', e => {
     e.preventDefault();
-    alert('Message sent successfully! (This is a demo)');
+    emailjs.sendForm('your_service_id', 'your_template_id', e.target)
+        .then(() => alert('Message sent successfully!'), err => alert('Error: ' + err.text));
     e.target.reset();
 });
 
-// Scroll-Triggered Animations
+// Scroll-Triggered Animations (Existing)
 document.addEventListener('DOMContentLoaded', () => {
     const sections = document.querySelectorAll('section');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Add .visible to h1 and h2 within the section for text reveal
-                const headings = entry.target.querySelectorAll('h1, h2');
-                headings.forEach(heading => heading.classList.add('visible'));
-                observer.unobserve(entry.target); // One-time for performance
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
     sections.forEach(section => observer.observe(section));
-
-    // Initialize AOS with global settings for futuristic minimalism
-    AOS.init({
-        duration: 1200, // Smooth, longer transitions for a high-tech feel
-        easing: 'ease-in-out-cubic', // Curved easing for modern fluidity
-        once: true, // Animate only once per scroll for performance
-        offset: 100 // Trigger slightly earlier for anticipation
-    });
-});
-
-// Property Oracle Teaser
-document.getElementById('property-oracle')?.addEventListener('click', () => {
-    const properties = [
-        'A futuristic eco-mansion in the hills with solar-powered infinity pools and drone delivery pads—yours for $2.5M!',
-        'An urban loft with holographic art walls and voice-activated everything, overlooking Detroit\'s skyline at $950K.',
-        'A serene lakeside estate with private yacht dock and AI-managed gardens—prime luxury at $1.8M.',
-        'A high-tech penthouse with VR tour capabilities and smart climate control, valued at $1.2M in the heart of the city.',
-        'A custom villa with underground cinema and electric vehicle charging hub—dream big for $3M!'
-    ];
-    const randomProp = properties[Math.floor(Math.random() * properties.length)];
-    const resultDiv = document.getElementById('oracle-result');
-    resultDiv.innerHTML = `<p class="fw-bold">The Oracle predicts: ${randomProp}</p><p>Intrigued? <a href="index.html#contact">Contact us</a> for the real deal!</p>`;
-    resultDiv.style.display = 'block';
-    resultDiv.style.opacity = 0;
-    resultDiv.style.transition = 'opacity 0.5s ease-in-out';
-    setTimeout(() => { resultDiv.style.opacity = 1; }, 10); // Fade-in animation
-});
-
-// Mortgage Calculator
-document.getElementById('mortgage-form')?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const price = parseFloat(document.getElementById('home-price').value);
-    const down = parseFloat(document.getElementById('down-payment').value);
-    const rate = parseFloat(document.getElementById('interest-rate').value) / 100 / 12;
-    const term = parseFloat(document.getElementById('loan-term').value) * 12;
-    const loan = price - down;
-    const payment = (loan * rate * Math.pow(1 + rate, term)) / (Math.pow(1 + rate, term) - 1);
-    const resultDiv = document.getElementById('mortgage-result');
-    resultDiv.innerHTML = `<p class="fw-bold">Estimated Monthly Payment: $${payment.toFixed(2)}</p><p>Ready for your Detroit luxury home? <a href="index.html#contact">Contact us</a> for financing tips!</p>`;
-    resultDiv.style.display = 'block';
-    resultDiv.style.opacity = 0;
-    resultDiv.style.transition = 'opacity 0.5s ease-in-out';
-    setTimeout(() => { resultDiv.style.opacity = 1; }, 10); // Fade-in
-});
-
-// Personalized Geolocation Greeting
-window.addEventListener('load', () => {
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition((position) => {
-            const lat = position.coords.latitude;
-            const lon = position.coords.longitude;
-            // Rough check for Detroit area (42.3 lat, -83.0 lon, ~50km radius)
-            const isDetroit = Math.abs(lat - 42.3314) < 0.5 && Math.abs(lon + 83.0458) < 0.5;
-            const greetingDiv = document.getElementById('personal-greeting');
-            greetingDiv.querySelector('p').textContent = isDetroit 
-                ? 'Welcome, Detroit Dreamer! Apex has prime Garden City spots waiting for you.' 
-                : 'Welcome to Apex—Luxury real estate tailored just for you!';
-            greetingDiv.style.display = 'block';
-            greetingDiv.style.opacity = 0;
-            greetingDiv.style.transition = 'opacity 1s ease-in';
-            setTimeout(() => { greetingDiv.style.opacity = 1; }, 500); // Delayed fade-in
-        }, () => {
-            // Fallback if denied
-            const greetingDiv = document.getElementById('personal-greeting');
-            greetingDiv.querySelector('p').textContent = 'Welcome to Apex—Discover luxury wherever you are!';
-            greetingDiv.style.display = 'block';
-        });
-    }
 });
