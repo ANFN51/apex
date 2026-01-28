@@ -72,6 +72,14 @@ section.visible { opacity: 1; animation: fadeInUp 0.8s ease-out forwards; }
     overflow: hidden;
     transition-duration: 0.4s;
 }
+
+.gradient-text {
+    background: linear-gradient(to right, #007bff, #00bfff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
 .btn::after {
     content: "";
     display: block;
