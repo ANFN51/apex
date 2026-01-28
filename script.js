@@ -134,17 +134,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 4000);
 });
 function calculateMortgage() {
-    const P = parseFloat(document.getElementById('loanAmount').value);
+    const homePrice = parseFloat(document.getElementById('homePrice').value); // Renamed from loanAmount for clarity
+    const downPayment = parseFloat(document.getElementById('downPayment').value) || 0; // Default to 0 if not provided
     const r = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
     const n = parseFloat(document.getElementById('loanTerm').value) * 12;
-    if (isNaN(P) || isNaN(r) || isNaN(n) || n <= 0) {
-        document.getElementById('result').innerHTML = 'Please enter valid numbers.';
+    
+    if (isNaN(homePrice) || isNaN(downPayment) || isNaN(r) || isNaN(n) || n <= 0 || downPayment < 0 || downPayment >= homePrice) {
+        document.getElementById('result').innerHTML = 'Please enter valid numbers (down payment must be less than home price).';
         return;
     }
-    const M = P * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
+    
+    const loan = homePrice - downPayment;
+    const M = loan * (r * Math.pow(1 + r, n)) / (Math.pow(1 + r, n) - 1);
     document.getElementById('result').innerHTML = `Estimated Monthly Payment: <span style="font-size: 1.6rem;">$${M.toFixed(2)}</span>`;
 }
-
 // Mobile Detection & Optimizations
 const isMobile = /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 767;
 if (isMobile) {
