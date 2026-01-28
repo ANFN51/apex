@@ -45,33 +45,30 @@
         </div>
     </div>
 </nav>
-<!-- About Section (Futuristic Parallax Mountain Background with Static Left Image) -->
-<section id="about" class="py-5 parallax about-bg text-white position-relative">
-    <div class="container">
-        <div class="row align-items-center"> <!-- Align vertically for high-tech symmetry -->
-            <div class="col-md-6">
-                <!-- Static About Image (Left Side, Above Background) -->
-                <img src="images/apex.png" alt="Premium Real Estate Feature" class="about-img img-fluid"> <!-- img-fluid for responsive scaling -->
-            </div>
-            <div class="col-md-6">
-                <!-- Text Content (Right Side) -->
-                <p>With over 15 years in the industry, we specialize in premium real estate solutions. Our team of experts ensures seamless transactions and personalized service for high-net-worth clients.</p>
-                <p>From urban penthouses to serene estates, we curate properties that embody sophistication and value. Trust us to elevate your real estate experience.</p>
-            </div>
-        </div>
-    </div>
-
-</section>
-
-   <!-- Hero Section (Parallax 1) -->
-    <section id="home" class="parallax hero d-flex align-items-center text-center text-white">
+<!-- Updated About Section (Now merges hero content with mountain background; button at bottom) -->
+    <section id="about" class="py-5 parallax about-bg text-white position-relative d-flex flex-column justify-content-center"> <!-- Added flex classes for vertical centering and structure -->
         <div class="container">
-            <h1 class="display-3 fw-bold">Discover Luxury Living</h1>
-            <p class="lead"></p>
-            <a href="properties.html" class="btn btn-primary btn-lg">Explore Listings</a>
+            <!-- Added the "Discover Luxury Living" heading at the top -->
+            <h1 class="display-3 fw-bold text-center mb-5">Discover Luxury Living</h1> <!-- Moved from hero -->
+
+            <div class="row align-items-center"> <!-- Align vertically for high-tech symmetry -->
+                <div class="col-md-6">
+                    <!-- Static About Image (Left Side, Above Background) -->
+                    <img src="images/apex.png" alt="Premium Real Estate Feature" class="about-img img-fluid"> <!-- img-fluid for responsive scaling -->
+                </div>
+                <div class="col-md-6">
+                    <!-- Text Content (Right Side) -->
+                    <p>With over 15 years in the industry, we specialize in premium real estate solutions. Our team of experts ensures seamless transactions and personalized service for high-net-worth clients.</p>
+                    <p>From urban penthouses to serene estates, we curate properties that embody sophistication and value. Trust us to elevate your real estate experience.</p>
+                </div>
+            </div>
+
+            <!-- Button placed at the bottom of the section -->
+            <div class="text-center mt-5"> <!-- Added margin-top for spacing -->
+                <a href="properties.html" class="btn btn-primary btn-lg">Explore Listings</a> <!-- Moved from hero -->
+            </div>
         </div>
     </section>
-
 
     <!-- Combined CTA & Contact Section (Parallax with CTA image) -->
 <section id="contact" class="parallax cta d-flex align-items-center py-5">
