@@ -97,24 +97,7 @@ copyrightYears.forEach(year => {
     year.textContent = new Date().getFullYear();
 });
 
-// AOS Init
-AOS.init();
-
-// Optimized Parallax Effect - Smoother & More Performant
-const isMobile = window.innerWidth <= 991;  // Bump to 991px to cover tablets better
-const parallaxSpeed = isMobile ? 0.15 : 0.4; // Even slower on mobile for ultra-smooth feel
-
-// Cache sections once
-const parallaxSections = document.querySelectorAll('.parallax');
-
-// IntersectionObserver for lazy updates (only process visible elements)
-const parallaxObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        entry.target.dataset.visible = entry.isIntersecting ? 'true' : 'false';
-    });
-}, { threshold: 0.1 }); // Start observing slightly before fully visible
-
-parallaxSections.forEach(section => parallaxObserver.observe(section));
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent) || window.innerWidth <= 991;
 
 // Throttle function (pure JS, lightweight)
 function throttle(fn, limit) {
