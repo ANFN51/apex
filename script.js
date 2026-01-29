@@ -101,7 +101,7 @@ copyrightYears.forEach(year => {
 AOS.init();
 
 // Optimized Parallax Effect - Smoother & More Performant
-const isMobile = window.innerWidth <= 768;
+const isMobile = window.innerWidth <= 991;  // Bump to 991px to cover tablets better
 const parallaxSpeed = isMobile ? 0.15 : 0.4; // Even slower on mobile for ultra-smooth feel
 
 // Cache sections once
@@ -128,20 +128,20 @@ function throttle(fn, limit) {
     };
 }
 
-// Update function
 function updateParallax() {
+    if (isMobile) return;  // Skip entirely on mobile → saves perf + avoids conflicts
+
     parallaxSections.forEach(section => {
         if (section.dataset.visible === 'true') {
             const inner = section.querySelector('.parallax-inner');
             if (inner) {
                 const rect = section.getBoundingClientRect();
                 const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
-                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`; // Slight scale for depth, but minimal for perf
+                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`;
             }
         }
     });
 }
-
 // Throttled scroll listener
 const throttledUpdate = throttle(updateParallax, 16); // ~60fps cap
 window.addEventListener('scroll', throttledUpdate, { passive: true });
