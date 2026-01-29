@@ -147,3 +147,8 @@ const throttledUpdate = throttle(updateParallax, 16); // ~60fps cap
 window.addEventListener('scroll', throttledUpdate, { passive: true });
 window.addEventListener('resize', throttledUpdate);
 updateParallax(); // Initial
+
+@media (max-width: 768px) {
+    .parallax { background-attachment: scroll; }
+    .parallax-inner { transform: none !important; }
+}
