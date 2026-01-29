@@ -62,50 +62,6 @@ body.dark-mode .nav-link { color: #fff !important; }
     padding: 0;
   }
 
-  /* Navigation – make it stack vertically or add hamburger later */
-  .nav, nav, .menu, header ul {   /* try common class names – change to match yours */
-    flex-direction: column !important;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .nav li, nav li, .menu li {
-    width: 100%;              /* full-width items */
-    text-align: center;
-    padding: 12px 0;
-  }
-
-  /* Images & hero/banner – prevent horizontal overflow */
-  img, .hero img, section img, .property-card img {
-    max-width: 100% !important;
-    height: auto !important;
-    display: block;
-    margin: 0 auto;
-  }
-
-  /* Sections & containers – let them breathe but not overflow */
-  .container, section, .content, main {
-    padding: 15px;
-    width: 100%;
-    box-sizing: border-box;
-  }
-
-  /* If you have stats row or cards side-by-side, stack them */
-  .stats, .row, .cards, .properties-grid {
-    flex-direction: column !important;
-    gap: 20px;
-  }
-
-  /* Buttons – make them easier to tap */
-  button, .btn, a.button {
-    padding: 14px 24px;
-    font-size: 1.1rem;
-    width: 100%;              /* full-width on small screens is often better */
-    max-width: 300px;
-    margin: 10px auto;
-    display: block;
-  }
-
   /* Hide desktop-only stuff if needed, or adjust */
   /* .desktop-only { display: none; } */   /* uncomment & use if you add later */
 }
