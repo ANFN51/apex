@@ -12,23 +12,16 @@
 .ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
 .ldio-rpinwye8j0b div { box-sizing: content-box; }
 
-/* Parallax Sections - Base for JS Simulation */
-.parallax {
-    background-position: center top; /* Start from top for consistent positioning */
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: scroll; /* Fallback to scroll for compatibility; JS handles parallax */
-    min-height: 60vh;
-    will-change: background-position; /* GPU optimization for position changes */
-    image-rendering: optimizeQuality; /* Smoother scaling on mobile */
-}
+/* Parallax Sections */
+.parallax { position: relative; overflow: hidden; min-height: 60vh; perspective: 1px; perspective-origin: top; }
+.parallax-inner { position: absolute; top: -10%; left: 0; width: 100%; height: 120%; background-position: center; background-repeat: no-repeat; background-size: cover; transform-style: preserve-3d; will-change: transform; backface-visibility: hidden; }
 .hero { min-height: 80vh; }
 .properties { min-height: 80vh; }
 .cta { min-height: 40vh; }
 
 /* General Styles */
-html { scroll-behavior: smooth; } /* Smooth anchor scrolling */
-body { font-family: 'Roboto', sans-serif; }
+html { scroll-behavior: smooth; }
+body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
 .navbar-brand { font-weight: 700; letter-spacing: 1px; background: linear-gradient(to right, #007bff, #00bfff); -webkit-background-clip: text; color: transparent; }
 .navbar { transition: background 0.3s; }
 .navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
@@ -42,9 +35,11 @@ body { font-family: 'Roboto', sans-serif; }
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
-    .parallax { min-height: 50vh; } /* Adjusted for better mobile flow without overload */
+    .parallax { min-height: 40vh; perspective-origin: center; }
+    .parallax-inner { height: 140%; top: -20%; }
     .form-control { min-height: 48px; font-size: 1.1rem; }
-    .card:hover { transform: none; } /* No hover on touch */
+    .card:hover { transform: none; }
+    body { touch-action: manipulation; }
 }
 
 /* Dark Mode */
