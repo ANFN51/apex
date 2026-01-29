@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     setTimeout(() => preloader.style.display = 'none', 500);
 });
 
-// Smooth Scroll
+// Smooth Scroll (Already present for anchors)
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
@@ -99,3 +99,23 @@ if (copyrightYear) {
 
 // AOS Init
 AOS.init();
+
+// Mobile Parallax Simulation (Optimized for Smooth Scrolling)
+const isMobile = /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
+const parallaxSpeed = isMobile ? 0.3 : 0.7; // Slower on mobile for less jank
+
+function updateParallax() {
+    const sections = document.querySelectorAll('.parallax');
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) { // Only update visible sections
+            const offset = (window.pageYOffset - rect.top) * parallaxSpeed;
+            section.style.backgroundPositionY = `${offset}px`;
+        }
+    });
+}
+
+window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateParallax); // Throttled for 60fps perf
+});
+updateParallax(); // Initial call
