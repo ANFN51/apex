@@ -12,14 +12,22 @@
 .ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
 .ldio-rpinwye8j0b div { box-sizing: content-box; }
 
-/* Parallax Sections */
-.parallax { background-attachment: fixed; background-position: center; background-repeat: no-repeat; background-size: cover; min-height: 60vh; }
+/* Parallax Sections - Optimized for Performance */
+.parallax {
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 60vh;
+    will-change: transform; /* GPU hint for smoother scrolling */
+    image-rendering: optimizeQuality; /* Better image scaling on mobile */
+}
 .hero { min-height: 80vh; }
 .properties { min-height: 80vh; }
 .cta { min-height: 40vh; }
 
 /* General Styles */
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; } /* Smooth scroll for anchors */
 body { font-family: 'Roboto', sans-serif; }
 .navbar-brand { font-weight: 700; letter-spacing: 1px; background: linear-gradient(to right, #007bff, #00bfff); -webkit-background-clip: text; color: transparent; }
 .navbar { transition: background 0.3s; }
@@ -32,10 +40,11 @@ body { font-family: 'Roboto', sans-serif; }
 .btn-primary { background: #007bff; border: none; transition: background 0.3s; }
 .btn-primary:hover { background: #0056b3; }
 
-/* Media Queries for Mobile */
+/* Media Queries for Mobile - Keep parallax but optimize */
 @media (max-width: 768px) {
+    .parallax { min-height: 50vh; } /* Slightly taller for better visibility without overload */
     .form-control { min-height: 48px; font-size: 1.1rem; }
-    .card:hover { transform: none; }
+    .card:hover { transform: none; } /* Disable hover effects on touch devices */
 }
 
 /* Dark Mode */
