@@ -3,36 +3,75 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Buy luxury properties in Detroit and Garden City with Apex Realty Centers. Expert guidance and mortgage calculator.">
-    <meta name="keywords" content="buy homes Detroit, luxury real estate Michigan, mortgage calculator">
-    <meta property="og:title" content="Apex - Buy Properties">
-    <meta property="og:description" content="Find and purchase your ideal luxury property with market insights.">
-    <meta property="og:image" content="images/mountain2.jpg">
+    <meta name="description" content="Buy luxury properties in Detroit and Garden City with Apex Realty Centers. Use our mortgage calculator for estimates.">
+    <meta name="keywords" content="buy luxury homes Detroit, real estate Michigan, mortgage calculator">
+    <meta property="og:title" content="Apex Realty Centers - Buy Properties">
+    <meta property="og:description" content="Expert guidance for purchasing premium real estate in Michigan.">
+    <meta property="og:image" content="images/mountain1.jpg">
     <meta property="og:url" content="https://apexrealtycenters.com/buy.html">
-    <title>Apex - Buy Properties</title>
-    <!-- Links same as index -->
+    <title>Apex Realty Centers - Buy Properties</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Preloader same -->
-    <!-- Navbar same -->
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loadingio-eclipse">
+            <div class="ldio-rpinwye8j0b"><div></div></div>
+        </div>
+    </div>
+
+    <!-- Navbar (same as index.html) -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" aria-label="Main navigation">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="index.html">Apex Realty Centers</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a class="nav-link" href="index.html#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                            <li><a class="dropdown-item" href="buy.html">Buy</a></li>
+                            <li><a class="dropdown-item" href="sell.html">Sell</a></li>
+                            <li><a class="dropdown-item" href="lease.html">Lease</a></li>
+                            <li><a class="dropdown-item" href="buy.html#mortgage-form"><i class="bi bi-calculator me-2"></i>Mortgage Calculator</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+                </ul>
+                <button id="theme-toggle" class="btn btn-outline-primary ms-3">Toggle Dark Mode</button>
+            </div>
+        </div>
+    </nav>
 
     <!-- Buy Content -->
     <section class="py-5" data-aos="fade-up">
-        <div class="mt-5 text-center">
+        <div class="container mt-5 text-center">
             <h4 class="fw-bold gradient-text">Detroit Dream Home Calculator</h4>
             <p>Estimate your monthly payment for a luxury Apex property!</p>
-            <form id="mortgage-form" aria-label="Mortgage Calculator Form">
+            <form id="mortgage-form">
                 <div class="mb-3">
-                    <input type="number" class="form-control" id="homePrice" placeholder="Home Price ($)" required min="100000" aria-label="Home Price">
+                    <input type="number" class="form-control" id="homePrice" placeholder="Home Price ($)" required min="100000">
                 </div>
                 <div class="mb-3">
-                    <input type="number" class="form-control" id="downPayment" placeholder="Down Payment ($)" min="0" aria-label="Down Payment">
+                    <input type="number" class="form-control" id="downPayment" placeholder="Down Payment ($)" min="0">
                 </div>
                 <div class="mb-3">
-                    <input type="number" class="form-control" id="interestrate" placeholder="Interest Rate (%)" required step="0.1" min="0" aria-label="Interest Rate">
+                    <input type="number" class="form-control" id="interestrate" placeholder="Interest Rate (%)" required step="0.1" min="0">
                 </div>
                 <div class="mb-3">
-                    <input type="number" class="form-control" id="loanterm" placeholder="Loan Term (Years)" required min="1" value="30" aria-label="Loan Term">
+                    <input type="number" class="form-control" id="loanterm" placeholder="Loan Term (Years)" required min="1" value="30">
                 </div>
                 <button type="submit" class="btn btn-primary">Calculate</button>
             </form>
@@ -44,14 +83,23 @@
                     <div class="card p-4 text-center">
                         <i class="bi bi-house-door-fill fs-1 mb-3 text-primary"></i>
                         <h4 class="fw-bold">Property Buying</h4>
-                        <p>We assist you in finding and purchasing your ideal luxury property with expert guidance and market insights...</p> <!-- Full text same -->
-                        <a href="#contact" class="btn btn-primary">Get Started</a>
+                        <p>We assist you in finding and purchasing your ideal luxury property with expert guidance and market insights. Our team conducts thorough market analysis to identify opportunities that match your preferences and investment goals. We handle negotiations, due diligence, and closing processes to ensure a smooth and efficient transaction. Additionally, we offer private showings and access to off-market listings for exclusive opportunities.</p>
+                        <a href="index.html#contact" class="btn btn-primary">Get Started</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer same -->
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container text-center">
+            <p>&copy; <span id="copyright-year"></span> Apex Realty Centers. All rights reserved.</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="legal.html#privacy" class="text-white">Privacy</a></li>
+                <li class="list-inline-item"><a href="legal.html#terms" class="text-white">Terms</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
 </html>
