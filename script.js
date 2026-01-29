@@ -44,21 +44,12 @@ counters.forEach(counter => {
 
 // Dynamic Testimonials
 fetch('testimonials.json')
-    .then(res => res.json())
-    .then(data => {
-        const row = document.getElementById('testimonials-row');
-        data.forEach((test, index) => {
-            const item = document.createElement('div');
-            item.className = `carousel-item ${index === 0 ? 'active' : ''}`;
-            item.innerHTML = `
-                <div class="d-block w-100 text-center">
-                    <p class="lead">"${test.quote}"</p>
-                    <p>- ${test.author}</p>
-                </div>
-            `;
-            row.appendChild(item);
-        });
-    });
+    .then(res => {
+        if (!res.ok) throw new Error('File missing');
+        return res.json();
+    })
+    .then(data => { /* your existing code */ })
+    .catch(err => console.warn('Testimonials failed (ignore if testing locally):', err));
 
 // Mortgage Calculator
 const mortgageForm = document.getElementById('mortgage-form');
