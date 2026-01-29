@@ -51,3 +51,45 @@ body.dark-mode .card { background: #2c2c2c; border-color: #444; }
 body.dark-mode .btn-primary { background: #00bfff; border: none; }
 body.dark-mode .navbar { background: #1e1e1e !important; }
 body.dark-mode .nav-link { color: #fff !important; }
+
+/* Stacked navbar brand */
+.navbar-brand {
+    padding: 0.5rem 0; /* Adjust vertical padding if needed */
+}
+
+.navbar-brand .logo-img {
+    max-height: 48px; /* Tune this — small logo above text */
+    width: auto;
+}
+
+.navbar-brand .text-wrapper {
+    line-height: 1.1;
+}
+
+.navbar-brand .brand-main {
+    font-size: 1.6rem; /* Bigger for "Apex" */
+    letter-spacing: 1px;
+    background: linear-gradient(to right, #007bff, #00bfff);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: block;
+}
+
+.navbar-brand .brand-sub {
+    font-size: 0.85rem; /* Smaller for "Realty Centers" */
+    color: #6c757d; /* Muted gray, or change to #0056b3 for blue-ish */
+    letter-spacing: 0.5px;
+}
+
+/* Mobile adjustments */
+@media (max-width: 991px) {
+    .navbar-brand {
+        align-items: center; /* Center on mobile if preferred */
+    }
+    .navbar-brand .logo-img {
+        max-height: 36px;
+    }
+    .navbar-brand .brand-main {
+        font-size: 1.4rem;
+    }
+}
