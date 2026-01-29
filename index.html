@@ -44,6 +44,17 @@
         </div>
     </div>
 
+    <script>
+  // Emergency fallback — hides preloader no matter what
+  setTimeout(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.style.opacity = '0';
+      setTimeout(() => { preloader.style.display = 'none'; }, 600);
+    }
+  }, 4000); // 4 seconds max
+</script>
+
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" aria-label="Main navigation">
         <div class="container">
