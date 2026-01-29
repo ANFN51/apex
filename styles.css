@@ -54,29 +54,28 @@ body.dark-mode .navbar { background: #1e1e1e !important; }
 body.dark-mode .nav-link { color: #fff !important; }
 
 
-/* Mobile-first adjustments – phones & small tablets */
-@media only screen and (max-width: 768px) {
-  body {
-    font-size: 16px;          /* readable base size */
-    margin: 0;                /* kill weird side padding if any */
-    padding: 0;
-  }
-
-  /* Hide desktop-only stuff if needed, or adjust */
-  /* .desktop-only { display: none; } */   /* uncomment & use if you add later */
+/* Existing parallax base */
+.parallax {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;          /* Good on desktop */
+    min-height: 60vh;
+    position: relative;
+    overflow: hidden;
 }
 
-/* Extra small phones – tweak further if needed */
-@media only screen and (max-width: 480px) {
-  body {
-    font-size: 15px;
-  }
+/* Kill the problematic fixed + cover combo on mobile */
+@media (max-width: 991px) {   /* or 768px if you prefer stricter */
+    .parallax {
+        background-attachment: scroll !important;   /* Fixes zoom/cropping */
+        background-size: cover !important;
+    }
 
-  h1, .hero h1 {
-    font-size: 2rem;          /* smaller big headings */
-  }
-
-  h2 {
-    font-size: 1.6rem;
-  }
+    /* Also disable JS-driven parallax inner movement on mobile */
+    .parallax-inner {
+        transform: none !important;
+        height: 100% !important;
+        top: 0 !important;
+    }
 }
