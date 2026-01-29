@@ -100,25 +100,50 @@ copyrightYears.forEach(year => {
 // AOS Init
 AOS.init();
 
-// Parallax Effect
+// Optimized Parallax Effect - Smoother & More Performant
 const isMobile = window.innerWidth <= 768;
-const parallaxSpeed = isMobile ? 0.2 : 0.5; // Slower on mobile
+const parallaxSpeed = isMobile ? 0.15 : 0.4; // Even slower on mobile for ultra-smooth feel
 
+// Cache sections once
+const parallaxSections = document.querySelectorAll('.parallax');
+
+// IntersectionObserver for lazy updates (only process visible elements)
+const parallaxObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        entry.target.dataset.visible = entry.isIntersecting ? 'true' : 'false';
+    });
+}, { threshold: 0.1 }); // Start observing slightly before fully visible
+
+parallaxSections.forEach(section => parallaxObserver.observe(section));
+
+// Throttle function (pure JS, lightweight)
+function throttle(fn, limit) {
+    let lastCall = 0;
+    return function(...args) {
+        const now = Date.now();
+        if (now - lastCall >= limit) {
+            lastCall = now;
+            fn(...args);
+        }
+    };
+}
+
+// Update function
 function updateParallax() {
-    const sections = document.querySelectorAll('.parallax');
-    sections.forEach(section => {
-        const inner = section.querySelector('.parallax-inner');
-        if (inner) {
-            const rect = section.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
+    parallaxSections.forEach(section => {
+        if (section.dataset.visible === 'true') {
+            const inner = section.querySelector('.parallax-inner');
+            if (inner) {
+                const rect = section.getBoundingClientRect();
                 const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
-                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.1)`;
+                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`; // Slight scale for depth, but minimal for perf
             }
         }
     });
-    requestAnimationFrame(updateParallax);
 }
 
-updateParallax();
-window.addEventListener('scroll', updateParallax, { passive: true });
-window.addEventListener('resize', updateParallax);
+// Throttled scroll listener
+const throttledUpdate = throttle(updateParallax, 16); // ~60fps cap
+window.addEventListener('scroll', throttledUpdate, { passive: true });
+window.addEventListener('resize', throttledUpdate);
+updateParallax(); // Initial
