@@ -4,7 +4,6 @@ window.addEventListener('load', () => {
     preloader.classList.add('loaded');
     setTimeout(() => preloader.style.display = 'none', 500);
 });
-
 // Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
