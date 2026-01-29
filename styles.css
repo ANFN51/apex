@@ -51,3 +51,26 @@ body.dark-mode .card { background: #2c2c2c; border-color: #444; }
 body.dark-mode .btn-primary { background: #00bfff; border: none; }
 body.dark-mode .navbar { background: #1e1e1e !important; }
 body.dark-mode .nav-link { color: #fff !important; }
+/* About section background - no zoom, no scale */
+#about {
+    background-size: cover !important;          /* fills section without cropping oddly */
+    background-position: center !important;
+    overflow: hidden;                           /* prevents any overflow weirdness */
+}
+
+/* Explicitly disable any transform/scale on the section or its children */
+#about,
+#about * {
+    transform: none !important;                 /* override any accidental AOS/JS scale */
+    transition: none !important;                /* no animations on background or children */
+}
+
+/* If you have any hover effects elsewhere, make sure they don't affect #about */
+#about:hover {
+    transform: none;
+}
+
+/* Optional: If you want the image slightly larger but without zoom animation */
+#about {
+    background-size: 105% 105%;                 /* subtle initial fill, no animation */
+}
