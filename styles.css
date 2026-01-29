@@ -58,19 +58,3 @@ body.dark-mode .nav-link { color: #fff !important; }
     overflow: hidden;                           /* prevents any overflow weirdness */
 }
 
-/* Explicitly disable any transform/scale on the section or its children */
-#about,
-#about * {
-    transform: none !important;                 /* override any accidental AOS/JS scale */
-    transition: none !important;                /* no animations on background or children */
-}
-
-/* If you have any hover effects elsewhere, make sure they don't affect #about */
-#about:hover {
-    transform: none;
-}
-
-/* Optional: If you want the image slightly larger but without zoom animation */
-#about {
-    background-size: 105% 105%;                 /* subtle initial fill, no animation */
-}
