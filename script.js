@@ -5,7 +5,7 @@ window.addEventListener('load', () => {
     setTimeout(() => preloader.style.display = 'none', 500);
 });
 
-// Smooth Scroll (Already present for anchors)
+// Smooth Scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
@@ -92,30 +92,33 @@ if (themeToggle) {
 }
 
 // Copyright Year
-const copyrightYear = document.getElementById('copyright-year');
-if (copyrightYear) {
-    copyrightYear.textContent = new Date().getFullYear();
-}
+const copyrightYears = document.querySelectorAll('#copyright-year');
+copyrightYears.forEach(year => {
+    year.textContent = new Date().getFullYear();
+});
 
 // AOS Init
 AOS.init();
 
-// Mobile Parallax Simulation (Optimized for Smooth Scrolling)
-const isMobile = /Mobi|Android/i.test(navigator.userAgent) || window.innerWidth <= 768;
-const parallaxSpeed = isMobile ? 0.3 : 0.7; // Slower on mobile for less jank
+// Parallax Effect
+const isMobile = window.innerWidth <= 768;
+const parallaxSpeed = isMobile ? 0.2 : 0.5; // Slower on mobile
 
 function updateParallax() {
     const sections = document.querySelectorAll('.parallax');
     sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) { // Only update visible sections
-            const offset = (window.pageYOffset - rect.top) * parallaxSpeed;
-            section.style.backgroundPositionY = `${offset}px`;
+        const inner = section.querySelector('.parallax-inner');
+        if (inner) {
+            const rect = section.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+                const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
+                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.1)`;
+            }
         }
     });
+    requestAnimationFrame(updateParallax);
 }
 
-window.addEventListener('scroll', () => {
-    requestAnimationFrame(updateParallax); // Throttled for 60fps perf
-});
-updateParallax(); // Initial call
+updateParallax();
+window.addEventListener('scroll', updateParallax, { passive: true });
+window.addEventListener('resize', updateParallax);
