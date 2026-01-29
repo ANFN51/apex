@@ -128,19 +128,86 @@ function throttle(fn, limit) {
     };
 }
 
-// Update function
-function updateParallax() {
-    parallaxSections.forEach(section => {
-        if (section.dataset.visible === 'true') {
-            const inner = section.querySelector('.parallax-inner');
-            if (inner) {
-                const rect = section.getBoundingClientRect();
-                const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
-                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`; // Slight scale for depth, but minimal for perf
-            }
-        }
+// Animated Parallax with lerp + requestAnimationFrame (smooth & performant)
+
+// Config
+const parallaxSpeed = window.innerWidth <= 768 ? 0.12 : 0.35; // Slower on mobile
+const lerpFactor = 0.08; // 0.05–0.12 range; lower = smoother/slower catch-up
+
+// Cache
+const parallaxSections = document.querySelectorAll('.parallax');
+let scrollY = window.scrollY;
+let targetScrollY = window.scrollY;
+let rafId = null;
+
+// Observer to only process visible sections
+const parallaxObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        entry.target.dataset.visible = entry.isIntersecting ? 'true' : 'false';
     });
+}, { rootMargin: '100px' }); // Start/stop a bit before/after viewport
+
+parallaxSections.forEach(sec => parallaxObserver.observe(sec));
+
+// Lerp helper
+function lerp(start, end, t) {
+    return start + (end - start) * t;
 }
+
+// Update function (called via rAF)
+function updateParallax() {
+    scrollY = lerp(scrollY, targetScrollY, lerpFactor);
+
+    parallaxSections.forEach(section => {
+        if (section.dataset.visible !== 'true') return;
+
+        const inner = section.querySelector('.parallax-inner');
+        if (!inner) return;
+
+        const rect = section.getBoundingClientRect();
+        // How far the section top is from viewport top (normalized)
+        const progress = rect.top / window.innerHeight;
+        // Parallax offset: negative for classic "background moves slower"
+        const offset = progress * 100 * parallaxSpeed;
+
+        // Apply smooth transform
+        inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.04)`; // Slight scale adds depth
+    });
+
+    rafId = requestAnimationFrame(updateParallax);
+}
+
+// Scroll handler — just update target, let rAF smooth it
+function onScroll() {
+    targetScrollY = window.scrollY;
+}
+
+// Throttle scroll event (still good to reduce calls)
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            onScroll();
+            ticking = false;
+        });
+        ticking = true;
+    }
+}, { passive: true });
+
+// Resize handler
+window.addEventListener('resize', () => {
+    // Optional: recalculate speed on resize
+    const isMobile = window.innerWidth <= 768;
+    // You can dynamically adjust parallaxSpeed here if desired
+});
+
+// Start the animation loop
+updateParallax(); // Kick off rAF
+
+// Cleanup (good practice)
+window.addEventListener('beforeunload', () => {
+    if (rafId) cancelAnimationFrame(rafId);
+});
 
 // Throttled scroll listener
 const throttledUpdate = throttle(updateParallax, 16); // ~60fps cap
