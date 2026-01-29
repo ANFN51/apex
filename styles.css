@@ -12,9 +12,9 @@
 .ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
 .ldio-rpinwye8j0b div { box-sizing: content-box; }
 
-/* Parallax Sections */
+/* Parallax Sections - Optimized Structure */
 .parallax { position: relative; overflow: hidden; min-height: 60vh; perspective: 1px; perspective-origin: top; }
-.parallax-inner { position: absolute; top: -10%; left: 0; width: 100%; height: 120%; background-position: center; background-repeat: no-repeat; background-size: cover; transform-style: preserve-3d; will-change: transform; backface-visibility: hidden; }
+.parallax-inner { position: absolute; top: -10%; left: 0; width: 100%; height: 120%; background-position: center; background-repeat: no-repeat; background-size: cover; transform-style: preserve-3d; will-change: transform; backface-visibility: hidden; transform: translate3d(0, 0, 0); } /* Added initial 3D for GPU */
 .hero { min-height: 80vh; }
 .properties { min-height: 80vh; }
 .cta { min-height: 40vh; }
@@ -33,13 +33,13 @@ body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-y: scr
 .btn-primary { background: #007bff; border: none; transition: background 0.3s; }
 .btn-primary:hover { background: #0056b3; }
 
-/* Media Queries for Mobile */
+/* Media Queries for Mobile - Lighter Effects */
 @media (max-width: 768px) {
     .parallax { min-height: 40vh; perspective-origin: center; }
-    .parallax-inner { height: 140%; top: -20%; }
+    .parallax-inner { height: 130%; top: -15%; } /* Reduced overhead for faster render */
     .form-control { min-height: 48px; font-size: 1.1rem; }
     .card:hover { transform: none; }
-    body { touch-action: manipulation; }
+    body { touch-action: manipulation; } /* Improves touch responsiveness */
 }
 
 /* Dark Mode */
