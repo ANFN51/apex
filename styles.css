@@ -54,17 +54,36 @@ body.dark-mode .navbar { background: #1e1e1e !important; }
 body.dark-mode .nav-link { color: #fff !important; }
 
 
-/* Existing parallax base */
 .parallax {
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;               /* or whatever you have */
+    perspective: 1px;               /* small perspective for depth illusion */
+}
+
+.parallax-inner {
+    position: absolute;
+    inset: 0;                       /* top/right/bottom/left: 0 */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed;          /* Good on desktop */
-    min-height: 60vh;
-    position: relative;
-    overflow: hidden;
+    transform: translate3d(0, 0, 0); /* initial GPU hint */
+    will-change: transform;         /* tells browser to optimize */
+    backface-visibility: hidden;
 }
 
+/* No fixed attachment anywhere — we handle movement in JS */
+.parallax,
+.parallax-inner {
+    background-attachment: scroll !important;
+}
+
+/* Optional: slight extra depth on desktop only */
+@media (min-width: 992px) {
+    .parallax {
+        perspective: 2px;           /* a bit more dramatic on big screens */
+    }
+}
 /* Kill the problematic fixed + cover combo on mobile */
 @media (max-width: 991px) {   /* or 768px if you prefer stricter */
     .parallax {
