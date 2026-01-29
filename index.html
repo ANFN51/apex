@@ -89,14 +89,25 @@
         </div>
     </nav>
 
-  <!-- Hero Section -->
-    <section id="home" class="parallax hero d-flex align-items-center text-white text-center" style="background-image: url('images/mountain.jpg');">
-        <div class="container">
-            <h1 class="display-2 fw-bold" data-aos="fade-up">Apex Realty Centers</h1>
-            <p class="lead" id="dynamic-greeting" data-aos="fade-up" data-aos-delay="100"></p>
-            <a href="#contact" class="btn btn-primary btn-lg" data-aos="fade-up" data-aos-delay="200">Contact Us</a>
-        </div>
-    </section>
+  <!-- Hero Section - Now with family neighborhood/house background, no zoom -->
+<section id="home" class="parallax hero d-flex align-items-center text-white text-center position-relative" 
+         style="background-image: url('images/house1.jpeg'); 
+                background-size: cover; 
+                background-position: center; 
+                background-repeat: no-repeat; 
+                background-attachment: scroll;  /* scroll = no parallax zoom feel */
+                min-height: 80vh;">
+    
+    <!-- Subtle dark overlay so text pops (adjust opacity 0.3–0.55) -->
+    <div class="position-absolute top-0 start-0 w-100 h-100" 
+         style="background: rgba(0, 0, 0, 0.40); z-index: 1;"></div>
+
+    <div class="container position-relative" style="z-index: 2;">
+        <h1 class="display-3 fw-bold gradient-text mb-3">Apex Realty Centers</h1>
+        <p class="lead fs-4 mb-4" id="dynamic-greeting" data-aos="fade-up" data-aos-delay="100"></p>
+        <a href="#contact" class="btn btn-primary btn-lg" data-aos="fade-up" data-aos-delay="200">Contact Us</a>
+    </div>
+</section>
 <!-- About Section with skyview background -->
 <section id="about" class="py-5 position-relative text-white" 
          style="background-image: url('images/aerial-family-neighborhood.jpg'); 
