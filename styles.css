@@ -33,7 +33,7 @@ body { font-family: 'Roboto', sans-serif; }
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
-    .parallax { background-attachment: scroll; min-height: 40vh; }
+    .parallax { min-height: 40vh; } /* Removed background-attachment: scroll; to enable parallax on mobile */
     .form-control { min-height: 48px; font-size: 1.1rem; }
     .card:hover { transform: none; }
 }
