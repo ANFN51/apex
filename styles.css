@@ -19,6 +19,7 @@
 .cta { min-height: 40vh; }
 
 /* General Styles */
+html { scroll-behavior: smooth; }
 body { font-family: 'Roboto', sans-serif; }
 .navbar-brand { font-weight: 700; letter-spacing: 1px; background: linear-gradient(to right, #007bff, #00bfff); -webkit-background-clip: text; color: transparent; }
 .navbar { transition: background 0.3s; }
@@ -33,7 +34,6 @@ body { font-family: 'Roboto', sans-serif; }
 
 /* Media Queries for Mobile */
 @media (max-width: 768px) {
-    .parallax { min-height: 40vh; } /* Removed background-attachment: scroll; to enable parallax on mobile */
     .form-control { min-height: 48px; font-size: 1.1rem; }
     .card:hover { transform: none; }
 }
