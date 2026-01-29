@@ -51,10 +51,28 @@ body.dark-mode .card { background: #2c2c2c; border-color: #444; }
 body.dark-mode .btn-primary { background: #00bfff; border: none; }
 body.dark-mode .navbar { background: #1e1e1e !important; }
 body.dark-mode .nav-link { color: #fff !important; }
-/* About section background - no zoom, no scale */
-#about {
-    background-size: cover !important;          /* fills section without cropping oddly */
+/* Hero background - no zoom, static fill */
+#home {
+    background-size: cover !important;
     background-position: center !important;
-    overflow: hidden;                           /* prevents any overflow weirdness */
+    overflow: hidden;
 }
 
+/* Force no scaling/transforms on hero or its inner elements */
+#home,
+#home .parallax-inner,
+#home * {
+    transform: none !important;
+    transition: none !important;  /* no animations that could feel like zoom */
+}
+
+/* If you have any JS parallax scale, override it here */
+#home:hover,
+#home:focus {
+    transform: none;
+}
+
+/* Optional: slight initial oversize for perfect fill without animation */
+#home {
+    background-size: 105% 105%;  /* fills edges nicely, no dynamic zoom */
+}
