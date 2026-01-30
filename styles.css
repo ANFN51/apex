@@ -1,4 +1,3 @@
-
 /* Preloader */
 #preloader {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999;
@@ -20,40 +19,115 @@
 .properties { min-height: 80vh; }
 .cta { min-height: 40vh; }
 
-/* General Styles */
-html { scroll-behavior: smooth; }
-body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; overflow-y: scroll; -webkit-overflow-scrolling: touch; }
-.navbar-brand { font-weight: 700; letter-spacing: 1px; background: linear-gradient(to right, #007bff, #00bfff); -webkit-background-clip: text; color: transparent; }
-.navbar { transition: background 0.3s; }
-.navbar.scrolled { background: rgba(255,255,255,0.95) !important; }
-.gradient-text { background: linear-gradient(to right, #007bff, #00bfff); -webkit-background-clip: text; color: transparent; }
-
-/* Cards and Buttons */
-.card { transition: transform 0.3s, box-shadow 0.3s; }
-.card:hover { transform: translateY(-5px); box-shadow: 0 4px 20px rgba(0,0,0,0.1); }
-.btn-primary { background: #007bff; border: none; transition: background 0.3s; }
-.btn-primary:hover { background: #0056b3; }
-
-/* Media Queries for Mobile - Lighter Effects */
-@media (max-width: 768px) {
-    .parallax { min-height: 40vh; perspective-origin: center; }
-    .parallax-inner { height: 130%; top: -15%; } /* Reduced overhead for faster render */
-    .form-control { min-height: 48px; font-size: 1.1rem; }
-    .card:hover { transform: none; }
-    body { touch-action: manipulation; } /* Improves touch responsiveness */
-}
-
-/* Dark Mode */
-body.dark-mode { background: #121212; color: #fff; }
-body.dark-mode .bg-light { background: #1e1e1e !important; }
-body.dark-mode .bg-white { background: #1e1e1e !important; }
-body.dark-mode .text-dark { color: #fff !important; }
-body.dark-mode .card { background: #2c2c2c; border-color: #444; }
-body.dark-mode .btn-primary { background: #00bfff; border: none; }
-body.dark-mode .navbar { background: #1e1e1e !important; }
-body.dark-mode .nav-link { color: #fff !important; }
-
-
+/* ==========================================================================
+   General Styles & Typography
+   ========================================================================== */
+   html { scroll-behavior: smooth; }
+   body { 
+       font-family: 'Roboto', sans-serif; 
+       margin: 0; 
+       padding: 0; 
+       overflow-y: scroll; 
+       -webkit-overflow-scrolling: touch; 
+   }
+   
+   /* Gradient text – with compatibility fix */
+   .gradient-text {
+       background: linear-gradient(to right, #007bff, #00bfff);
+       -webkit-background-clip: text;        /* WebKit browsers (Chrome, Safari, Edge, older) */
+       background-clip: text;                /* Standard property – Firefox + future browsers */
+       color: transparent;
+   }
+   
+   .navbar-brand { 
+       font-weight: 700; 
+       letter-spacing: 1px; 
+       background: linear-gradient(to right, #007bff, #00bfff);
+       -webkit-background-clip: text;        /* WebKit browsers */
+       background-clip: text;                /* Standard property */
+       color: transparent; 
+   }
+   
+   /* Navbar scroll effect */
+   .navbar { 
+       transition: background 0.3s; 
+   }
+   .navbar.scrolled { 
+       background: rgba(255,255,255,0.95) !important; 
+   }
+   
+   /* Preloader */
+   #preloader {
+       position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #fff; z-index: 9999;
+       display: flex; justify-content: center; align-items: center; transition: opacity 0.5s ease;
+   }
+   #preloader.loaded { opacity: 0; pointer-events: none; }
+   
+   /* Loading Animation */
+   @keyframes ldio-rpinwye8j0b { 0% { transform: rotate(0deg) } 50% { transform: rotate(180deg) } 100% { transform: rotate(360deg) } }
+   .ldio-rpinwye8j0b div { 
+       position: absolute; animation: ldio-rpinwye8j0b 1s linear infinite; 
+       width: 80px; height: 80px; top: 10px; left: 10px; border-radius: 50%; 
+       box-shadow: 0 2px 0 0 #007bff; transform-origin: 40px 41px; 
+   }
+   .loadingio-eclipse { width: 100px; height: 100px; display: inline-block; overflow: hidden; }
+   .ldio-rpinwye8j0b { width: 100%; height: 100%; position: relative; transform: translateZ(0) scale(1); backface-visibility: hidden; transform-origin: 0 0; }
+   .ldio-rpinwye8j0b div { box-sizing: content-box; }
+   
+   /* Parallax Sections - Optimized Structure */
+   .parallax { 
+       position: relative; 
+       overflow: hidden; 
+       min-height: 60vh; 
+       perspective: 1px; 
+       perspective-origin: top; 
+   }
+   .parallax-inner { 
+       position: absolute; 
+       top: -10%; left: 0; 
+       width: 100%; height: 120%; 
+       background-position: center; 
+       background-repeat: no-repeat; 
+       background-size: cover; 
+       transform-style: preserve-3d; 
+       will-change: transform; 
+       backface-visibility: hidden; 
+       transform: translate3d(0, 0, 0); 
+   }
+   .hero { min-height: 80vh; }
+   .properties { min-height: 80vh; }
+   .cta { min-height: 40vh; }
+   
+   /* Mobile / Responsive Overrides */
+   @media (max-width: 991px) {
+       .parallax {
+           background-attachment: scroll !important;
+           background-size: cover !important;
+       }
+       .parallax-inner {
+           transform: none !important;
+           height: 100% !important;
+           top: 0 !important;
+       }
+   }
+   
+   @media (min-width: 992px) {
+       .parallax {
+           perspective: 2px;  /* Slight extra depth on desktop */
+       }
+   }
+   
+   /* Dark Mode */
+   body.dark-mode { background: #121212; color: #fff; }
+   body.dark-mode .bg-light { background: #1e1e1e !important; }
+   body.dark-mode .bg-white { background: #1e1e1e !important; }
+   body.dark-mode .text-dark { color: #fff !important; }
+   body.dark-mode .card { background: #2c2c2c; border-color: #444; }
+   body.dark-mode .btn-primary { background: #00bfff; border: none; }
+   body.dark-mode .navbar { background: #1e1e1e !important; }
+   body.dark-mode .nav-link { color: #fff !important; }
+   
+   
 .parallax {
     position: relative;
     overflow: hidden;
