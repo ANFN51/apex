@@ -55,53 +55,155 @@
         </div>
     </nav>
 
-    <!-- Properties Header (Parallax) -->
-    <section id="properties" class="parallax properties py-5 text-white" data-aos="fade-up" style="background-image: url('images/mountain3.jpg');">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold gradient-text" data-aos="fade-down" data-aos-delay="100">Featured Properties</h2>
-            <p class="text-center">Explore our exclusive listings in Detroit and Garden City.</p>
-        </div>
-    </section>
+   <!-- Properties Header – Parallax with Virtual Tour Carousel Overlay -->
+<section id="properties-header" class="parallax hero min-vh-80 position-relative text-white" 
+data-aos="fade-up" 
+style="background-image: url('images/properties-bg.jpeg');">  <!-- ← your main background pic here -->
 
-    <!-- Virtual Tours Carousel -->
-    <section class="py-5 bg-light">
-        <div class="container">
-            <h3 class="text-center fw-bold mb-4 gradient-text">Virtual Tours</h3>
-            <div id="tour-carousel" class="carousel slide" data-bs-ride="carousel">
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="images/mountain1.jpg" class="d-block w-100" alt="Virtual tour of urban penthouse in Detroit">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Urban Penthouse Tour</h5>
-                            <a href="index.html#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/neighborhood.jpg" class="d-block w-100" alt="Virtual tour of serene estate in Garden City">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Serene Estate Tour</h5>
-                            <a href="index.html#contact" class="btn btn-primary">Book Now</a>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="images/mountain2.jpg" class="d-block w-100" alt="Virtual tour of luxury lofts">
-                        <div class="carousel-caption d-none d-md-block">
-                            <h5>Loft Living Tour</h5>
-                            <a href="index.html#contact" class="btn btn-primary">Book Now</a>
+<!-- Parallax inner layer if you still use .parallax-inner (optional – remove if not needed) -->
+<!-- <div class="parallax-inner"></div> -->
+
+<div class="container position-relative z-1 py-5 d-flex flex-column justify-content-center h-100">
+
+<!-- Title & Subtitle -->
+<div class="text-center mb-5">
+   <h1 class="display-4 fw-bold gradient-text mb-3" data-aos="fade-down">Featured Properties</h1>
+   <p class="lead fs-4" data-aos="fade-up" data-aos-delay="200">
+       Explore luxury homes, condos & investment opportunities in Detroit & Garden City
+   </p>
+</div>
+
+<!-- Virtual Tour Carousel – now embedded in the header -->
+<div class="row justify-content-center">
+   <div class="col-lg-10 col-xl-9">
+       <div id="tour-carousel" class="carousel slide shadow-lg rounded-4 overflow-hidden" 
+            data-bs-ride="carousel" data-bs-interval="6000">
+           
+           <div class="carousel-inner">
+               <div class="carousel-item active">
+                   <img src="images/neighborhood.jpg" class="d-block w-100" 
+                        alt="Virtual tour – Modern neighborhood in Garden City">
+                   <div class="carousel-caption d-none d-md-block">
+                       <h5>Serene Garden City Estate</h5>
+                       <p>Spacious family home with premium finishes</p>
+                       <a href="index.html#contact" class="btn btn-primary btn-lg">Book Private Tour</a>
+                   </div>
+               </div>
+               <div class="carousel-item">
+                   <img src="images/mountain2.jpg" class="d-block w-100" 
+                        alt="Virtual tour – Urban luxury condo in Detroit">
+                   <div class="carousel-caption d-none d-md-block">
+                       <h5>Downtown Detroit Penthouse</h5>
+                       <p>Panoramic views & modern amenities</p>
+                       <a href="index.html#contact" class="btn btn-primary btn-lg">Book Private Tour</a>
+                   </div>
+               </div>
+               <div class="carousel-item">
+                   <img src="images/house1.jpeg" class="d-block w-100" 
+                        alt="Virtual tour – Luxury loft conversion">
+                   <div class="carousel-caption d-none d-md-block">
+                       <h5>Historic Loft in Detroit</h5>
+                       <p>Industrial chic with high ceilings</p>
+                       <a href="index.html#contact" class="btn btn-primary btn-lg">Book Private Tour</a>
+                   </div>
+               </div>
+               <!-- Add more carousel items as needed -->
+           </div>
+
+           <button class="carousel-control-prev" type="button" data-bs-target="#tour-carousel" data-bs-slide="prev">
+               <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Previous</span>
+           </button>
+           <button class="carousel-control-next" type="button" data-bs-target="#tour-carousel" data-bs-slide="next">
+               <span class="carousel-control-next-icon" aria-hidden="true"></span>
+               <span class="visually-hidden">Next</span>
+           </button>
+
+           <!-- Indicators (optional – small dots at bottom) -->
+           <div class="carousel-indicators">
+               <button type="button" data-bs-target="#tour-carousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+               <button type="button" data-bs-target="#tour-carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+               <button type="button" data-bs-target="#tour-carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+           </div>
+       </div>
+   </div>
+</div>
+</div>
+</section>
+
+      <!-- Real Estate Genie Section -->
+<section id="genie-section" class="py-5 bg-light" data-aos="fade-up">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="fw-bold gradient-text">Summon the Apex Real Estate Genie</h2>
+            <p class="lead text-muted">Tell the Genie your dream — get instant insights & next steps</p>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card shadow-lg border-0 overflow-hidden">
+                    <div class="card-body p-5 text-center">
+                        <!-- Genie Lamp Icon (use Bootstrap icon or your own SVG/image) -->
+                        <i class="bi bi-lightbulb-fill text-warning fs-1 mb-4 d-block"></i>
+
+                        <form id="genie-form">
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">I'm looking for</label>
+                                <select class="form-select form-select-lg" id="genie-type" required>
+                                    <option value="" disabled selected>Choose your desire...</option>
+                                    <option value="single-family">Single-Family Luxury Home</option>
+                                    <option value="condo">Modern Condo / Loft</option>
+                                    <option value="investment">Investment / Multi-Family</option>
+                                    <option value="commercial">Commercial Space</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Price range</label>
+                                <select class="form-select form-select-lg" id="genie-price" required>
+                                    <option value="" disabled selected>Select range...</option>
+                                    <option value="400-700">$400k – $700k</option>
+                                    <option value="700-1200">$700k – $1.2M</option>
+                                    <option value="1200+">$1.2M+</option>
+                                    <option value="any">No limit – show me the best</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">Preferred area</label>
+                                <select class="form-select form-select-lg" id="genie-area">
+                                    <option value="both">Detroit or Garden City</option>
+                                    <option value="detroit">Detroit only</option>
+                                    <option value="gardencity">Garden City only</option>
+                                </select>
+                            </div>
+
+                            <div class="mb-4">
+                                <label class="form-label fw-bold">When do you want to move?</label>
+                                <select class="form-select form-select-lg" id="genie-timeline" required>
+                                    <option value="" disabled selected>Choose timeline...</option>
+                                    <option value="soon">Within 6 months</option>
+                                    <option value="1-2yr">1–2 years</option>
+                                    <option value="later">3+ years / investing ahead</option>
+                                </select>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg px-5">Ask the Genie</button>
+                        </form>
+
+                        <!-- Response area (hidden until submit) -->
+                        <div id="genie-response" class="mt-5 pt-4 border-top" style="display: none;">
+                            <h4 class="fw-bold text-primary mb-3">The Genie Speaks...</h4>
+                            <div id="genie-message" class="lead text-dark"></div>
+                            <a href="index.html#contact" class="btn btn-outline-primary mt-4">Contact Apex Now →</a>
                         </div>
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#tour-carousel" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#tour-carousel" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Footer -->
     <footer class="bg-dark text-white py-4">
