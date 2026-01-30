@@ -1,105 +1,174 @@
+// script.js - Apex Realty Centers website interactivity
+// @ts-nocheck   ← keeps VS Code TypeScript checker quiet on plain JS file
+
 // Preloader
 window.addEventListener('load', () => {
     const preloader = document.getElementById('preloader');
-    preloader.classList.add('loaded');
-    setTimeout(() => preloader.style.display = 'none', 500);
+    if (preloader) {
+        preloader.classList.add('loaded');
+        setTimeout(() => preloader.style.display = 'none', 500);
+    }
 });
 
-// Smooth Scroll
+// Smooth Scroll for anchor links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', e => {
         e.preventDefault();
-        document.querySelector(anchor.getAttribute('href')).scrollIntoView({ behavior: 'smooth' });
+        const target = document.querySelector(anchor.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({ behavior: 'smooth' });
+        }
     });
 });
 
-// Navbar Scroll Effect
+// Navbar scroll effect (adds .scrolled class when page is scrolled)
 window.addEventListener('scroll', () => {
-    document.querySelector('.navbar').classList.toggle('scrolled', window.scrollY > 50);
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        navbar.classList.toggle('scrolled', window.scrollY > 50);
+    }
 });
 
-// Dynamic Greeting
+// Dynamic Greeting (if element exists)
 const greeting = document.getElementById('dynamic-greeting');
 if (greeting) {
     const hour = new Date().getHours();
-    greeting.textContent = `${hour < 12 ? 'Good Morning' : hour < 18 ? 'Good Afternoon' : 'Good Evening'}. Exclusive properties tailored for discerning clients.`;
+    let message = 'Good Evening';
+    if (hour < 12) message = 'Good Morning';
+    else if (hour < 18) message = 'Good Afternoon';
+    greeting.textContent = `${message}. Exclusive properties tailored for discerning clients.`;
 }
 
-// Animated Counters
+// Animated Counters (Properties sold, Customers, Years of experience, etc.)
 const counters = document.querySelectorAll('.counter');
 const countUp = (el) => {
     const target = +el.getAttribute('data-target');
     let count = 0;
-    const interval = setInterval(() => {
-        count += Math.ceil(target / 50);
+    const duration = 2000; // 2 seconds
+    const startTime = performance.now();
+
+    const animate = (time) => {
+        const progress = (time - startTime) / duration;
+        count = Math.min(Math.ceil(progress * target), target);
         el.textContent = count;
-        if (count >= target) clearInterval(interval);
-    }, 40);
+        if (progress < 1) requestAnimationFrame(animate);
+    };
+
+    requestAnimationFrame(animate);
 };
-counters.forEach(counter => {
+
+if (counters.length > 0) {
     const observer = new IntersectionObserver(entries => {
-        if (entries[0].isIntersecting) countUp(counter);
-    });
-    observer.observe(counter);
-});
-
-// Dynamic Testimonials
-fetch('testimonials.json')
-    .then(res => res.json())
-    .then(data => {
-        const row = document.getElementById('testimonials-row');
-        data.forEach((test, index) => {
-            const item = document.createElement('div');
-            item.className = `carousel-item ${index === 0 ? 'active' : ''}`;
-            item.innerHTML = `
-                <div class="d-block w-100 text-center">
-                    <p class="lead">"${test.quote}"</p>
-                    <p>- ${test.author}</p>
-                </div>
-            `;
-            row.appendChild(item);
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                countUp(entry.target);
+                observer.unobserve(entry.target); // animate only once
+            }
         });
-    });
+    }, { threshold: 0.1 });
 
-// Mortgage Calculator
+    counters.forEach(counter => observer.observe(counter));
+}
+
+// Dynamic Testimonials from JSON
+fetch('testimonials.json')
+    .then(res => {
+        if (!res.ok) throw new Error('Failed to load testimonials');
+        return res.json();
+    })
+    .then(data => {
+        const container = document.getElementById('testimonials-row');
+        if (container) {
+            data.forEach((test, index) => {
+                const item = document.createElement('div');
+                item.className = `carousel-item ${index === 0 ? 'active' : ''}`;
+                item.innerHTML = `
+                    <div class="d-block w-100 text-center">
+                        <p class="lead">"${test.quote}"</p>
+                        <p>- ${test.author}</p>
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+    })
+    .catch(err => console.error('Testimonials error:', err));
+
+// Mortgage Calculator (on buy.html)
 const mortgageForm = document.getElementById('mortgage-form');
 if (mortgageForm) {
     mortgageForm.addEventListener('submit', e => {
         e.preventDefault();
-        const homePrice = parseFloat(document.getElementById('homePrice').value);
-        const downPayment = parseFloat(document.getElementById('downPayment').value) || 0;
-        const interestRate = parseFloat(document.getElementById('interestrate').value) / 100 / 12;
-        const loanTerm = parseFloat(document.getElementById('loanterm').value) * 12;
 
-        if (isNaN(homePrice) || isNaN(downPayment) || isNaN(interestRate) || isNaN(loanTerm)) {
-            document.getElementById('mortgage-result').innerHTML = 'Please enter valid numbers.';
+        const homePrice    = parseFloat(document.getElementById('homePrice')?.value)    || 0;
+        const downPayment  = parseFloat(document.getElementById('downPayment')?.value)  || 0;
+        const interestRate = parseFloat(document.getElementById('interestrate')?.value) || 0;
+        const loanTerm     = parseFloat(document.getElementById('loanterm')?.value)     || 30;
+
+        if (homePrice <= 0 || interestRate < 0 || loanTerm <= 0) {
+            document.getElementById('mortgage-result').innerHTML = 'Please enter valid positive values.';
             return;
         }
 
         const loanAmount = homePrice - downPayment;
-        const monthlyPayment = loanAmount * (interestRate * Math.pow(1 + interestRate, loanTerm)) / (Math.pow(1 + interestRate, loanTerm) - 1);
-        document.getElementById('mortgage-result').innerHTML = `Monthly Payment: $${monthlyPayment.toFixed(2)}`;
+        if (loanAmount <= 0) {
+            document.getElementById('mortgage-result').innerHTML = 'Down payment cannot exceed home price.';
+            return;
+        }
+
+        const monthlyRate = interestRate / 100 / 12;
+        const months      = loanTerm * 12;
+
+        const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) /
+                               (Math.pow(1 + monthlyRate, months) - 1);
+
+        document.getElementById('mortgage-result').innerHTML = 
+            `Estimated Monthly Payment: $${monthlyPayment.toFixed(2)}`;
         document.getElementById('mortgage-result').style.display = 'block';
     });
 }
 
-// Theme Toggle
+// Theme / Dark Mode Toggle
 const themeToggle = document.getElementById('theme-toggle');
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
+        // Optional: save preference
+        localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+
+    // Restore saved preference
+    if (localStorage.getItem('darkMode') === 'true') {
+        document.body.classList.add('dark-mode');
+    }
+}
+
+// Update copyright year in footer
+document.querySelectorAll('#copyright-year').forEach(el => {
+    el.textContent = new Date().getFullYear();
+});
+
+// Parallax effect (desktop only)
+const isMobile = /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent) || window.innerWidth <= 991;
+const parallaxSections = document.querySelectorAll('.parallax');
+const parallaxSpeed = 0.3; // adjust for desired effect strength
+
+function updateParallax() {
+    if (isMobile) return;
+
+    parallaxSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight && rect.bottom > 0) {
+            const inner = section.querySelector('.parallax-inner');
+            if (inner) {
+                const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
+                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`;
+            }
+        }
     });
 }
 
-// Copyright Year
-const copyrightYears = document.querySelectorAll('#copyright-year');
-copyrightYears.forEach(year => {
-    year.textContent = new Date().getFullYear();
-});
-
-const isMobile = /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent) || window.innerWidth <= 991;
-
-// Throttle function (pure JS, lightweight)
+// Throttle function (lightweight)
 function throttle(fn, limit) {
     let lastCall = 0;
     return function(...args) {
@@ -111,27 +180,19 @@ function throttle(fn, limit) {
     };
 }
 
-function updateParallax() {
-    if (isMobile) return;  // Skip entirely on mobile → saves perf + avoids conflicts
+const throttledUpdate = throttle(updateParallax, 16); // ~60fps
 
-    parallaxSections.forEach(section => {
-        if (section.dataset.visible === 'true') {
-            const inner = section.querySelector('.parallax-inner');
-            if (inner) {
-                const rect = section.getBoundingClientRect();
-                const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
-                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`;
-            }
-        }
-    });
+if (!isMobile) {
+    window.addEventListener('scroll', throttledUpdate, { passive: true });
+    window.addEventListener('resize', throttledUpdate);
+    updateParallax(); // initial call
 }
-// Throttled scroll listener
-const throttledUpdate = throttle(updateParallax, 16); // ~60fps cap
-window.addEventListener('scroll', throttledUpdate, { passive: true });
-window.addEventListener('resize', throttledUpdate);
-updateParallax(); // Initial
 
-@media (max-width: 768px) {
-    .parallax { background-attachment: scroll; }
-    .parallax-inner { transform: none !important; }
+// Optional: AOS init (if you're using AOS library)
+if (typeof AOS !== 'undefined') {
+    AOS.init({
+        once: true,
+        duration: 800,
+        easing: 'ease-out'
+    });
 }
