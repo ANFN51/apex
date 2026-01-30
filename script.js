@@ -196,3 +196,51 @@ if (typeof AOS !== 'undefined') {
         easing: 'ease-out'
     });
 }
+// ────────────────────────────────────────────────
+// Real Estate Genie – properties.html only
+// ────────────────────────────────────────────────
+const genieForm = document.getElementById('genie-form');
+const genieResponse = document.getElementById('genie-response');
+const genieMessage = document.getElementById('genie-message');
+
+if (genieForm) {
+    genieForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const type    = document.getElementById('genie-type')?.value;
+        const price   = document.getElementById('genie-price')?.value;
+        const area    = document.getElementById('genie-area')?.value;
+        const timeline = document.getElementById('genie-timeline')?.value;
+
+        if (!type || !price || !timeline) {
+            genieMessage.innerHTML = '<span class="text-danger">The Genie needs a bit more information to grant your wish...</span>';
+            genieResponse.style.display = 'block';
+            return;
+        }
+
+        // Simple template responses – expand with more logic later
+        let message = `Ah, seeker of luxury in ${area === 'both' ? 'the Detroit & Garden City realms' : area === 'detroit' ? 'vibrant Detroit' : 'serene Garden City'}...`;
+
+        if (type.includes('single-family') || type.includes('condo')) {
+            message += `<br><br>I see a stunning ${type.replace('-', ' ')} in your future, valued around ${price.replace('-', '–')}.`;
+        } else {
+            message += `<br><br>Your vision for ${type} is wise — excellent opportunities await.`;
+        }
+
+        if (timeline === 'soon') {
+            message += ` The stars align quickly — properties matching your desire are moving fast right now.`;
+        } else if (timeline === '1-2yr') {
+            message += ` In 1–2 years, values in this market are likely to rise 12–22% based on current trends. A smart time to prepare.`;
+        } else {
+            message += ` Patience will be rewarded — long-term holds in this area have historically performed strongly.`;
+        }
+
+        message += `<br><br>Shall we make this vision real? Reach out to the Apex team — your wish is but one conversation away. ✨`;
+
+        genieMessage.innerHTML = message;
+        genieResponse.style.display = 'block';
+
+        // Optional: smooth scroll to response
+        genieResponse.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+}
