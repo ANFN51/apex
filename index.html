@@ -109,40 +109,47 @@
       }, 4000);
     </script>
 
-    <!-- Navbar (improved contrast) -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" aria-label="Main navigation">
-        <div class="container">
-            <a class="navbar-brand d-flex flex-column align-items-start" href="index.html">
-                <img src="images/apex.png" alt="Apex Realty Centers Logo" class="logo-img mb-1" style="height: 40px; width: auto;">
-                <div class="text-wrapper">
-                    <span class="brand-main gradient-text fw-bold">Apex</span>
-                    <small class="brand-sub d-block text-muted fw-light">Realty Centers</small>
-                </div>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
-                        <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
-                            <li><a class="dropdown-item" href="buy.html">Buy</a></li>
-                            <li><a class="dropdown-item" href="sell.html">Sell</a></li>
-                            <li><a class="dropdown-item" href="lease.html">Lease</a></li>
-                            <li><a class="dropdown-item" href="buy.html#mortgage-form"><i class="bi bi-calculator me-2"></i>Mortgage Calculator</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-                <button id="theme-toggle" class="btn btn-outline-primary ms-3">Toggle Dark Mode</button>
+  <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" aria-label="Main navigation">
+    <div class="container">
+        <a class="navbar-brand d-flex flex-column align-items-start" href="index.html">
+            <img src="images/apex.png" alt="Apex Realty Centers Logo" class="logo-img mb-1" style="height: 40px; width: auto;">
+            <div class="text-wrapper">
+                <span class="brand-main gradient-text fw-bold">Apex</span>
+                <small class="brand-sub d-block text-muted fw-light">Realty Centers</small>
             </div>
-        </div>
-    </nav>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <!-- Left side – exactly as you had it -->
+            <ul class="navbar-nav">
+                <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                    <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+                        <li><a class="dropdown-item" href="buy.html">Buy</a></li>
+                        <li><a class="dropdown-item" href="sell.html">Sell</a></li>
+                        <li><a class="dropdown-item" href="lease.html">Lease</a></li>
+                        <li><a class="dropdown-item" href="buy.html#mortgage-form"><i class="bi bi-calculator me-2"></i>Mortgage Calculator</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+            </ul>
 
+            <!-- Right side – only TEAMS, pushed to the far right -->
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link fw-bold gradient-text text-uppercase" href="teams.html">TEAMS</a>
+                </li>
+            </ul>
+
+            <button id="theme-toggle" class="btn btn-outline-primary ms-3">Toggle Dark Mode</button>
+        </div>
+    </div>
+</nav>
     <!-- Hero Section – mountain parallax -->
     <section id="home" class="parallax hero d-flex align-items-center text-white text-center">
         <div class="overlay"></div>
