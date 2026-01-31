@@ -160,37 +160,42 @@
         </div>
     </section>
 
-    <!-- About Section – uses body background + overlay for readability -->
-    <section id="about" class="parallax py-5 position-relative text-white">
-        <div class="overlay"></div>
-        <div class="container content-above-overlay position-relative" style="z-index: 2;">
-            <div class="row justify-content-center">
-                <div class="col-lg-10 text-center">
-                    <div class="logo-box mx-auto mb-5 p-4 bg-white rounded shadow-lg" style="max-width: 300px; border: 5px solid #007bff;">
-                        <img src="images/apex.png" alt="Apex Realty Centers Logo" class="img-fluid">
+     <!-- About Section – updated logo without white box -->
+<section id="about" class="parallax py-5 position-relative text-white">
+    <div class="overlay"></div>
+    <div class="container content-above-overlay position-relative" style="z-index: 2;">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 text-center">
+                <!-- Logo – crisp, no glow, centered -->
+<div class="mb-5">
+    <img src="images/apex.png" alt="Apex Realty Centers Logo" 
+         class="img-fluid mx-auto d-block logo-crisp"
+         style="max-width: 280px;">
+</div>
+
+                <h2 class="display-5 fw-bold gradient-text mb-4">About Apex Realty Centers</h2>
+                <p class="lead fs-4 mb-4">Helping families find their dream homes in Detroit, Garden City, and beyond since [year].</p>
+                <p class="fs-5">We specialize in premium properties, personalized service, and making every transaction feel like family.</p>
+
+                <!-- Stats (unchanged) -->
+                <div class="stats row text-center mt-5 justify-content-center">
+                    <div class="col-md-3 mb-4">
+                        <span class="counter fs-1 fw-bold text-white" data-target="50">0</span>+
+                        <p class="text-white-75">Years Experience</p>
                     </div>
-                    <h2 class="display-5 fw-bold gradient-text mb-4">About Apex Realty Centers</h2>
-                    <p class="lead fs-4 mb-4">Helping families find their dream homes in Detroit, Garden City, and beyond since [year].</p>
-                    <p class="fs-5">We specialize in premium properties, personalized service, and making every transaction feel like family.</p>
-                    <!-- Stats -->
-                    <div class="stats row text-center mt-5 justify-content-center">
-                        <div class="col-md-3 mb-4">
-                            <span class="counter fs-1 fw-bold text-white" data-target="50">0</span>+
-                            <p class="text-white-75">Years Experience</p>
-                        </div>
-                        <div class="col-md-3 mb-4">
-                            <span class="counter fs-1 fw-bold text-white" data-target="75000">0</span>+
-                            <p class="text-white-75">Properties Sold</p>
-                        </div>
-                        <div class="col-md-3 mb-4">
-                            <span class="counter fs-1 fw-bold text-white" data-target="100000">0</span>+
-                            <p class="text-white-75">Happy Clients</p>
-                        </div>
+                    <div class="col-md-3 mb-4">
+                        <span class="counter fs-1 fw-bold text-white" data-target="75000">0</span>+
+                        <p class="text-white-75">Properties Sold</p>
+                    </div>
+                    <div class="col-md-3 mb-4">
+                        <span class="counter fs-1 fw-bold text-white" data-target="100000">0</span>+
+                        <p class="text-white-75">Happy Clients</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
 <!-- Services Section -->
     <section id="services" class="py-5">
