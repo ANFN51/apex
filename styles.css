@@ -162,7 +162,29 @@
 
 
 
+* ────────────────────────────────────────────────
+   iOS Safari (18/19/21+) specific fix for fixed backgrounds
+   ──────────────────────────────────────────────── */
+@supports (-webkit-touch-callout: none) and (pointer-coarse) {
+    /* Target the About section and any parallax containers */
+    #about,
+    #about.parallax {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+    }
 
+    #about .parallax-inner {
+        transform: none !important;
+        position: relative !important; /* change from absolute to avoid clipping */
+        height: auto !important;
+        inset: auto !important;
+        width: 100% !important;
+        background-attachment: scroll !important;
+    }
+
+ 
 
   /* iOS Safari / mobile fallback fix for fixed backgrounds – safe for all browsers */
 #about,
