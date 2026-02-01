@@ -234,3 +234,92 @@
         --bs-aspect-ratio: calc(4 / 3 * 100%); /* Taller on mobile if needed */
     }
 }
+
+/* ────────────────────────────────────────────────
+   MOBILE & iOS SAFARI NUCLEAR FIX – make everything behave like normal on phones
+   ──────────────────────────────────────────────── */
+
+/* 1. Kill fixed backgrounds globally on mobile (main culprit) */
+@media (max-width: 991px) {
+    [style*="background-attachment: fixed"],
+    .parallax,
+    .parallax-inner,
+    section.parallax,
+    #about,
+    #about.parallax,
+    #properties-header,
+    .hero,
+    .properties,
+    .cta,
+    body {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: auto !important;
+    }
+}
+
+/* 2. iOS Safari specific (targets iPhone/iPad Safari 18/19/21+) */
+@supports (-webkit-touch-callout: none) and (pointer-coarse) {
+    /* Force all parallax to normal scroll behavior */
+    .parallax,
+    .parallax-inner,
+    #about,
+    #about.parallax,
+    #about [style*="house1.jpg"],
+    #properties-header,
+    .hero,
+    .properties,
+    .cta {
+        background-attachment: scroll !important;
+        -webkit-background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center top !important;
+        -webkit-background-size: cover !important;
+    }
+
+    /* Remove absolute positioning that causes clipping/zoom */
+    .parallax-inner {
+        position: relative !important;
+        transform: none !important;
+        inset: auto !important;
+        top: 0 !important;
+        left: 0 !important;
+        height: auto !important;
+        width: 100% !important;
+    }
+
+    /* Safer section heights – prevent giant empty space or cut-off */
+    .hero,
+    .min-vh-80,
+    .min-vh-100,
+    section.parallax,
+    #about,
+    #properties-header {
+        min-height: 60vh !important;
+        height: auto !important;
+        padding-top: 80px !important;   /* fixed navbar clearance */
+        padding-bottom: 40px !important;
+    }
+
+    /* Overlay & content safety */
+    .overlay {
+        position: absolute !important;
+        inset: 0 !important;
+        z-index: 1 !important;
+        pointer-events: none !important;
+    }
+
+    .content-above-overlay,
+    .container {
+        position: relative !important;
+        z-index: 2 !important;
+    }
+}
+
+/* 3. Extra viewport safety for iOS address bar jumps */
+@supports (-webkit-overflow-scrolling: touch) {
+    body {
+        -webkit-overflow-scrolling: auto !important; /* fallback to normal scroll */
+    }
+}
