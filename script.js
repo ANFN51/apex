@@ -21,7 +21,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Navbar scroll effect (adds .scrolled class when page is scrolled)
+// Navbar scroll effect
 window.addEventListener('scroll', () => {
     const navbar = document.querySelector('.navbar');
     if (navbar) {
@@ -29,7 +29,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Dynamic Greeting (if element exists)
+// Dynamic Greeting
 const greeting = document.getElementById('dynamic-greeting');
 if (greeting) {
     const hour = new Date().getHours();
@@ -39,12 +39,12 @@ if (greeting) {
     greeting.textContent = `${message}. Exclusive properties tailored for discerning clients.`;
 }
 
-// Animated Counters (Properties sold, Customers, Years of experience, etc.)
+// Animated Counters
 const counters = document.querySelectorAll('.counter');
 const countUp = (el) => {
     const target = +el.getAttribute('data-target');
     let count = 0;
-    const duration = 2000; // 2 seconds
+    const duration = 2000;
     const startTime = performance.now();
 
     const animate = (time) => {
@@ -53,7 +53,6 @@ const countUp = (el) => {
         el.textContent = count;
         if (progress < 1) requestAnimationFrame(animate);
     };
-
     requestAnimationFrame(animate);
 };
 
@@ -62,7 +61,7 @@ if (counters.length > 0) {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 countUp(entry.target);
-                observer.unobserve(entry.target); // animate only once
+                observer.unobserve(entry.target);
             }
         });
     }, { threshold: 0.1 });
@@ -70,7 +69,7 @@ if (counters.length > 0) {
     counters.forEach(counter => observer.observe(counter));
 }
 
-// Dynamic Testimonials from JSON
+// Dynamic Testimonials
 fetch('testimonials.json')
     .then(res => {
         if (!res.ok) throw new Error('Failed to load testimonials');
@@ -94,12 +93,11 @@ fetch('testimonials.json')
     })
     .catch(err => console.error('Testimonials error:', err));
 
-// Mortgage Calculator (on buy.html)
+// Mortgage Calculator
 const mortgageForm = document.getElementById('mortgage-form');
 if (mortgageForm) {
     mortgageForm.addEventListener('submit', e => {
         e.preventDefault();
-
         const homePrice    = parseFloat(document.getElementById('homePrice')?.value)    || 0;
         const downPayment  = parseFloat(document.getElementById('downPayment')?.value)  || 0;
         const interestRate = parseFloat(document.getElementById('interestrate')?.value) || 0;
@@ -117,8 +115,7 @@ if (mortgageForm) {
         }
 
         const monthlyRate = interestRate / 100 / 12;
-        const months      = loanTerm * 12;
-
+        const months = loanTerm * 12;
         const monthlyPayment = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) /
                                (Math.pow(1 + monthlyRate, months) - 1);
 
@@ -128,30 +125,32 @@ if (mortgageForm) {
     });
 }
 
-// Theme / Dark Mode Toggle
+// Dark Mode Toggle + Persistence
 const themeToggle = document.getElementById('theme-toggle');
 if (themeToggle) {
     themeToggle.addEventListener('click', () => {
         document.body.classList.toggle('dark-mode');
-        // Optional: save preference
         localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
     });
 
-    // Restore saved preference
     if (localStorage.getItem('darkMode') === 'true') {
         document.body.classList.add('dark-mode');
     }
 }
 
-// Update copyright year in footer
+// Copyright Year
 document.querySelectorAll('#copyright-year').forEach(el => {
     el.textContent = new Date().getFullYear();
 });
 
-// Parallax effect (desktop only)
-const isMobile = /Mobi|Android|iPhone|iPad|iPod/.test(navigator.userAgent) || window.innerWidth <= 991;
+// ────────────────────────────────────────────────
+// Parallax – only initialize if NOT mobile
+// ────────────────────────────────────────────────
+let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+               || window.innerWidth <= 991;
+
 const parallaxSections = document.querySelectorAll('.parallax');
-const parallaxSpeed = 0.3; // adjust for desired effect strength
+const parallaxSpeed = 0.3;
 
 function updateParallax() {
     if (isMobile) return;
@@ -168,7 +167,6 @@ function updateParallax() {
     });
 }
 
-// Throttle function (lightweight)
 function throttle(fn, limit) {
     let lastCall = 0;
     return function(...args) {
@@ -180,15 +178,40 @@ function throttle(fn, limit) {
     };
 }
 
-const throttledUpdate = throttle(updateParallax, 16); // ~60fps
-
+// Only set up parallax if desktop-sized
 if (!isMobile) {
+    const throttledUpdate = throttle(updateParallax, 16);
     window.addEventListener('scroll', throttledUpdate, { passive: true });
     window.addEventListener('resize', throttledUpdate);
-    updateParallax(); // initial call
+    updateParallax(); // initial
+} else {
+    // Force cleanup on mobile (in case desktop → mobile resize)
+    document.querySelectorAll('.parallax-inner').forEach(el => {
+        el.style.transform = 'none';
+        el.style.height = '100%';
+        el.style.top = '0';
+    });
 }
 
-// Optional: AOS init (if you're using AOS library)
+// Re-check isMobile on resize (handles window resize from desktop to mobile)
+window.addEventListener('resize', () => {
+    const newIsMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                        || window.innerWidth <= 991;
+    if (newIsMobile !== isMobile) {
+        isMobile = newIsMobile;
+        if (isMobile) {
+            // Cleanup on switch to mobile
+            document.querySelectorAll('.parallax-inner').forEach(el => {
+                el.style.transform = 'none';
+            });
+        } else {
+            // Re-init parallax if switched back to desktop
+            updateParallax();
+        }
+    }
+});
+
+// AOS init
 if (typeof AOS !== 'undefined') {
     AOS.init({
         once: true,
@@ -196,6 +219,7 @@ if (typeof AOS !== 'undefined') {
         easing: 'ease-out'
     });
 }
+
 // ────────────────────────────────────────────────
 // Real Estate Genie – properties.html only
 // ────────────────────────────────────────────────
@@ -206,7 +230,6 @@ const genieMessage = document.getElementById('genie-message');
 if (genieForm) {
     genieForm.addEventListener('submit', (e) => {
         e.preventDefault();
-
         const type    = document.getElementById('genie-type')?.value;
         const price   = document.getElementById('genie-price')?.value;
         const area    = document.getElementById('genie-area')?.value;
@@ -218,7 +241,6 @@ if (genieForm) {
             return;
         }
 
-        // Simple template responses – expand with more logic later
         let message = `Ah, seeker of luxury in ${area === 'both' ? 'the Detroit & Garden City realms' : area === 'detroit' ? 'vibrant Detroit' : 'serene Garden City'}...`;
 
         if (type.includes('single-family') || type.includes('condo')) {
@@ -239,8 +261,6 @@ if (genieForm) {
 
         genieMessage.innerHTML = message;
         genieResponse.style.display = 'block';
-
-        // Optional: smooth scroll to response
         genieResponse.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
