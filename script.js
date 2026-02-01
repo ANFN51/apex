@@ -144,8 +144,8 @@ document.querySelectorAll('#copyright-year').forEach(el => {
 });
 
 // ────────────────────────────────────────────────
-// Parallax – only initialize if NOT mobile
-// ────────────────────────────────────────────────
+ // Parallax – desktop only, aggressive mobile skip
+ // ────────────────────────────────────────────────
 let isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
                || window.innerWidth <= 991;
 
@@ -157,55 +157,49 @@ function updateParallax() {
 
     parallaxSections.forEach(section => {
         const rect = section.getBoundingClientRect();
-        if (rect.top < window.innerHeight && rect.bottom > 0) {
-            const inner = section.querySelector('.parallax-inner');
-            if (inner) {
-                const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
-                inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`;
-            }
-        }
+        if (rect.top >= window.innerHeight || rect.bottom <= 0) return;
+
+        const inner = section.querySelector('.parallax-inner');
+        if (!inner) return;
+
+        const offset = (rect.top / window.innerHeight) * 100 * parallaxSpeed;
+        inner.style.transform = `translate3d(0, ${offset}%, 0) scale(1.05)`;
     });
 }
 
 function throttle(fn, limit) {
     let lastCall = 0;
-    return function(...args) {
+    return function() {
         const now = Date.now();
-        if (now - lastCall >= limit) {
-            lastCall = now;
-            fn(...args);
-        }
+        if (now - lastCall < limit) return;
+        lastCall = now;
+        fn();
     };
 }
 
-// Only set up parallax if desktop-sized
+// Initialize parallax only if not mobile
 if (!isMobile) {
     const throttledUpdate = throttle(updateParallax, 16);
     window.addEventListener('scroll', throttledUpdate, { passive: true });
     window.addEventListener('resize', throttledUpdate);
-    updateParallax(); // initial
+    updateParallax(); // initial run
 } else {
-    // Force cleanup on mobile (in case desktop → mobile resize)
+    // Immediate cleanup on mobile
     document.querySelectorAll('.parallax-inner').forEach(el => {
         el.style.transform = 'none';
-        el.style.height = '100%';
-        el.style.top = '0';
+        el.style.transition = 'none';
     });
 }
 
-// Re-check isMobile on resize (handles window resize from desktop to mobile)
+// Re-check isMobile on resize
 window.addEventListener('resize', () => {
-    const newIsMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
-                        || window.innerWidth <= 991;
-    if (newIsMobile !== isMobile) {
-        isMobile = newIsMobile;
+    const currentIsMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) 
+                            || window.innerWidth <= 991;
+    if (currentIsMobile !== isMobile) {
+        isMobile = currentIsMobile;
         if (isMobile) {
-            // Cleanup on switch to mobile
-            document.querySelectorAll('.parallax-inner').forEach(el => {
-                el.style.transform = 'none';
-            });
+            document.querySelectorAll('.parallax-inner').forEach(el => el.style.transform = 'none');
         } else {
-            // Re-init parallax if switched back to desktop
             updateParallax();
         }
     }
@@ -220,9 +214,7 @@ if (typeof AOS !== 'undefined') {
     });
 }
 
-// ────────────────────────────────────────────────
 // Real Estate Genie – properties.html only
-// ────────────────────────────────────────────────
 const genieForm = document.getElementById('genie-form');
 const genieResponse = document.getElementById('genie-response');
 const genieMessage = document.getElementById('genie-message');
