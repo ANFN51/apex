@@ -159,6 +159,50 @@
         perspective: 2px;           /* a bit more dramatic on big screens */
     }
 }
+
+
+
+
+
+  /* iOS Safari / mobile fallback fix for fixed backgrounds – safe for all browsers */
+#about,
+#about.parallax,
+#about [style*="house1.jpg"],
+#about .parallax-inner {
+    background-attachment: scroll !important;
+    background-size: cover !important;
+    background-position: center top !important;
+    -webkit-background-size: cover !important;
+    background-repeat: no-repeat !important;
+}
+
+#about .parallax-inner {
+    position: relative !important;
+    transform: none !important;
+    top: 0 !important;
+    left: 0 !important;
+    height: auto !important;
+    width: 100% !important;
+    inset: auto !important;
+}
+
+#about .overlay {
+    position: absolute !important;
+    inset: 0 !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+}
+
+#about .content-above-overlay {
+    position: relative !important;
+    z-index: 2 !important;
+    pointer-events: auto !important;
+    color: #fff !important;
+    text-align: center !important;
+    padding: 2rem !important;
+    margin-top: 2rem !important;
+    margin-bottom: 2rem !important;
+}
 /* Kill the problematic fixed + cover combo on mobile */
 @media (max-width: 991px) {   /* or 768px if you prefer stricter */
     .parallax {
