@@ -309,3 +309,52 @@ body.dark-mode .nav-link { color: #fff !important; }
         min-height: 60vh;           /* or whatever your minimum is */
     }
 }
+/* Core parallax for desktop / good browsers */
+.parallax {
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;                   /* or whatever you want */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;       /* this works on desktop Chrome/Firefox/Edge */
+}
+
+/* Fallback for ALL mobile + iOS Safari — kill fixed, make it scroll normally */
+@media (max-width: 991px) {             /* or @media (hover: none) and (pointer: coarse) for touch devices */
+    .parallax {
+        background-attachment: scroll !important;   /* forced scroll = no parallax, but reliable */
+        background-size: cover !important;
+        background-position: center !important;
+    }
+
+    /* If you're using the inner pseudo-element trick for faux parallax */
+    .parallax-inner {
+        transform: none !important;
+        position: relative !important;
+        top: 0 !important;
+        height: 100% !important;
+        background-attachment: scroll !important;
+    }
+
+    /* Optional: prevent any zoom/crop weirdness */
+    body {
+        -webkit-overflow-scrolling: touch !important;   /* smooth momentum scroll */
+    }
+}
+
+/* Extra nuclear option if still seeing zoom/stacking on iOS */
+@supports (-webkit-touch-callout: none) {   /* pretty reliable iOS Safari sniff */
+    .parallax,
+    .hero,
+    .properties.parallax,
+    #sell-header.parallax,
+    #lease-header.parallax,
+    body {
+        background-attachment: scroll !important;
+    }
+    
+    .parallax-inner {
+        transform: none !important;
+    }
+}
