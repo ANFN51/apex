@@ -1,130 +1,64 @@
-/* mobile.css - Dedicated mobile/phone overrides for Apex Realty Centers */
-/* Loaded only on screens <= 991px */
+/* ────────────────────────────────────────────────
+   MOBILE-ONLY DESIGN VARIANT (phones & small tablets)
+───────────────────────────────────────────────── */
 
-/* ==========================================================================
-   BASE FIXES - Kill parallax / fixed bg issues on iOS Safari & Android
-   ========================================================================== */
-body {
-    background-attachment: scroll !important;
-    -webkit-overflow-scrolling: touch !important; /* smooth momentum scroll on iOS */
-}
+/* Target phones + small devices — adjust breakpoint as needed */
+@media (max-width: 991px) {  /* or 767px if you want tablets to keep desktop look */
 
-.parallax,
-.hero.parallax,
-.properties.parallax,
-#sell-header.parallax,
-#lease-header.parallax,
-#about.parallax {
-    background-attachment: scroll !important;
-    background-size: cover !important;
-    background-position: center !important;
-    min-height: 50vh !important;          /* shorter hero on mobile */
-    padding: 4rem 1rem 3rem !important;   /* more top space for navbar + readability */
-}
+    /* Kill all parallax / fixed background nonsense */
+    .parallax,
+    .hero.parallax,
+    .properties.parallax,
+    #sell-header.parallax,
+    #lease-header.parallax {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: 50vh !important;           /* shorter on mobile for faster scroll */
+        padding: 3rem 1rem !important;         /* more breathing room */
+    }
 
-.parallax-inner {
-    display: none !important;             /* hide any pseudo-parallax layer */
-    transform: none !important;
-}
+    /* Remove pseudo-parallax layers completely */
+    .parallax-inner {
+        display: none !important;              /* or transform: none; top:0; etc. */
+    }
 
-/* ==========================================================================
-   NAVBAR FIX - Prevent overlapping hero text/carousel on mobile
-   ========================================================================== */
-body {
-    padding-top: 80px !important;         /* Adjust this value: start at 70-90px */
-}
+    /* Make body scroll feel buttery on iOS */
+    body {
+        -webkit-overflow-scrolling: touch !important;
+        background-attachment: scroll !important;
+    }
 
-.navbar.fixed-top {
-    padding: 0.5rem 1rem !important;      /* slimmer vertical padding */
-    background: rgba(255, 255, 255, 0.98) !important;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12) !important;
-}
+    /* Mobile-specific tweaks — make it feel like a different design */
+    .navbar {
+        padding: 0.75rem 1rem !important;      /* slimmer nav */
+        background: rgba(255,255,255,0.98) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
 
-.navbar-brand {
-    font-size: 1.35rem !important;        /* slightly smaller logo text */
-}
+    h1, h2, .gradient-text {
+        font-size: 2.2rem !important;          /* smaller dramatic headlines */
+    }
 
-.navbar-toggler {
-    padding: 0.4rem 0.6rem !important;
-}
+    .carousel-caption {
+        padding: 1rem !important;
+        bottom: 1rem !important;
+        background: rgba(0,0,0,0.7) !important; /* darker for readability */
+        border-radius: 0.5rem !important;
+    }
 
-/* When menu is open, it shouldn't push content weirdly (Bootstrap handles, but safety) */
-.navbar-collapse {
-    background: white;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
+    section.py-5 {
+        padding: 2.5rem 0 !important;          /* less vertical space */
+    }
 
-/* ==========================================================================
-   TYPOGRAPHY & SPACING - Make it feel clean & readable on small screens
-   ========================================================================== */
-h1, h2, .gradient-text {
-    font-size: 2.1rem !important;         /* smaller dramatic titles */
-    line-height: 1.2 !important;
-}
+    /* Hide or simplify heavy elements on mobile */
+    #tour-carousel .carousel-item img {
+        object-fit: cover;
+        height: 50vh !important;               /* shorter hero images */
+    }
 
-h3, h4 {
-    font-size: 1.6rem !important;
-}
-
-p, .card p {
-    font-size: 1rem !important;
-    line-height: 1.6 !important;
-}
-
-section.py-5,
-.py-5 {
-    padding: 2.5rem 0 !important;         /* reduce vertical whitespace */
-}
-
-.container {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
-}
-
-/* ==========================================================================
-   CAROUSEL / HERO IMAGES - Better fit on phones
-   ========================================================================== */
-#tour-carousel .carousel-item img,
-.carousel-item img {
-    height: 45vh !important;              /* shorter than desktop */
-    object-fit: cover !important;
-}
-
-.carousel-caption {
-    padding: 1rem !important;
-    bottom: 1.5rem !important;
-    background: rgba(0,0,0,0.65) !important; /* darker overlay for text legibility */
-    border-radius: 0.6rem !important;
-    font-size: 0.95rem !important;
-}
-
-.carousel-caption h5 {
-    font-size: 1.4rem !important;
-}
-
-/* ==========================================================================
-   CARDS & BUTTONS - Touch-friendly
-   ========================================================================== */
-.card {
-    margin-bottom: 1.5rem !important;
-}
-
-.btn {
-    padding: 0.75rem 1.5rem !important;
-    font-size: 1rem !important;
-}
-
-/* ==========================================================================
-   OPTIONAL: Hide or simplify heavy desktop-only elements
-   ========================================================================== */
-/* Example: if you have desktop-only parallax inner content */
-.parallax > .container > *:first-child {
-    margin-top: 1rem !important;
-}
-
-/* If you want a different body bg fallback on mobile (lighter image) */
-body {
-    background-image: url('images/mobile-fallback-bg.jpg') !important; /* add this file if you want */
-    background-size: cover !important;
-    background-position: center !important;
+    /* Optional: different background fallback image for mobile if you want it to feel "separate" */
+    body {
+        background-image: url('images/mobile-fallback-bg.jpg') !important;  /* lighter / simpler image */
+    }
 }
