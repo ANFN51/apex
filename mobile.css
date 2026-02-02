@@ -1,10 +1,27 @@
 /* ────────────────────────────────────────────────
    MOBILE-ONLY DESIGN VARIANT (phones & small tablets)
 ───────────────────────────────────────────────── */
-
 /* Target phones + small devices — adjust breakpoint as needed */
-@media (max-width: 991px) {  /* or 767px if you want tablets to keep desktop look */
+@media (max-width: 991px) { /* or 767px if you want tablets to keep desktop look */
 
+    /* ── NAVBAR FIX ── Prevent it from covering hero text/carousel on mobile ── */
+    body {
+        padding-top: 80px !important;          /* Core fix: pushes content down below fixed navbar */
+                                               /* Test on phone: if still covers → try 90px; if too much gap → try 70px */
+    }
+
+    .navbar {
+        padding: 0.5rem 1rem !important;       /* Slightly slimmer vertical padding than your original 0.75rem */
+        background: rgba(255,255,255,0.98) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+
+    /* Optional safety: make sure collapsed menu doesn't mess with layout */
+    .navbar-collapse {
+        background: white !important;
+    }
+
+    /* ── Your original parallax / background fixes (unchanged) ── */
     /* Kill all parallax / fixed background nonsense */
     .parallax,
     .hero.parallax,
@@ -14,13 +31,13 @@
         background-attachment: scroll !important;
         background-size: cover !important;
         background-position: center !important;
-        min-height: 50vh !important;           /* shorter on mobile for faster scroll */
-        padding: 3rem 1rem !important;         /* more breathing room */
+        min-height: 50vh !important; /* shorter on mobile for faster scroll */
+        padding: 3rem 1rem !important; /* more breathing room */
     }
 
     /* Remove pseudo-parallax layers completely */
     .parallax-inner {
-        display: none !important;              /* or transform: none; top:0; etc. */
+        display: none !important; /* or transform: none; top:0; etc. */
     }
 
     /* Make body scroll feel buttery on iOS */
@@ -30,14 +47,8 @@
     }
 
     /* Mobile-specific tweaks — make it feel like a different design */
-    .navbar {
-        padding: 0.75rem 1rem !important;      /* slimmer nav */
-        background: rgba(255,255,255,0.98) !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-    }
-
     h1, h2, .gradient-text {
-        font-size: 2.2rem !important;          /* smaller dramatic headlines */
+        font-size: 2.2rem !important; /* smaller dramatic headlines */
     }
 
     .carousel-caption {
@@ -48,17 +59,17 @@
     }
 
     section.py-5 {
-        padding: 2.5rem 0 !important;          /* less vertical space */
+        padding: 2.5rem 0 !important; /* less vertical space */
     }
 
     /* Hide or simplify heavy elements on mobile */
     #tour-carousel .carousel-item img {
         object-fit: cover;
-        height: 50vh !important;               /* shorter hero images */
+        height: 50vh !important; /* shorter hero images */
     }
 
     /* Optional: different background fallback image for mobile if you want it to feel "separate" */
     body {
-        background-image: url('images/mobile-fallback-bg.jpg') !important;  /* lighter / simpler image */
+        background-image: url('images/mobile-fallback-bg.jpg') !important; /* lighter / simpler image */
     }
 }
