@@ -272,24 +272,40 @@ body.dark-mode .nav-link { color: #fff !important; }
     }
 }
 
-/* iOS Safari specific */
-@supports (-webkit-touch-callout: none) {
-    #about,
-    #about.parallax,
-    #about [style*="house1.jpg"],
-    #about .parallax-inner {
+/* ────────────────────────────────────────────────
+   Fix iOS Safari background-attachment: fixed issues
+   (zooming, stacking, incorrect layering, jitter)
+───────────────────────────────────────────────── */
+@supports (-webkit-overflow-scrolling: touch) or (-webkit-touch-callout: none) {
+    /* Kill fixed backgrounds entirely on iOS Safari */
+    .parallax,
+    .hero.parallax,
+    .properties.parallax,
+    #sell-header.parallax,
+    #lease-header.parallax,
+    body {
         background-attachment: scroll !important;
-        background-size: 100% auto !important;
-        background-position: center top !important;
-        -webkit-background-size: 100% auto !important;
+        -webkit-background-size: cover !important;
+        background-size: cover !important;
     }
 
-    #about .parallax-inner {
-        position: relative !important;
+    /* If you're using the .parallax-inner pseudo-parallax technique */
+    .parallax-inner {
+        background-attachment: scroll !important;
         transform: none !important;
+        top: 0 !important;
+        height: 100% !important;
+        -webkit-transform: none !important;
     }
 
+    /* Prevent odd body scrolling behavior */
     body {
         -webkit-overflow-scrolling: auto !important;
+    }
+
+    /* Optional: make sure sections don't collapse weirdly */
+    .parallax {
+        background-attachment: scroll !important;
+        min-height: 60vh;           /* or whatever your minimum is */
     }
 }
