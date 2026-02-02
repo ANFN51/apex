@@ -5,7 +5,7 @@
 
     /* Navbar overlap fix */
     body {
-        padding-top: 80px !important;          /* adjust if needed after testing */
+        padding-top: 80px !important;
     }
 
     .navbar {
@@ -35,7 +35,7 @@
         -webkit-text-fill-color: transparent !important;
     }
 
-    /* iOS smooth scroll + kill any fixed background inheritance */
+    /* iOS smooth scroll */
     body {
         -webkit-overflow-scrolling: touch !important;
         background-attachment: scroll !important;
@@ -62,35 +62,42 @@
         height: 50vh !important;
     }
 
-    /* ── Mobile fallback background ONLY for About and Stats sections ── */
-    #about,
-    #stats,               /* ← change to your actual stats section ID/class */
-    .about-section,       /* ← alternative common class */
-    .stats,               /* ← another common class */
-    .counters-section,    /* ← if you named it after the counters */
-    [id*="about"],        /* ← catches #about-us, #about-section etc. */
-    [class*="about"],     /* ← catches .about, .about-us etc. */
-    [id*="stats"],
-    [class*="stats"] {
+    /* ── Mobile fallback background ONLY for the section RIGHT UNDER the hero ── */
+    /* Change the selector below to match your actual section ID or class */
+    #about,                    /* ← most common: if it's id="about" */
+    #welcome,                  /* ← if welcome/intro section */
+    #stats,                    /* ← if stats/counters section */
+    #features,                 /* ← if featured properties or services */
+    .intro-section,            /* ← common class names */
+    .about-us, 
+    section.py-5:first-of-type, /* ← targets the FIRST py-5 section after hero */
+    .container.my-5:first-of-type {  /* ← if it's wrapped in container my-5 */
         background-image: url('images/mobilefall.jpg') !important;
         background-size: cover !important;
         background-position: center !important;
         background-repeat: no-repeat !important;
-        background-attachment: scroll !important;   /* ensure no fixed weirdness */
+        background-attachment: scroll !important;
+        min-height: 60vh !important;  /* give it decent height so image is visible */
     }
 
-    /* Optional: subtle overlay if the image is too busy behind text */
+    /* Optional: dark overlay so text stays readable on the image */
     #about::before,
-    #stats::before {      /* ← match your selectors above */
+    #stats::before,
+    #welcome::before,
+    #features::before,
+    .intro-section::before,
+    .about-us::before,
+    section.py-5:first-of-type::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.3);   /* dark tint for readability – adjust opacity */
+        background: rgba(0, 0, 0, 0.35);   /* adjust 0.35 → 0.5 if too light */
         z-index: 0;
     }
 
-    /* Make sure text/content sits above overlay */
-    #about > *, #stats > * {
+    /* Keep content above overlay */
+    #about > *, #stats > *, #welcome > *, #features > *, 
+    .intro-section > *, .about-us > *, section.py-5:first-of-type > * {
         position: relative;
         z-index: 1;
     }
