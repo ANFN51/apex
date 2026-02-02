@@ -5,7 +5,7 @@
 
     /* Navbar overlap fix */
     body {
-        padding-top: 80px !important;          /* adjust to 70–95px if needed after testing */
+        padding-top: 80px !important;          /* adjust if needed after testing */
     }
 
     .navbar {
@@ -39,9 +39,6 @@
     body {
         -webkit-overflow-scrolling: touch !important;
         background-attachment: scroll !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
     }
 
     /* Typography & spacing */
@@ -65,8 +62,36 @@
         height: 50vh !important;
     }
 
-    /* Mobile-specific background fallback */
-    body {
+    /* ── Mobile fallback background ONLY for About and Stats sections ── */
+    #about,
+    #stats,               /* ← change to your actual stats section ID/class */
+    .about-section,       /* ← alternative common class */
+    .stats,               /* ← another common class */
+    .counters-section,    /* ← if you named it after the counters */
+    [id*="about"],        /* ← catches #about-us, #about-section etc. */
+    [class*="about"],     /* ← catches .about, .about-us etc. */
+    [id*="stats"],
+    [class*="stats"] {
         background-image: url('images/mobilefall.jpg') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;   /* ensure no fixed weirdness */
+    }
+
+    /* Optional: subtle overlay if the image is too busy behind text */
+    #about::before,
+    #stats::before {      /* ← match your selectors above */
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);   /* dark tint for readability – adjust opacity */
+        z-index: 0;
+    }
+
+    /* Make sure text/content sits above overlay */
+    #about > *, #stats > * {
+        position: relative;
+        z-index: 1;
     }
 }
