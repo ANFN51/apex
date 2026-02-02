@@ -81,6 +81,6 @@
 
     /* Optional mobile bg */
     body {
-        background-image: url('images/mobile-fallback-bg.jpg') !important;
+        background-image: url('images/mobilefall.jpg') !important;
     }
 }
