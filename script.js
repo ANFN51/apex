@@ -274,3 +274,11 @@ if (window.innerWidth <= 991) {
 
     parallaxSections.forEach(sec => observer.observe(sec));
 }
+// Dynamic body padding for fixed navbar on mobile
+if (window.innerWidth <= 991) {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        const height = navbar.offsetHeight + 10;  // +10 for safety buffer
+        document.body.style.paddingTop = height + 'px';
+    }
+}
