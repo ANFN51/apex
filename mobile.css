@@ -102,3 +102,39 @@
         z-index: 1;
     }
 }
+@media (max-width: 991px) {
+    /* Kill desktop parallax/fixed bg in About on mobile */
+    #about.parallax {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: 70vh !important;   /* visible height for image */
+    }
+
+    /* Apply mobile fallback background ONLY to About section */
+    #about {
+        background-image: url('images/mobilefall.jpg') !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+        position: relative !important;
+    }
+
+    /* Strengthen the existing overlay on mobile */
+    #about .overlay {
+        background: rgba(0, 0, 0, 0.45) !important;   /* same as desktop or darker */
+        z-index: 1 !important;
+    }
+
+    /* Ensure content stays above */
+    #about .content-above-overlay {
+        z-index: 2 !important;
+        position: relative !important;
+    }
+
+    /* Optional: more readable text on mobile if needed */
+    #about h2, #about p, #about .counter, #about .text-white-75 {
+        text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important; /* subtle shadow for contrast */
+    }
+}
