@@ -1,0 +1,64 @@
+/* ────────────────────────────────────────────────
+   MOBILE-ONLY DESIGN VARIANT (phones & small tablets)
+───────────────────────────────────────────────── */
+
+/* Target phones + small devices — adjust breakpoint as needed */
+@media (max-width: 991px) {  /* or 767px if you want tablets to keep desktop look */
+
+    /* Kill all parallax / fixed background nonsense */
+    .parallax,
+    .hero.parallax,
+    .properties.parallax,
+    #sell-header.parallax,
+    #lease-header.parallax {
+        background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        min-height: 50vh !important;           /* shorter on mobile for faster scroll */
+        padding: 3rem 1rem !important;         /* more breathing room */
+    }
+
+    /* Remove pseudo-parallax layers completely */
+    .parallax-inner {
+        display: none !important;              /* or transform: none; top:0; etc. */
+    }
+
+    /* Make body scroll feel buttery on iOS */
+    body {
+        -webkit-overflow-scrolling: touch !important;
+        background-attachment: scroll !important;
+    }
+
+    /* Mobile-specific tweaks — make it feel like a different design */
+    .navbar {
+        padding: 0.75rem 1rem !important;      /* slimmer nav */
+        background: rgba(255,255,255,0.98) !important;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+    }
+
+    h1, h2, .gradient-text {
+        font-size: 2.2rem !important;          /* smaller dramatic headlines */
+    }
+
+    .carousel-caption {
+        padding: 1rem !important;
+        bottom: 1rem !important;
+        background: rgba(0,0,0,0.7) !important; /* darker for readability */
+        border-radius: 0.5rem !important;
+    }
+
+    section.py-5 {
+        padding: 2.5rem 0 !important;          /* less vertical space */
+    }
+
+    /* Hide or simplify heavy elements on mobile */
+    #tour-carousel .carousel-item img {
+        object-fit: cover;
+        height: 50vh !important;               /* shorter hero images */
+    }
+
+    /* Optional: different background fallback image for mobile if you want it to feel "separate" */
+    body {
+        background-image: url('images/mobile-fallback-bg.jpg') !important;  /* lighter / simpler image */
+    }
+}
