@@ -5,7 +5,7 @@
 
     /* Navbar overlap fix */
     body {
-        padding-top: 80px !important;
+        padding-top: 80px !important;          /* adjust to 70–95px if needed after testing */
     }
 
     .navbar {
@@ -35,12 +35,13 @@
         -webkit-text-fill-color: transparent !important;
     }
 
-    
-
-    /* iOS smooth scroll */
+    /* iOS smooth scroll + kill any fixed background inheritance */
     body {
         -webkit-overflow-scrolling: touch !important;
         background-attachment: scroll !important;
+        background-size: cover !important;
+        background-position: center !important;
+        background-repeat: no-repeat !important;
     }
 
     /* Typography & spacing */
@@ -64,7 +65,7 @@
         height: 50vh !important;
     }
 
-    /* Optional mobile bg */
+    /* Mobile-specific background fallback */
     body {
         background-image: url('images/mobilefall.jpg') !important;
     }
