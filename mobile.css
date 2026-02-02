@@ -35,22 +35,7 @@
         -webkit-text-fill-color: transparent !important;
     }
 
-    /* Parallax kill */
-    .parallax,
-    .hero.parallax,
-    .properties.parallax,
-    #sell-header.parallax,
-    #lease-header.parallax {
-        background-attachment: scroll !important;
-        background-size: cover !important;
-        background-position: center !important;
-        min-height: 50vh !important;
-        padding: 3rem 1rem !important;
-    }
-
-    .parallax-inner {
-        display: none !important;
-    }
+    
 
     /* iOS smooth scroll */
     body {
