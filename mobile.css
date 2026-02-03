@@ -1,53 +1,212 @@
+/* mobile.css — Mobile redesign for Apex Realty Centers (<= 991px) */
 @media (max-width: 991px) {
-    body {
-      padding-top: 80px !important;
-      background-attachment: scroll !important;
-      -webkit-overflow-scrolling: touch !important;
-    }
-  
-    .navbar {
-      padding: 0.5rem 1rem !important;
-      background: rgba(255,255,255,0.98) !important;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
-    }
-  
-    .navbar-collapse {
-      background: white !important;
-      border-radius: 0.75rem;
-      margin-top: 0.5rem;
-      padding: 0.5rem 1rem;
-    }
-  
-    h1, h2, .gradient-text {
-      font-size: 2.1rem !important;
-    }
-  
-    section.py-5 {
-      padding: 2.5rem 0 !important;
-    }
-  
-    #testimonials .carousel-item img {
-      height: 50vh !important;
-    }
-  
-    #about.parallax {
-      background-attachment: scroll !important;
-      background-size: cover !important;
-      background-position: center !important;
-      min-height: 70vh !important;
-    }
-  
-    #about {
-      background-image: url("images/mobilefall.jpg") !important;
-      position: relative !important;
-    }
-  
-    #about .overlay {
-      background: rgba(0, 10, 30, 0.55) !important;
-    }
-  
-    #about h2, #about p, #about .counter, #about .text-white-75 {
-      text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
-    }
+  :root {
+    --m-bg: #f7f9fc;
+    --m-card: #ffffff;
+    --m-ink: #0f172a;
+    --m-muted: #6b7280;
+    --m-blue: #0b5ed7;
+    --m-sky: #00bfff;
+    --m-glow: rgba(11, 94, 215, 0.18);
   }
-  
+
+  body {
+    background: var(--m-bg) !important;
+    background-attachment: scroll !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding-top: 82px !important;
+    color: var(--m-ink);
+  }
+
+  /* NAVBAR */
+  .navbar {
+    background: #ffffff !important;
+    padding: 0.6rem 1rem !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .navbar-brand .brand-main {
+    font-size: 1.25rem;
+    letter-spacing: 0.5px;
+  }
+
+  .navbar-collapse {
+    background: #fff !important;
+    margin-top: 0.5rem;
+    border-radius: 0.9rem;
+    padding: 0.75rem 1rem;
+    box-shadow: 0 10px 30px rgba(15,23,42,0.08);
+  }
+
+  .nav-link {
+    padding: 0.6rem 0 !important;
+    font-weight: 600;
+  }
+
+  /* HERO */
+  #home.parallax.hero {
+    background-attachment: scroll !important;
+    min-height: 70vh !important;
+  }
+
+  #home .container {
+    padding: 2.5rem 1rem;
+  }
+
+  #home h1 {
+    font-size: 2.2rem !important;
+    line-height: 1.15;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  }
+
+  #home .lead {
+    font-size: 1rem !important;
+    margin-top: 0.5rem;
+    margin-bottom: 1.2rem;
+  }
+
+  #home .btn {
+    padding: 0.85rem 1.4rem;
+    border-radius: 999px;
+    font-weight: 700;
+    box-shadow: 0 8px 20px var(--m-glow);
+  }
+
+  /* SECTION GENERAL */
+  section.py-5 {
+    padding: 2.5rem 0 !important;
+  }
+
+  h1, h2, .gradient-text {
+    font-size: 1.85rem !important;
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+
+  /* ABOUT */
+  #about {
+    background: #0f172a !important;
+    background-image: url("images/mobilefall.jpg") !important;
+    background-size: cover !important;
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-attachment: scroll !important;
+    position: relative !important;
+  }
+
+  #about .overlay {
+    background: rgba(4, 18, 40, 0.65) !important;
+  }
+
+  #about .logo-crisp {
+    max-width: 140px;
+    margin-bottom: 1rem;
+  }
+
+  #about .lead {
+    font-size: 1.05rem !important;
+  }
+
+  #about .stats {
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
+    padding: 1rem 0.75rem;
+    backdrop-filter: blur(6px);
+  }
+
+  #about .counter {
+    font-size: 1.6rem !important;
+  }
+
+  #about .text-white-75 {
+    font-size: 0.85rem;
+  }
+
+  /* SERVICES */
+  #services .card {
+    border-radius: 1rem;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
+  }
+
+  #services .card h4 {
+    font-size: 1.1rem;
+  }
+
+  #services .btn {
+    border-radius: 999px;
+    padding: 0.6rem 1.2rem;
+  }
+
+  /* TESTIMONIALS */
+  #testimonials .carousel-item img {
+    height: 45vh !important;
+    object-fit: cover;
+  }
+
+  .carousel-caption {
+    bottom: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    border-radius: 0.75rem !important;
+  }
+
+  .carousel-caption h5 {
+    font-size: 1.1rem;
+  }
+
+  /* CTA */
+  #cta .ratio {
+    border-radius: 1rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.1);
+  }
+
+  #cta .btn {
+    border-radius: 999px;
+    padding: 0.8rem 1.4rem;
+    font-weight: 700;
+  }
+
+  /* CONTACT */
+  #contact .team-section {
+    background: #fff;
+    border-radius: 1rem;
+    padding: 1rem;
+    box-shadow: 0 10px 25px rgba(15, 23, 42, 0.08);
+    margin-bottom: 1.25rem;
+  }
+
+  #contact .form-control {
+    border-radius: 0.9rem;
+    padding: 0.85rem 1rem;
+  }
+
+  #contact .btn {
+    border-radius: 999px;
+    padding: 0.8rem 1.2rem;
+    font-weight: 700;
+  }
+
+  /* MAP */
+  .map iframe {
+    height: 300px !important;
+    border-radius: 1rem;
+    margin: 0 1rem;
+    width: calc(100% - 2rem) !important;
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+
+  /* STOP PARALLAX ARTIFACTS */
+  .parallax,
+  .parallax .parallax-inner {
+    background-attachment: scroll !important;
+    transform: none !important;
+    will-change: auto !important;
+  }
+}
