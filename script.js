@@ -256,21 +256,3 @@ if (genieForm) {
         genieResponse.scrollIntoView({ behavior: 'smooth', block: 'center' });
     });
 }
-// Mobile-friendly parallax fallback
-if (window.innerWidth <= 991) {
-    const parallaxSections = document.querySelectorAll('.parallax');
-    
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const speed = 0.3; // adjust 0.1–0.5
-                window.addEventListener('scroll', () => {
-                    const yPos = -(window.scrollY * speed);
-                    entry.target.style.backgroundPositionY = `${yPos}px`;
-                });
-            }
-        });
-    }, { threshold: 0.1 });
-
-    parallaxSections.forEach(sec => observer.observe(sec));
-}
