@@ -1,140 +1,53 @@
-/* mobile.css - Mobile overrides for Apex Realty Centers */
-/* Only loads on screens <= 991px */
-
 @media (max-width: 991px) {
-
-    /* Navbar overlap fix */
     body {
-        padding-top: 80px !important;
+      padding-top: 80px !important;
+      background-attachment: scroll !important;
+      -webkit-overflow-scrolling: touch !important;
     }
-
+  
     .navbar {
-        padding: 0.5rem 1rem !important;
-        background: rgba(255,255,255,0.98) !important;
-        box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
+      padding: 0.5rem 1rem !important;
+      background: rgba(255,255,255,0.98) !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1) !important;
     }
-
+  
     .navbar-collapse {
-        background: white !important;
+      background: white !important;
+      border-radius: 0.75rem;
+      margin-top: 0.5rem;
+      padding: 0.5rem 1rem;
     }
-
-    /* Keep Apex gradient in navbar on mobile */
-    .navbar-brand {
-        background: linear-gradient(to right, #007bff, #00bfff) !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-        color: transparent !important;
-    }
-
-    .navbar-brand:hover,
-    .navbar-brand:focus {
-        background: linear-gradient(to right, #0056b3, #0099cc) !important;
-        -webkit-background-clip: text !important;
-        background-clip: text !important;
-        -webkit-text-fill-color: transparent !important;
-    }
-
-    /* iOS smooth scroll */
-    body {
-        -webkit-overflow-scrolling: touch !important;
-        background-attachment: scroll !important;
-    }
-
-    /* Typography & spacing */
+  
     h1, h2, .gradient-text {
-        font-size: 2.2rem !important;
+      font-size: 2.1rem !important;
     }
-
-    .carousel-caption {
-        padding: 1rem !important;
-        bottom: 1rem !important;
-        background: rgba(0,0,0,0.7) !important;
-        border-radius: 0.5rem !important;
-    }
-
+  
     section.py-5 {
-        padding: 2.5rem 0 !important;
+      padding: 2.5rem 0 !important;
     }
-
-    #tour-carousel .carousel-item img {
-        object-fit: cover;
-        height: 50vh !important;
+  
+    #testimonials .carousel-item img {
+      height: 50vh !important;
     }
-
-    /* ── Mobile fallback background ONLY for the section RIGHT UNDER the hero ── */
-    /* Change the selector below to match your actual section ID or class */
-    #about,                    /* ← most common: if it's id="about" */
-    #welcome,                  /* ← if welcome/intro section */
-    #stats,                    /* ← if stats/counters section */
-    #features,                 /* ← if featured properties or services */
-    .intro-section,            /* ← common class names */
-    .about-us, 
-    section.py-5:first-of-type, /* ← targets the FIRST py-5 section after hero */
-    .container.my-5:first-of-type {  /* ← if it's wrapped in container my-5 */
-        background-image: url('images/mobilefall.jpg') !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: scroll !important;
-        min-height: 60vh !important;  /* give it decent height so image is visible */
-    }
-
-    /* Optional: dark overlay so text stays readable on the image */
-    #about::before,
-    #stats::before,
-    #welcome::before,
-    #features::before,
-    .intro-section::before,
-    .about-us::before,
-    section.py-5:first-of-type::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.35);   /* adjust 0.35 → 0.5 if too light */
-        z-index: 0;
-    }
-
-    /* Keep content above overlay */
-    #about > *, #stats > *, #welcome > *, #features > *, 
-    .intro-section > *, .about-us > *, section.py-5:first-of-type > * {
-        position: relative;
-        z-index: 1;
-    }
-}
-@media (max-width: 991px) {
-    /* Kill desktop parallax/fixed bg in About on mobile */
+  
     #about.parallax {
-        background-attachment: scroll !important;
-        background-size: cover !important;
-        background-position: center !important;
-        min-height: 70vh !important;   /* visible height for image */
+      background-attachment: scroll !important;
+      background-size: cover !important;
+      background-position: center !important;
+      min-height: 70vh !important;
     }
-
-    /* Apply mobile fallback background ONLY to About section */
+  
     #about {
-        background-image: url('images/mobilefall.jpg') !important;
-        background-size: cover !important;
-        background-position: center !important;
-        background-repeat: no-repeat !important;
-        background-attachment: scroll !important;
-        position: relative !important;
+      background-image: url("images/mobilefall.jpg") !important;
+      position: relative !important;
     }
-
-    /* Strengthen the existing overlay on mobile */
+  
     #about .overlay {
-        background: rgba(0, 0, 0, 0.45) !important;   /* same as desktop or darker */
-        z-index: 1 !important;
+      background: rgba(0, 10, 30, 0.55) !important;
     }
-
-    /* Ensure content stays above */
-    #about .content-above-overlay {
-        z-index: 2 !important;
-        position: relative !important;
-    }
-
-    /* Optional: more readable text on mobile if needed */
+  
     #about h2, #about p, #about .counter, #about .text-white-75 {
-        text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important; /* subtle shadow for contrast */
+      text-shadow: 0 1px 3px rgba(0,0,0,0.6) !important;
     }
-}
+  }
+  
