@@ -53,14 +53,13 @@
   }
   
   .logo-img {
-  height: 60px; /* was 40px */
-  width: auto;
-}
-
+    height: 130px;
+    width: auto;
+  }
   
   .logo-crisp {
-    max-width: 180px;
-    filter: drop-shadow(0 8px 28px rgba(0,0,0,0.2));
+    max-width: 400px;
+    filter: drop-shadow(0 8px 28px rgba(6, 31, 221, 0.2));
   }
   
   /* Parallax */
@@ -217,4 +216,17 @@
     width: 100%;
     height: 100%;
   }
-  
+  /* Increase navbar link font size */
+.nav-link {
+  font-size: 1.7rem;  /* Adjust this value as needed: 1.1rem for subtle, 1.3rem for bolder */
+  font-weight: 500;   /* Optional: slight bold for better readability */
+  padding: 0.75rem 1rem;  /* Optional: more padding to space them out with larger text */
+}
+
+/* Responsive adjustment for mobile (smaller screens) */
+@media (max-width: 991px) {
+  .nav-link {
+      font-size: 1.1rem;  /* Slightly smaller on mobile to prevent crowding */
+      padding: 0.75rem 0.5rem;
+  }
+}
