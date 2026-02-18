@@ -22,7 +22,7 @@
   .navbar {
     background: #ffffff !important;
     padding: 0.2rem 0.3rem !important;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08) !important;
+    box-shadow: 0 2px 5px rgba(15, 23, 42, 0.08) !important;
   }
 
   .navbar-brand .brand-main {
