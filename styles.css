@@ -61,6 +61,10 @@
     max-width: 400px;
     filter: drop-shadow(0 8px 28px rgba(6, 31, 221, 0.2));
   }
+
+  .hero-mobile-logo {
+    display: none;
+  }
   
   /* Parallax */
   .parallax {
