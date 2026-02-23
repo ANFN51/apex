@@ -182,7 +182,9 @@
     z-index: 99999;
     display: grid;
     place-items: center;
-    background: #000;
+    background:
+      radial-gradient(circle at 50% 42%, rgba(36, 55, 90, 0.28), rgba(0, 0, 0, 0.96) 40%),
+      #000;
     opacity: 1;
     transition: opacity 0.4s ease, transform 0.4s ease, filter 0.4s ease;
     contain: layout paint;
@@ -190,10 +192,24 @@
 
   .preloader-scene {
     position: relative;
-    width: min(78vw, 420px);
+    width: min(82vw, 460px);
     aspect-ratio: 1 / 1;
     transform: scale(1);
     transition: transform 0.4s ease;
+  }
+
+  .preloader-scene::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: 14%;
+    width: 64%;
+    height: 17%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(71, 105, 168, 0.44) 0%, rgba(0, 0, 0, 0) 72%);
+    filter: blur(9px);
+    pointer-events: none;
   }
 
   #preloader-canvas {
@@ -203,11 +219,12 @@
   }
 
   .preloader-caption {
-    margin: 1.2rem 0 0;
+    margin: 1.15rem 0 0;
     text-transform: uppercase;
-    letter-spacing: 0.24em;
-    font-size: 0.76rem;
-    color: rgba(255, 255, 255, 0.78);
+    letter-spacing: 0.26em;
+    font-size: 0.74rem;
+    color: rgba(255, 255, 255, 0.82);
+    text-shadow: 0 0 24px rgba(47, 113, 255, 0.22);
   }
 
   .preloader-fallback {
@@ -250,67 +267,86 @@
 
   .fallback-house-icon {
     position: relative;
-    width: 140px;
-    height: 140px;
+    width: 186px;
+    height: 134px;
+    perspective: 900px;
     transform-style: preserve-3d;
-    animation: fallback-house-spin 2.6s linear infinite;
+    animation: fallback-house-orbit 3.4s linear infinite;
+  }
+
+  .fallback-house-icon::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 58px;
+    width: 24px;
+    height: 66px;
+    transform: translateX(39px) skewY(-21deg);
+    background: linear-gradient(180deg, #b7c1d4 0%, #97a7c2 45%, #8192ae 100%);
+    border-radius: 4px;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.28);
   }
 
   .house-roof {
     position: absolute;
     left: 50%;
-    top: 20px;
-    transform: translateX(-50%);
-    width: 0;
-    height: 0;
-    border-left: 52px solid transparent;
-    border-right: 52px solid transparent;
-    border-bottom: 48px solid #2f71ff;
-    filter: drop-shadow(0 0 12px rgba(47, 113, 255, 0.35));
+    top: 16px;
+    width: 122px;
+    height: 44px;
+    transform: translateX(-50%) rotateX(60deg) rotateZ(-2deg);
+    clip-path: polygon(50% 0%, 100% 100%, 0 100%);
+    background: linear-gradient(140deg, #7c97c4 0%, #355384 56%, #1f2f4f 100%);
+    filter: drop-shadow(0 12px 22px rgba(0, 0, 0, 0.45));
   }
 
   .house-body {
     position: absolute;
     left: 50%;
-    top: 66px;
-    transform: translateX(-50%);
-    width: 92px;
-    height: 62px;
+    top: 52px;
+    width: 126px;
+    height: 74px;
+    transform: translateX(-50%) rotateY(-14deg);
     border-radius: 8px;
-    background: linear-gradient(180deg, #f3f7ff 0%, #ced9f5 100%);
+    background: linear-gradient(160deg, #eceff4 0%, #d8dfeb 52%, #bcc8db 100%);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.36),
+      0 14px 20px rgba(0, 0, 0, 0.38);
   }
 
   .house-door {
     position: absolute;
     left: 50%;
-    bottom: 16px;
-    transform: translateX(-50%);
-    width: 22px;
-    height: 34px;
-    border-radius: 5px 5px 3px 3px;
-    background: #1c3f8e;
+    bottom: 10px;
+    transform: translateX(-50%) rotateY(-14deg);
+    width: 26px;
+    height: 40px;
+    border-radius: 4px 4px 2px 2px;
+    background: linear-gradient(180deg, #385a94 0%, #1c335f 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.2);
   }
 
   .house-window {
     position: absolute;
-    top: 80px;
-    width: 16px;
-    height: 16px;
-    border-radius: 4px;
-    background: #95b8ff;
+    top: 78px;
+    width: 18px;
+    height: 18px;
+    border-radius: 3px;
+    background: linear-gradient(160deg, #afceff 0%, #5e85c6 100%);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.35);
   }
 
   .house-window.left {
-    left: 40px;
+    left: 52px;
   }
 
   .house-window.right {
-    right: 40px;
+    right: 52px;
   }
 
-  @keyframes fallback-house-spin {
-    from { transform: rotateY(0deg); }
-    to { transform: rotateY(360deg); }
+  @keyframes fallback-house-orbit {
+    0% { transform: rotateX(8deg) rotateY(-18deg) translateY(0); }
+    50% { transform: rotateX(8deg) rotateY(162deg) translateY(-4px); }
+    100% { transform: rotateX(8deg) rotateY(342deg) translateY(0); }
   }
 
   body.preloader-exit #preloader {
@@ -340,6 +376,12 @@
 
   body.preloader-reduced .fallback-house-icon {
     animation: none;
+  }
+
+  @media (max-width: 991px) {
+    .preloader-scene {
+      width: min(86vw, 360px);
+    }
   }
   
   /* Dark Mode */
