@@ -28,6 +28,9 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/build/three.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.161.0/examples/js/loaders/GLTFLoader.js" defer></script>
+  <script src="loader.js" defer></script>
   <script src="script.js" defer></script>
 
   <script type="application/ld+json">
@@ -50,9 +53,19 @@
 <body>
   <!-- Preloader -->
   <div id="preloader" aria-hidden="true">
-    <div class="loadingio-eclipse">
-      <div class="ldio-rpinwye8j0b"><div></div></div>
+    <div class="preloader-scene">
+      <canvas id="preloader-canvas" aria-label="Loading scene"></canvas>
+      <div id="preloader-fallback" class="preloader-fallback" hidden>
+        <div class="fallback-house-icon" aria-hidden="true">
+          <span class="house-roof"></span>
+          <span class="house-body"></span>
+          <span class="house-door"></span>
+          <span class="house-window left"></span>
+          <span class="house-window right"></span>
+        </div>
+      </div>
     </div>
+    <p class="preloader-caption">Apex Realty Centers</p>
   </div>
 
   <nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top shadow-sm" aria-label="Main navigation">

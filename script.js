@@ -200,12 +200,17 @@
     }
   });
 
-  // Preloader (after full load)
+  // Legacy preloader support for non-index pages
   window.addEventListener("load", () => {
     const preloader = document.getElementById("preloader");
-    if (!preloader) return;
-    preloader.classList.add("loaded");
-    setTimeout(() => { preloader.style.display = "none"; }, 500);
+    const hasThreeLoader = !!document.getElementById("preloader-canvas");
+    if (!preloader || hasThreeLoader) return;
+
+    preloader.style.transition = "opacity 0.45s ease";
+    preloader.style.opacity = "0";
+    setTimeout(() => {
+      preloader.style.display = "none";
+    }, 460);
   });
 
   // Parallax – desktop only, skip on mobile
