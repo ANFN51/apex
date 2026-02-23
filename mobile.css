@@ -142,7 +142,8 @@
     }
   
     #about .logo-crisp {
-      max-width: 140px;
+      width: min(72vw, 300px);
+      max-width: 300px;
       margin-bottom: 1rem;
     }
   
@@ -257,14 +258,6 @@
     height: 42px !important;
     width: auto !important;
     margin-bottom: 0 !important;
-  }
-
-  .hero-mobile-logo {
-    display: block !important;
-    width: min(72vw, 280px);
-    height: auto;
-    margin: 0 auto 1rem;
-    filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.35));
   }
 }
   
