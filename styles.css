@@ -49,21 +49,24 @@ body {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-pale) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  -webkit-text-fill-color: transparent;
 }
 
 .gradient-text-blue {
   background: linear-gradient(135deg, #1a4fa3 0%, #2d7dd2 60%, #5ba8f5 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: #2d7dd2;
+  -webkit-text-fill-color: transparent;
 }
 
 .section-title-gradient {
   background: linear-gradient(135deg, #0d2b5e 0%, #1a4fa3 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  -webkit-text-fill-color: transparent;
 }
 
 /* ── Navbar ────────────────────────────────────────────── */
@@ -92,7 +95,8 @@ body {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  -webkit-text-fill-color: transparent;
   font-size: 1.3rem;
   letter-spacing: 0.08em;
   font-family: "Playfair Display", serif;
@@ -150,7 +154,8 @@ body {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent !important;
+  color: var(--gold) !important;
+  -webkit-text-fill-color: transparent;
   font-weight: 700;
   letter-spacing: 0.1em;
 }
@@ -451,7 +456,8 @@ body {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  -webkit-text-fill-color: transparent;
   line-height: 1;
   margin-bottom: 0.25rem;
 }
@@ -590,7 +596,8 @@ section {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  -webkit-text-fill-color: transparent;
   line-height: 1;
 }
 
@@ -618,7 +625,8 @@ section {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 50%, var(--gold-pale) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  -webkit-text-fill-color: transparent;
 }
 
 #about .lead {
@@ -1107,7 +1115,8 @@ footer p {
   background: linear-gradient(135deg, var(--gold) 0%, var(--gold-light) 100%);
   -webkit-background-clip: text;
   background-clip: text;
-  color: transparent;
+  color: var(--gold);
+  -webkit-text-fill-color: transparent;
   font-family: "Playfair Display", serif;
   font-size: 1.1rem;
   font-weight: 700;
