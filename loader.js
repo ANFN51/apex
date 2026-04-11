@@ -276,8 +276,9 @@
       if (statusText) statusText.textContent = "WELCOME TO APEX";
       setTimeout(exitPreloader, remaining);
     } else {
-      // Immediate exit on fail
-      exitPreloader();
+      const failRemaining = Math.max(0, FAIL_VISIBLE_MS - elapsed);
+      if (statusText) statusText.textContent = "LOADING EXPERIENCE...";
+      setTimeout(exitPreloader, failRemaining);
     }
   });
 
