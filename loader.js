@@ -146,7 +146,9 @@
         if (typeof THREE.DRACOLoader === "function") {
           dracoLoader = new THREE.DRACOLoader();
           dracoLoader.setDecoderPath("vendor/draco/");
-          dracoLoader.setDecoderConfig({ type: "wasm" });
+          // Use JS decoder for production reliability with strict CSP setups.
+          dracoLoader.setDecoderConfig({ type: "js" });
+          dracoLoader.preload();
           loader.setDRACOLoader(dracoLoader);
         }
         loadGltf(loader).then((gltf) => {
