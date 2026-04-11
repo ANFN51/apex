@@ -2,7 +2,7 @@
   "use strict";
 
   // ── Configuration ───────────────────────────────────────
-  const MODEL_URL = "american_house.glb?v=20260411h";
+  const MODEL_URL = "models/american_house.glb?v=20260411h";
   const MIN_VISIBLE_MS = 8000;
   const FAIL_VISIBLE_MS = 5000;
   const MAX_WAIT_MS = 12000;
