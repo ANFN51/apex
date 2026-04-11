@@ -1416,3 +1416,16 @@ body.dark-mode #contact .team-section {
   .listing-item { flex: 0 0 85%; }
   .slider-nav { display: none; } /* On mobile, use native touch scroll */
 }
+
+/* ── Production Fail-Safe Gold Text ─────────────────────── */
+/* If gradient clipping is inconsistent on any browser/build, force solid gold. */
+
+  .gradient-text,
+  .section-title-gradient,
+  .brand-main,
+  .footer-brand,
+  .navbar-nav .gradient-text {
+  background: none !important;
+  color: #c9a84c !important;
+  -webkit-text-fill-color: #c9a84c !important;
+}
