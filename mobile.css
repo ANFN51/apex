@@ -1,0 +1,263 @@
+/* ── Mobile layout for Apex Realty Centers (<= 991px) ── */
+@media (max-width: 991px) {
+
+  body {
+    background: #07101f;
+    padding-top: 72px !important;
+  }
+
+  /* ── Navbar ── */
+  .navbar {
+    padding: 0.4rem 0.75rem !important;
+    border-bottom: 1px solid rgba(201, 168, 76, 0.12) !important;
+  }
+
+  .logo-img {
+    height: 36px !important;
+    width: auto !important;
+  }
+
+  .navbar-brand {
+    gap: 0.5rem !important;
+  }
+
+  .brand-main {
+    font-size: 1.05rem;
+  }
+
+  .brand-sub {
+    font-size: 0.6rem;
+  }
+
+  .navbar-collapse {
+    background: rgba(7, 16, 31, 0.98) !important;
+    border: 1px solid rgba(201, 168, 76, 0.15) !important;
+    border-radius: 1rem !important;
+    padding: 0.75rem 1rem !important;
+    margin-top: 0.5rem !important;
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.5);
+  }
+
+  .nav-link {
+    font-size: 0.98rem !important;
+    padding: 0.5rem 0.5rem !important;
+  }
+
+  /* ── Hero ── */
+  #home {
+    min-height: 85vh !important;
+  }
+
+  /* iOS / Android: background-attachment:fixed is broken — use scroll */
+  .hero-bg {
+    background-attachment: scroll !important;
+    background-position: center 30% !important;
+  }
+
+  .hero h1 {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+  }
+
+  .hero .lead {
+    font-size: 0.95rem !important;
+    padding: 0 1rem;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+  }
+
+  .hero-orb-1 {
+    width: 240px;
+    height: 240px;
+  }
+
+  .hero-orb-2 {
+    width: 180px;
+    height: 180px;
+  }
+
+  /* Remove animated grid on mobile for performance */
+  .hero-grid {
+    animation: none !important;
+    opacity: 0.5;
+  }
+
+  /* Stats bar stacked on mobile */
+  .stats-bar-inner {
+    flex-direction: column;
+    gap: 0;
+    padding: 1rem 1.25rem;
+  }
+
+  .stat-item {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.75rem 0;
+  }
+
+  .stat-item:last-child {
+    border-bottom: none;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+  }
+
+  /* ── About ── */
+  #about {
+    padding: 3.5rem 0 !important;
+  }
+
+  .about-card {
+    padding: 2rem 1.25rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .logo-crisp {
+    width: min(80vw, 260px) !important;
+  }
+
+  #about .stats {
+    padding: 1.25rem 1rem !important;
+    border-radius: 1rem !important;
+  }
+
+  /* ── Services ── */
+  #services {
+    padding: 3.5rem 0 !important;
+  }
+
+  .service-card {
+    padding: 1.75rem 1.5rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .service-card .service-icon {
+    width: 52px;
+    height: 52px;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  /* ── MLS / Listings ── */
+  #listings {
+    padding: 3.5rem 0 !important;
+  }
+
+  .zillow-search-bar {
+    flex-direction: column;
+    border-radius: 1rem !important;
+    padding: 1rem !important;
+    gap: 0.5rem;
+    align-items: stretch;
+  }
+
+  .zillow-search-bar .bi-search:first-child {
+    display: none;
+  }
+
+  .zillow-search-bar input {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 0.65rem !important;
+    padding: 0.7rem 1rem !important;
+    color: #fff;
+  }
+
+  .zillow-search-bar button {
+    border-radius: 0.65rem !important;
+    padding: 0.75rem 1rem !important;
+    text-align: center;
+  }
+
+  .listing-card {
+    border-radius: 1rem !important;
+  }
+
+  .listing-img-wrap {
+    height: 180px !important;
+  }
+
+  .listing-price {
+    font-size: 1.25rem !important;
+  }
+
+  .zillow-cta-bar {
+    padding: 1.5rem 1rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .zillow-cta-bar .d-flex {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .zillow-cta-bar .btn {
+    text-align: center;
+  }
+
+  /* ── Testimonials ── */
+  #testimonials {
+    padding: 3.5rem 0 !important;
+  }
+
+  .testimonial-card {
+    padding: 1.75rem 1.5rem !important;
+    border-radius: 1rem !important;
+  }
+
+  .testimonial-card .quote {
+    font-size: 0.95rem !important;
+  }
+
+  .carousel-control-prev { left: -4px !important; }
+  .carousel-control-next { right: -4px !important; }
+
+  /* ── Contact ── */
+  #contact {
+    padding: 3.5rem 0 !important;
+  }
+
+  .contact-info-card {
+    padding: 1.75rem !important;
+    border-radius: 1rem !important;
+  }
+
+  /* ── Map ── */
+  .map iframe {
+    height: 260px !important;
+  }
+
+  /* ── Footer ── */
+  footer {
+    font-size: 0.85rem;
+  }
+
+  /* ── General section spacing ── */
+  section.py-5 {
+    padding: 3rem 0 !important;
+  }
+}
+
+/* Very small screens */
+@media (max-width: 575px) {
+  .hero-cta {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-cta .btn {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .listing-details {
+    font-size: 0.75rem;
+  }
+
+  .listing-detail strong {
+    font-size: 0.9rem;
+  }
+}
