@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover"
+  />
+  <meta name="description" content="Apex Realty Centers offers premium real estate services in Detroit and Garden City, MI. Buy, sell, or lease luxury properties with expert guidance." />
+  <meta name="keywords" content="luxury real estate Detroit, Garden City properties, Michigan brokerage, buy sell lease homes" />
+  <meta property="og:title" content="Apex Realty Centers - Premium Real Estate" />
+  <meta property="og:description" content="Expert services for buying, selling, and leasing luxury properties in Michigan." />
+  <meta property="og:image" content="images/apex.png" />
+  <meta property="og:url" content="https://apexrealtycenters.com" />
+
+  <title>Apex Realty Centers - Premium Real Estate</title>
+  <style>
+    #preloader {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: grid;
+      place-items: center;
+      background: #07101f;
+    }
+  </style>
+  <link rel="icon" type="image/png" sizes="32x32" href="images/apex.png">
+  <link rel="shortcut icon" type="image/png" href="images/apex.png">
+  <link rel="apple-touch-icon" href="images/apex.png">
+
+  <!-- Preload hero image so it's ready before first paint -->
+  <link rel="preload" as="image" href="images/mountain.jpg" fetchpriority="high">
+  <link rel="preload" as="fetch" href="models/american_house.glb" fetchpriority="high">
+  <script>
+    // Warm the GLB request immediately so the 3D preloader can parse sooner.
+    window.__apexPreloaderModelPromise = fetch("models/american_house.glb", {
+      cache: "force-cache",
+      credentials: "same-origin"
+    })
+      .then((res) => (res.ok ? res.arrayBuffer() : null))
+      .catch(() => null);
+  </script>
+
+  <!-- Critical CSS only -- Bootstrap loads first -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts: preconnect first, then async load -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@400;700&display=swap"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  </noscript>
+
+  <!-- Bootstrap Icons async -->
+  <link rel="preload" as="style"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    onload="this.onload=null;this.rel='stylesheet'">
+  <noscript>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  </noscript>
+
+  <!-- AOS async (non-critical) -->
+  <link rel="preload" as="style"
+    href="https://unpkg.com/aos@2.3.1/dist/aos.css"
+    onload="this.onload=null;this.rel='stylesheet'">
+
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 991px)" />
+
+  <!-- JS: Bootstrap bundle + AOS deferred -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" defer></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js" defer></script>
+  <!-- Three.js / GLTFLoader loaded only if preloader canvas exists -->
+  <script src="vendor/three.min.js" defer></script>
+  <script src="vendor/DRACOLoader.js" defer></script>
+  <script src="vendor/GLTFLoader.js" defer></script>
+  <script src="loader.js?v=5" defer></script>
+  <script src="script.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "RealEstateAgent",
+    "name": "Apex Realty Centers",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "30942 Ford Rd",
+      "addressLocality": "Garden City",
+      "addressRegion": "MI",
+      "postalCode": "48135"
+    },
+    "telephone": "(313) 332-5821",
+    "email": "apexrealtycenters@gmail.com"
+  }
+  </script>
+</head>
+<body>
+  <!-- Preloader -->
+  <!-- Cinematic 3D Preloader -->
+  <div id="preloader" class="preloader-new" aria-hidden="true">
+    <div class="preloader-overlay"></div>
+    
+    <div class="preloader-content">
+      <div id="preloader-scene-wrap">
+        <canvas id="preloader-canvas"></canvas>
+      </div>
+
+      <div class="preloader-ui">
+        <div class="preloader-logo-wrap">
+          <span class="logo-text-pre">APEX</span>
+          <div class="logo-line"></div>
+        </div>
+        
+        <div class="loading-status">
+          <div class="loading-bar-container">
+            <div id="loading-bar-fill"></div>
+          </div>
+          <p id="loading-text">RE-INITIALIZING PROPERTY ENGINE</p>
+          <span id="loading-percentage">0%</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" aria-label="Main navigation">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <img src="images/apex.png" alt="Apex Realty Centers Logo" class="logo-img" />
+        <div class="text-wrapper">
+          <span class="brand-main fw-bold d-block">Apex</span>
+          <small class="brand-sub d-block">Realty Centers</small>
+        </div>
+      </a>
+
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#listings">Listings</a></li>
+          <li class="nav-item"><a class="nav-link" href="properties.html">Properties</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+            <ul class="dropdown-menu" aria-labelledby="servicesDropdown">
+              <li><a class="dropdown-item" href="buy.html"><i class="bi bi-house-door me-2"></i>Buy</a></li>
+              <li><a class="dropdown-item" href="sell.html"><i class="bi bi-tags me-2"></i>Sell</a></li>
+              <li><a class="dropdown-item" href="lease.html"><i class="bi bi-key me-2"></i>Lease</a></li>
+              <li><hr class="dropdown-divider" style="border-color:rgba(255,255,255,0.1)"></li>
+              <li><a class="dropdown-item" href="buy.html#mortgage-form"><i class="bi bi-calculator me-2"></i>Mortgage Calculator</a></li>
+            </ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item ms-2">
+            <a class="nav-link gradient-text fw-bold" href="teams.html">Team</a>
+          </li>
+        </ul>
+        <button id="theme-toggle" class="btn ms-3 d-none d-lg-inline-flex">
+          <i class="bi bi-moon-stars me-1"></i> Dark Mode
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- Hero                                                 -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <section id="home" class="hero">
+    <div class="hero-bg parallax-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-orb hero-orb-1"></div>
+    <div class="hero-orb hero-orb-2"></div>
+
+    <div class="container hero-content">
+      <div class="hero-eyebrow">Detroit & Garden City, Michigan</div>
+      <h1>Your <em>Dream Home</em><br>Starts Here</h1>
+      <p class="lead" id="dynamic-greeting">Exclusive properties tailored for discerning clients.</p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-primary btn-lg px-5">Get in Touch</a>
+        <a href="properties.html" class="btn btn-outline-primary btn-lg px-5">View Properties</a>
+      </div>
+
+      <!-- Stats bar -->
+      <div class="stats-bar">
+        <div class="stats-bar-inner">
+          <div class="stat-item">
+            <div class="stat-number counter" data-target="25">0</div>
+            <div class="stat-label">Years Experience</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number counter" data-target="2400">0</div>
+            <div class="stat-label">Properties Sold</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number counter" data-target="3800">0</div>
+            <div class="stat-label">Happy Clients</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- About                                               -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <section id="about" class="py-5 position-relative" data-aos="fade-up">
+    <!-- Parallax background for About -->
+    <div class="about-bg parallax-bg"></div>
+    <div class="about-overlay"></div>
+    <!-- Decorative background elements -->
+    <div class="about-bg-glow"></div>
+    <div class="container position-relative z-1">
+      <div class="row align-items-center g-5">
+        <!-- Logo / Graphic Side -->
+        <div class="col-lg-5 order-2 order-lg-1 text-center" data-aos="fade-right" data-aos-delay="100">
+          <div class="about-logo-wrapper">
+            <div class="about-logo-glow"></div>
+            <img src="images/apex.png" alt="Apex Realty Centers Logo" class="img-fluid logo-crisp about-main-logo">
+            <div class="about-year-badge">
+              <span class="badge-year">2000</span>
+              <span class="badge-text">Est.</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Content Side -->
+        <div class="col-lg-7 order-1 order-lg-2" data-aos="fade-left" data-aos-delay="100">
+          <div class="about-content">
+            <span class="section-eyebrow">Who We Are</span>
+            <h2 class="section-title-gradient fw-bold mb-3">About Apex Realty Centers</h2>
+            <div class="gold-divider ms-0"></div>
+            
+            <p class="lead fs-5 text-muted mt-4 mb-3">
+              Helping families find their dream homes in Detroit, and beyond since 2000.
+            </p>
+            <p class="text-muted mb-4">
+              We specialize in premium properties, personalized service, and making every transaction feel like family. Our deep-rooted knowledge of the Michigan real estate market ensures that you get the best possible guidance, whether you are buying your first home or selling a luxury estate.
+            </p>
+
+            <div class="stats stats-horizontal row g-3 mt-2 rounded-4 py-3 px-3" style="background:var(--navy);">
+              <div class="col-4">
+                <div class="d-flex flex-column">
+                  <div class="d-flex align-items-center mb-1">
+                    <span class="counter fs-2 fw-bold" data-target="25">0</span><span class="text-white ms-1 fs-4">+</span>
+                  </div>
+                  <span class="text-white-75" style="font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Years in Business</span>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-flex flex-column">
+                  <div class="d-flex align-items-center mb-1">
+                    <span class="counter fs-2 fw-bold" data-target="2400">0</span><span class="text-white ms-1 fs-4">+</span>
+                  </div>
+                  <span class="text-white-75" style="font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Properties Sold</span>
+                </div>
+              </div>
+              <div class="col-4">
+                <div class="d-flex flex-column">
+                  <div class="d-flex align-items-center mb-1">
+                    <span class="counter fs-2 fw-bold" data-target="3800">0</span><span class="text-white ms-1 fs-4">+</span>
+                  </div>
+                  <span class="text-white-75" style="font-size:0.75rem;letter-spacing:0.06em;text-transform:uppercase;">Happy Clients</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="mt-5">
+              <a href="#contact" class="btn btn-outline-primary rounded-pill px-4 py-2 fw-bold">Let's Connect</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- Services                                            -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <section id="services" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow">What We Offer</span>
+        <h2 class="gradient-text fw-bold">Our Services</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="row g-4">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="bi bi-house-door-fill"></i></div>
+            <h4>Buy</h4>
+            <p>Find your perfect property with our expert guidance. From first-time buyers to seasoned investors, we match you with homes that fit your lifestyle and budget.</p>
+            <a href="buy.html" class="btn btn-primary">Explore Buying →</a>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="bi bi-tags-fill"></i></div>
+            <h4>Sell</h4>
+            <p>Maximize your property's value with our proven marketing strategies and deep local market knowledge. We get results that exceed expectations.</p>
+            <a href="sell.html" class="btn btn-primary">Explore Selling →</a>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
+          <div class="service-card h-100">
+            <div class="service-icon"><i class="bi bi-key-fill"></i></div>
+            <h4>Lease</h4>
+            <p>Discover flexible leasing options across Detroit and Garden City. Whether you're a tenant or landlord, we make the process seamless.</p>
+            <a href="lease.html" class="btn btn-primary">Explore Leasing →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- Zillow MLS Listings                                 -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <section id="listings">
+    <div class="container">
+      <div class="text-center mb-4" data-aos="fade-up">
+        <span class="section-eyebrow">Live MLS Listings</span>
+        <h2 class="gradient-text fw-bold">Search Properties on Zillow</h2>
+        <div class="gold-divider"></div>
+        <p style="color:rgba(255,255,255,0.5);font-size:0.9rem;margin-top:0.75rem;">Detroit &amp; Garden City, MI — listings updated daily via Zillow</p>
+      </div>
+
+      <!-- Zillow Search Bar -->
+      <form class="zillow-search-bar" data-aos="fade-up" data-aos-delay="50" onsubmit="zillowSearch(event)">
+        <i class="bi bi-search" style="color:rgba(255,255,255,0.4);font-size:1rem;flex-shrink:0;"></i>
+        <input type="text" id="zillow-location" placeholder="Enter city, zip, or address (e.g. Garden City MI)" value="Garden City, MI">
+        <button type="submit"><i class="bi bi-search me-1"></i> Search Zillow</button>
+      </form>
+
+      <!-- Featured Listings Slider -->
+      <div class="listings-slider-container" data-aos="fade-up" data-aos-delay="100">
+        <div class="listings-slider" id="listings-slider">
+          <!-- Card 1 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Garden-City,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z1.png" alt="Luxury Modern Estate" loading="lazy">
+                <span class="listing-badge badge-new">New Construction</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$845,000</div>
+                <div class="listing-address">124 Oakwood Dr, Garden City, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>4</strong>Beds</div>
+                  <div class="listing-detail"><strong>3.5</strong>Baths</div>
+                  <div class="listing-detail">3,200 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Detroit,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z2.png" alt="Suburban Palace" loading="lazy">
+                <span class="listing-badge">Featured</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$620,000</div>
+                <div class="listing-address">45 Prospect Way, Detroit, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>5</strong>Beds</div>
+                  <div class="listing-detail"><strong>4</strong>Baths</div>
+                  <div class="listing-detail">4,100 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 3 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Detroit,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z3.png" alt="Contemporary Glass Villa" loading="lazy">
+                <span class="listing-badge badge-premium">Premium</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$1,250,000</div>
+                <div class="listing-address">77 Skyview Terrace, Detroit, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>4</strong>Beds</div>
+                  <div class="listing-detail"><strong>4.5</strong>Baths</div>
+                  <div class="listing-detail">5,600 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Garden-City,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z4.png" alt="White Colonial Mansion" loading="lazy">
+                <span class="listing-badge">Just Listed</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$915,000</div>
+                <div class="listing-address">200 Heritage Blvd, Garden City, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>6</strong>Beds</div>
+                  <div class="listing-detail"><strong>5</strong>Baths</div>
+                  <div class="listing-detail">4,800 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 5 (Repeated images for the requested 10 total) -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Detroit,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z1.png" alt="Listing 5" loading="lazy">
+                <span class="listing-badge">Price Reduction</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$780,000</div>
+                <div class="listing-address">58 Maple Court, Detroit, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>3</strong>Beds</div>
+                  <div class="listing-detail"><strong>3</strong>Baths</div>
+                  <div class="listing-detail">2,900 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 6 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Garden-City,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z2.png" alt="Listing 6" loading="lazy">
+                <span class="listing-badge">Open House</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$545,000</div>
+                <div class="listing-address">12 Bluebird Dr, Garden City, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>3</strong>Beds</div>
+                  <div class="listing-detail"><strong>2.5</strong>Baths</div>
+                  <div class="listing-detail">2,400 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 7 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Detroit,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z3.png" alt="Listing 7" loading="lazy">
+                <span class="listing-badge">SOLD (Coming Soon)</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$1,100,000</div>
+                <div class="listing-address">33 River Rd, Detroit, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>5</strong>Beds</div>
+                  <div class="listing-detail"><strong>4</strong>Baths</div>
+                  <div class="listing-detail">5,000 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 8 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Garden-City,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house_z4.png" alt="Listing 8" loading="lazy">
+                <span class="listing-badge">Active</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$695,000</div>
+                <div class="listing-address">404 Tech Way, Garden City, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>4</strong>Beds</div>
+                  <div class="listing-detail"><strong>3.5</strong>Baths</div>
+                  <div class="listing-detail">3,500 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 9 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Detroit,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/house1.jpeg" alt="Listing 9" loading="lazy">
+                <span class="listing-badge">New Listing</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$425,000</div>
+                <div class="listing-address">90 West Forest, Detroit, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>3</strong>Beds</div>
+                  <div class="listing-detail"><strong>2</strong>Baths</div>
+                  <div class="listing-detail">1,800 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+          <!-- Card 10 -->
+          <div class="listing-item">
+            <a class="listing-card" href="https://www.zillow.com/homes/for_sale/Detroit,-MI_rb/" target="_blank">
+              <div class="listing-img-wrap">
+                <img src="images/properties-bg.jpeg" alt="Listing 10" loading="lazy">
+                <span class="listing-badge">Luxury Rehab</span>
+                <span class="zillow-tag">View on Zillow ↗</span>
+              </div>
+              <div class="listing-body">
+                <div class="listing-price">$385,000</div>
+                <div class="listing-address">15 East Warren, Detroit, MI</div>
+                <div class="listing-details">
+                  <div class="listing-detail"><strong>4</strong>Beds</div>
+                  <div class="listing-detail"><strong>3</strong>Baths</div>
+                  <div class="listing-detail">2,100 Sq Ft</div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <!-- Slider Controls -->
+        <button class="slider-nav slider-prev" onclick="scrollListings(-1)" aria-label="Previous listings"><i class="bi bi-chevron-left"></i></button>
+        <button class="slider-nav slider-next" onclick="scrollListings(1)" aria-label="Next listings"><i class="bi bi-chevron-right"></i></button>
+      </div>
+
+
+      <!-- Zillow CTA -->
+      <div class="zillow-cta-bar" data-aos="fade-up" data-aos-delay="150">
+        <p>Browse thousands of active listings across Detroit, Garden City, Dearborn &amp; surrounding areas — powered by Zillow MLS data.</p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+          <a href="https://www.zillow.com/homes/for_sale/Garden-City,-MI_rb/" target="_blank" rel="noopener" class="btn btn-primary">
+            <i class="bi bi-house-fill me-2"></i>Garden City Listings
+          </a>
+          <a href="https://www.zillow.com/homes/for_sale/Detroit,-MI_rb/" target="_blank" rel="noopener" class="btn btn-outline-primary">
+            <i class="bi bi-buildings me-2"></i>Detroit Listings
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- Testimonials                                        -->
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <section id="testimonials" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow">Client Stories</span>
+        <h2 class="section-title-gradient fw-bold">What Our Clients Say</h2>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="100">
+        <div class="col-lg-9">
+          <div id="tour-carousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-inner" id="testimonials-row"></div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#tour-carousel" data-bs-slide="prev">
+              <i class="bi bi-chevron-left" style="color:var(--gold);font-size:1.1rem;"></i>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#tour-carousel" data-bs-slide="next">
+              <i class="bi bi-chevron-right" style="color:var(--gold);font-size:1.1rem;"></i>
+              <span class="visually-hidden">Next</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════ -->
+  <!-- Contact                                             -->
+  <!-- ════════════════════════════════════════════════════ -->
+  <section id="contact" class="py-5">
+    <div class="container">
+      <div class="text-center mb-5" data-aos="fade-up">
+        <span class="section-eyebrow">Reach Out</span>
+        <h1 class="fw-bold gradient-text">Contact Us</h1>
+        <div class="gold-divider"></div>
+      </div>
+      <div class="row g-4 align-items-stretch">
+        <div class="col-md-5" data-aos="fade-right">
+          <div class="contact-info-card">
+            <h3>Let's Talk</h3>
+            <p class="mb-4">We're dedicated to providing top-tier real estate services. Reach out for consultations, viewings, or general inquiries.</p>
+            <p><strong><i class="bi bi-geo-alt-fill me-2"></i>Address</strong><br>
+              <a href="https://maps.google.com/?q=30942+Ford+Rd+Garden+City+MI+48135" target="_blank" rel="noopener">30942 Ford Rd, Garden City, MI 48135</a>
+            </p>
+            <p><strong><i class="bi bi-telephone-fill me-2"></i>Phone</strong><br>
+              <a href="tel:+13133325821">(313) 332-5821</a>
+            </p>
+            <p><strong><i class="bi bi-envelope-fill me-2"></i>Email</strong><br>
+              <a href="mailto:apexrealtycenters@gmail.com">apexrealtycenters@gmail.com</a>
+            </p>
+            <div class="mt-4 pt-3" style="border-top:1px solid rgba(255,255,255,0.08);">
+              <p class="mb-2" style="color:rgba(255,255,255,0.45);font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;">Office Hours</p>
+              <p>Mon–Fri: 9:00 AM – 6:00 PM<br>Sat: 10:00 AM – 4:00 PM</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-7" data-aos="fade-left">
+          <div class="contact-info-card">
+            <h3>Send a Message</h3>
+            <form id="contact-form" action="https://formspree.io/f/your-form-id" method="POST" class="mt-3">
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <input type="text" class="form-control" name="name" placeholder="Your Name" required maxlength="100">
+                </div>
+                <div class="col-sm-6">
+                  <input type="email" class="form-control" name="email" placeholder="Your Email" required maxlength="254">
+                </div>
+                <div class="col-12">
+                  <input type="text" class="form-control" name="subject" placeholder="Subject" required maxlength="200">
+                </div>
+                <div class="col-12">
+                  <textarea class="form-control" name="message" rows="5" placeholder="Tell us about your real estate goals…" required maxlength="2000"></textarea>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary w-100 py-3">Send Message <i class="bi bi-send ms-2"></i></button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <section class="map">
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2947.768947922476!2d-83.34608092345678!3d42.324151950000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8824c2b7b6a5c5a3%3A0x9a7b0f8e8f8e8f8e!2s30942%20Ford%20Rd%2C%20Garden%20City%2C%20MI%2048135!5e0!3m2!1sen!2sus!4v1712345678901"
+      title="Apex Realty Centers Location"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </section>
+
+  <!-- Footer -->
+  <footer class="py-5">
+    <div class="container text-center">
+      <div class="footer-brand mb-2">APEX REALTY CENTERS</div>
+      <p>30942 Ford Rd, Garden City, MI 48135 &nbsp;·&nbsp; (313) 332-5821</p>
+      <p>&copy; <span id="copyright-year"></span> Apex Realty Centers. All rights reserved.</p>
+      <ul class="list-inline mt-3 mb-0">
+        <li class="list-inline-item"><a href="legal.html#privacy">Privacy Policy</a></li>
+        <li class="list-inline-item mx-2" style="color:rgba(255,255,255,0.2);">|</li>
+        <li class="list-inline-item"><a href="legal.html#terms">Terms of Service</a></li>
+        <li class="list-inline-item mx-2" style="color:rgba(255,255,255,0.2);">|</li>
+        <li class="list-inline-item"><a href="teams.html">Our Team</a></li>
+      </ul>
+    </div>
+  </footer>
+</body>
+</html>
