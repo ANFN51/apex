@@ -253,12 +253,18 @@
     
     setTimeout(() => {
       cancelAnimationFrame(rafId);
-      if (dracoLoader && typeof dracoLoader.dispose === "function") {
-        dracoLoader.dispose();
-      }
-      if (renderer) renderer.dispose();
+           // Always unlock page scroll even if cleanup/dispose errors occur.
+
       body.classList.remove("preload-active", "preloader-exit");
       if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+      try {
+        if (dracoLoader && typeof dracoLoader.dispose === "function") {
+          dracoLoader.dispose();
+        }
+        if (renderer) renderer.dispose();
+      } catch (e) {
+        console.warn("Preloader: cleanup warning", e);
+      }
       window.dispatchEvent(new CustomEvent("preloaderFinished"));
     }, EXIT_DURATION_MS);
   };
