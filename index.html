@@ -30,10 +30,10 @@
 
   <!-- Preload hero image so it's ready before first paint -->
   <link rel="preload" as="image" href="images/mountain.jpg" fetchpriority="high">
-  <link rel="preload" as="fetch" href="models/american_house.glb?v=20260411h" fetchpriority="high">
+  <link rel="preload" as="fetch" href="american_house.glb?v=20260411h" fetchpriority="high">
   <script>
     // Warm the GLB request immediately so the 3D preloader can parse sooner.
-    window.__apexPreloaderModelPromise = fetch("models/american_house.glb?v=20260411h", {
+    window.__apexPreloaderModelPromise = fetch("american_house.glb?v=20260411h", {
       cache: "force-cache",
       credentials: "same-origin"
     })
