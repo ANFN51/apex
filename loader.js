@@ -140,6 +140,10 @@
 
         // Loader
         const loader = new THREE.GLTFLoader();
+         if (window.MeshoptDecoder) {
+          loader.setMeshoptDecoder(window.MeshoptDecoder);
+        }
+        
         if (typeof THREE.DRACOLoader === "function") {
           dracoLoader = new THREE.DRACOLoader();
           dracoLoader.setDecoderPath("vendor/draco/");
