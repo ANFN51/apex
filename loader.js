@@ -6,7 +6,7 @@
   const MIN_VISIBLE_MS = 5000;
   const FAIL_VISIBLE_MS = 5000;
   const MAX_WAIT_MS = 10000;
-  const EXIT_DURATION_MS = 2000;
+  const EXIT_DURATION_MS = 1000;
   
   // ── DOM References ──────────────────────────────────────
   const body = document.body;
