@@ -3,9 +3,9 @@
 
   // ── Configuration ───────────────────────────────────────
  const MODEL_URL = "models/american_house.glb";
-  const MIN_VISIBLE_MS = 8000;
+  const MIN_VISIBLE_MS = 5000;
   const FAIL_VISIBLE_MS = 5000;
-  const MAX_WAIT_MS = 12000;
+  const MAX_WAIT_MS = 10000;
   const EXIT_DURATION_MS = 2000;
   
   // ── DOM References ──────────────────────────────────────
