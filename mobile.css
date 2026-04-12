@@ -3,13 +3,33 @@
 
   body {
     background: #07101f;
-    padding-top: 72px !important;
+    padding-top: calc(72px + env(safe-area-inset-top, 0px)) !important;
   }
 
-  /* ── Navbar ── */
+  /* ── Navbar (safe areas for notch / rounded corners) ── */
   .navbar {
-    padding: 0.4rem 0.75rem !important;
+    padding-top: max(0.4rem, env(safe-area-inset-top, 0px)) !important;
+    padding-bottom: 0.4rem !important;
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px)) !important;
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px)) !important;
     border-bottom: 1px solid rgba(201, 168, 76, 0.12) !important;
+  }
+
+  .navbar-toggler {
+    min-width: 44px;
+    min-height: 44px;
+    padding: 0.5rem 0.65rem;
+  }
+
+  /* Services dropdown: in-flow so it is not clipped by the collapse panel */
+  #navbarNav .dropdown-menu {
+    position: static !important;
+    transform: none !important;
+    inset: auto !important;
+    width: 100%;
+    margin-top: 0.35rem;
+    box-shadow: none;
+    border: 1px solid rgba(201, 168, 76, 0.18);
   }
 
   .logo-img {
@@ -84,11 +104,14 @@
     opacity: 0.5;
   }
 
-  /* Stats bar stacked on mobile */
+  /* Stats bar stacked on mobile — no backdrop blur (costly / muddy on some phones) */
   .stats-bar-inner {
     flex-direction: column;
     gap: 0;
     padding: 1rem 1.25rem;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    background: rgba(7, 16, 31, 0.82);
   }
 
   .stat-item {
@@ -119,9 +142,9 @@
     width: min(80vw, 260px) !important;
   }
 
-  #about .stats {
-    padding: 1.25rem 1rem !important;
-    border-radius: 1rem !important;
+  /* Hide animated stat counters in About (hero still shows stats bar) */
+  #about .about-content .stats.stats-horizontal {
+    display: none !important;
   }
 
   /* ── Services ── */
@@ -233,12 +256,53 @@
   /* ── Footer ── */
   footer {
     font-size: 0.85rem;
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0px));
   }
 
   /* ── General section spacing ── */
   section.py-5 {
     padding: 3rem 0 !important;
   }
+
+  /* ── Cinematic preloader (notch + short viewports) ── */
+  #preloader-scene-wrap {
+    width: min(92vw, 520px);
+  }
+
+  .preloader-ui {
+    bottom: max(9%, calc(env(safe-area-inset-bottom, 0px) + 1rem));
+    padding-left: max(0.75rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.75rem, env(safe-area-inset-right, 0px));
+  }
+
+  .logo-text-pre {
+    font-size: clamp(1.2rem, 5.5vw, 1.65rem);
+    letter-spacing: 0.32em;
+    margin-left: 0.32em;
+  }
+
+  #loading-text {
+    font-size: 0.55rem;
+    letter-spacing: 0.14em;
+    line-height: 1.45;
+    padding: 0 0.25rem;
+  }
+
+  /* ── Listings horizontal strip: avoid 300px min-width overflow on small phones ── */
+  .listings-slider {
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-inline: max(1rem, env(safe-area-inset-left, 0px));
+    padding-left: max(1rem, env(safe-area-inset-left, 0px));
+    padding-right: max(1rem, env(safe-area-inset-right, 0px));
+  }
+
+  .listings-slider .listing-item {
+    flex: 0 0 calc(100vw - 2.75rem - env(safe-area-inset-left, 0px) - env(safe-area-inset-right, 0px)) !important;
+    min-width: 0 !important;
+    max-width: 380px;
+    scroll-snap-align: center;
+  }
+
 }
 
 /* Very small screens */

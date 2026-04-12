@@ -3,9 +3,13 @@
 
   // ── Configuration ───────────────────────────────────────
   const MODEL_URL = "models/american_house.glb?v=20260411h";
-  const MIN_VISIBLE_MS = 8000;
-  const FAIL_VISIBLE_MS = 5000;
-  const MAX_WAIT_MS = 12000;
+  const narrowViewport =
+    typeof window.matchMedia === "function"
+      ? window.matchMedia("(max-width: 991px)").matches
+      : window.innerWidth <= 991;
+  const MIN_VISIBLE_MS = narrowViewport ? 3200 : 8000;
+  const FAIL_VISIBLE_MS = narrowViewport ? 3500 : 5000;
+  const MAX_WAIT_MS = narrowViewport ? 10000 : 12000;
   const EXIT_DURATION_MS = 1000;
   // ── DOM References ──────────────────────────────────────
   const body = document.body;
