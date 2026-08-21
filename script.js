@@ -150,8 +150,10 @@ function scrollListings(direction) {
 
         const monthlyRate = interestRate / 100 / 12;
         const months = loanTerm * 12;
-        const monthly = loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) /
-          (Math.pow(1 + monthlyRate, months) - 1);
+        const monthly = monthlyRate === 0
+          ? loanAmount / months
+          : loanAmount * (monthlyRate * Math.pow(1 + monthlyRate, months)) /
+            (Math.pow(1 + monthlyRate, months) - 1);
 
         result.innerHTML = `Estimated Monthly Payment: <strong>$${monthly.toFixed(2)}</strong>`;
         result.style.display = "block";
@@ -208,7 +210,7 @@ function scrollListings(direction) {
       AOS.init({ once: true, duration: 650, easing: "ease-out", offset: 60 });
     }
 
-    // ── Real Estate Genie (properties page only) ────────
+     // ── Real Estate Genie (properties page only) ────────
     const genieForm = document.getElementById("genie-form");
     const genieResponse = document.getElementById("genie-response");
     const genieMessage = document.getElementById("genie-message");
@@ -235,7 +237,7 @@ function scrollListings(direction) {
           : `<br><br>Your vision for ${type} is wise — excellent opportunities await.`;
 
         if (timeline === "soon") message += ` The stars align quickly — properties matching your desire are moving fast.`;
-        else if (timeline === "1-2yr") message += ` In 1–2 years, values here are likely to rise 12–22% based on current trends.`;
+        else if (timeline === "1-2yr") message += ` A 1–2 year timeline gives us time to watch the market and refine your search strategy.`;
         else message += ` Patience will be rewarded — long-term holds here have historically performed strongly.`;
 
         message += `<br><br>Shall we make this vision real? Reach out to the Apex team.`;
@@ -248,6 +250,7 @@ function scrollListings(direction) {
       });
     }
   }); // end DOMContentLoaded
+
 
   // ── Preloader (non-index pages legacy support) ──────────
   window.addEventListener("load", () => {
