@@ -157,6 +157,22 @@ function scrollListings(direction) {
         result.style.display = "block";
       });
     }
+    
+ // ── Contact Form (email client) ──────────────────────
+    const contactForm = document.getElementById("contact-form");
+    if (contactForm) {
+      contactForm.addEventListener("submit", e => {
+        e.preventDefault();
+        const formData = new FormData(contactForm);
+        const name = String(formData.get("name") || "").trim();
+        const email = String(formData.get("email") || "").trim();
+        const subject = String(formData.get("subject") || "").trim();
+        const message = String(formData.get("message") || "").trim();
+        const body = `Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+
+        window.location.href = `mailto:apexrealtycenters@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      });
+    }
 
     // ── Dark Mode Toggle ─────────────────────────────────
     const themeToggle = document.getElementById("theme-toggle");
